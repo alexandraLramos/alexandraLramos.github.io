@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alexandra L. Ramos Figueroa</title>
+
+  <!-- =====================================================
+       FONTS
+       Body: Inter  |  Display: Playfair Display
+       Change at fonts.google.com — swap the names below
+  ====================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =====================================================
+       DESIGN TOKENS — change colors / fonts here in one place
+    ====================================================== */
+    :root {
+      --bg:           #f7f7f8;
+      --surface:      #ffffff;
+      --text:         #111827;
+      --muted:        #6b7280;
+      --border:       #e5e7eb;
+      --hover:        #f3f4f6;
+
+      /* ↓ PRIMARY ACCENT — change this hex to restyle the whole site */
+      --accent:       #7c6fcd;   /* lavender-purple, matching your mockup */
+      --accent-light: #ede9f8;
+      --accent-dark:  #5b4fb8;
+
+      --font-body:    'Inter', sans-serif;
+      --font-display: 'Playfair Display', serif;
+
+      --nav-h:    70px;
+      --max-w:    900px;
+      --gap:      96px;
+    }
+
+    /* ---- reset ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ---- layout ---- */
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    section { padding: var(--gap) 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* =====================================================
+       NAV
+    ====================================================== */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: var(--nav-h);
+      background: rgba(247,247,248,.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 200;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    /* ↓ YOUR NAME in the top-left */
+    .nav-name {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* text links */
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: color .18s, background .18s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: var(--hover);
+    }
+
+    /* icon links (Twitter / LinkedIn / etc.) */
+    .nav-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 1rem;
+      transition: color .18s, background .18s;
+    }
+    .nav-icon:hover {
+      color: var(--text);
+      background: var(--hover);
+    }
+
+    /* divider between text links and icons */
+    .nav-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+      margin: 0 6px;
+    }
+
+    /* mobile toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: .25s;
+    }
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+    #hero {
+      padding: 0;
+      border-top: none;
+    }
+    .hero-wrap {
+      padding-top: var(--nav-h);
+    }
+
+    /* top strip: name + tagline */
+    .hero-intro {
+      padding: 56px 28px 40px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 28px;
+    }
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ---- HERO BANNER (the scientific illustration area) ---- */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: clamp(300px, 42vw, 500px);
+      overflow: hidden;
+      background: linear-gradient(135deg, #c9c2e8 0%, #a9b8e8 50%, #c2d0f0 100%);
+    }
+
+    /* Canvas sits behind text */
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-banner-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 60px 44px 44px;
+      background: linear-gradient(to top, rgba(80,60,140,.55) 0%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-research-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.8vw, 2.6rem);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      max-width: 700px;
+      text-shadow: 0 2px 16px rgba(0,0,0,.3);
+    }
+
+    /* =====================================================
+       BUTTONS
+    ====================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 20px;
+      border-radius: 7px;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: all .18s;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+    .btn-dark {
+      background: var(--text);
+      color: #fff;
+    }
+    .btn-dark:hover { background: #333; }
+
+    .btn-outline {
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      border-color: var(--text);
+      background: var(--hover);
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-accent:hover { background: var(--accent-dark); }
+
+    /* =====================================================
+       SECTION HEADERS (shared)
+    ====================================================== */
+    .sec-label {
+      font-size: .73rem;
+      font-weight: 500;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .sec-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+      margin-bottom: 36px;
+    }
+
+    /* =====================================================
+       ABOUT
+    ====================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 48px;
+      align-items: start;
+    }
+    .about-body { font-size: .97rem; color: var(--text); }
+    .about-body p + p { margin-top: 14px; }
+
+    .about-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+    .about-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      background: var(--border);
+    }
+    .photo-placeholder {
+      width: 180px;
+      height: 180px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ede9f8, #c9c2e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border: 2px solid var(--border);
+    }
+
+    /* =====================================================
+       RESEARCH / PROJECTS
+    ====================================================== */
+    .project-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 16px;
+      padding: 22px 18px;
+      border-radius: 10px;
+      transition: background .18s;
+    }
+    .project-card:hover { background: var(--surface); }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: .71rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      background: var(--hover);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .tag-accent {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border-color: #c4b8ef;
+    }
+    .project-year { font-size: .78rem; color: var(--muted); }
+
+    .project-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 5px;
+      line-height: 1.35;
+    }
+    .project-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+
+    .project-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+    .icon-link {
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+      transition: opacity .18s;
+    }
+    .icon-link:hover { opacity: .65; }
+
+    /* =====================================================
+       COURSE
+    ====================================================== */
+    .course-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .course-card:hover {
+      box-shadow: 0 6px 28px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+    .course-chip {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid #c4b8ef;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .course-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .course-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+    .course-action { flex-shrink: 0; }
+
+    /* =====================================================
+       EXPERIENCE
+    ====================================================== */
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 128px 1fr;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .tl-date { font-size: .78rem; color: var(--muted); padding-top: 3px; line-height: 1.5; }
+    .tl-role { font-size: .98rem; font-weight: 500; margin-bottom: 2px; }
+    .tl-org  { font-size: .88rem; color: var(--accent); margin-bottom: 7px; }
+    .tl-desc { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+
+    .skills-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+    .skill-chip {
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: .8rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+    }
+
+    /* =====================================================
+       OUTREACH
+    ====================================================== */
+    .outreach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
+    }
+    .outreach-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      transition: box-shadow .18s, transform .18s;
+    }
+    .outreach-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transform: translateY(-2px);
+    }
+    .outreach-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .outreach-title { font-size: .93rem; font-weight: 500; margin-bottom: 5px; }
+    .outreach-desc  { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+
+    /* =====================================================
+       CONTACT
+    ====================================================== */
+    #contact .wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      align-items: start;
+    }
+    .contact-blurb {
+      font-size: .93rem;
+      color: var(--muted);
+      margin: 14px 0 26px;
+      line-height: 1.7;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .c-link {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: .88rem;
+      transition: color .18s;
+    }
+    .c-link:hover { color: var(--accent); }
+    .c-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      background: var(--hover);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      flex-shrink: 0;
+      transition: background .18s;
+    }
+    .c-link:hover .c-icon { background: var(--accent-light); }
+
+    /* form */
+    .contact-form { display: flex; flex-direction: column; gap: 12px; }
+    .fg { display: flex; flex-direction: column; gap: 4px; }
+    .fg label { font-size: .77rem; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
+    .fg input, .fg textarea {
+      font-family: var(--font-body);
+      font-size: .88rem;
+      padding: 9px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+      transition: border-color .18s;
+      resize: vertical;
+    }
+    .fg input:focus, .fg textarea:focus { border-color: var(--accent); }
+    .fg textarea { min-height: 100px; }
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+    }
+    footer p { font-size: .8rem; color: var(--muted); }
+    footer a { color: var(--accent); }
+
+    /* =====================================================
+       SCROLL ANIMATION
+    ====================================================== */
+    .fi {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .fi.on { opacity: 1; transform: none; }
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+    @media (max-width: 660px) {
+      .about-grid, #contact .wrap { grid-template-columns: 1fr; }
+      .about-photo-wrap { order: -1; }
+      .photo-placeholder, .about-photo { width: 120px; height: 120px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 2px; }
+      .tl-date { padding-top: 0; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-links { flex-direction: row; }
+      .course-card { grid-template-columns: 1fr; }
+      .nav-links { display: none; flex-direction: column; position: absolute;
+        top: var(--nav-h); left: 0; right: 0; background: var(--surface);
+        border-bottom: 1px solid var(--border); padding: 14px 20px; gap: 4px; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .nav-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+       NAV
+       Edit: your name (.nav-name), the link labels,
+       and your social media URLs in the icon links.
+  ====================================================== -->
+  <nav>
+    <div class="nav-inner">
+      <!-- ↓ YOUR NAME — shown top-left in purple -->
+      <a href="#hero" class="nav-name">Alexandra L. Ramos Figueroa</a>
+
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#course">Course</a></li>
+          <li><a href="#outreach">Outreach</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <!-- ↓ Social icon links — update href to your actual profiles -->
+        <a href="https://twitter.com/yourhandle" target="_blank" class="nav-icon" title="Twitter">
+          <!-- Twitter/X icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="nav-icon" title="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://orcid.org/yourorcid" target="_blank" class="nav-icon" title="ORCID / Scholar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 3.872-2.203 3.872-3.722 0-2.016-1.109-3.722-3.884-3.722h-2.285z"/>
+          </svg>
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- =====================================================
+       HERO
+       The animated canvas replicates your polymer-network
+       illustration. Edit the research title text below.
+  ====================================================== -->
+  <div id="hero">
+    <div class="hero-wrap">
+
+      <!-- Text above the banner -->
+      <div class="hero-intro">
+        <p class="hero-eyebrow">Chemical Engineering · Materials Science</p>
+        <!-- ↓ YOUR NAME as the big display heading -->
+        <h1 class="hero-name">Alexandra L.<br />Ramos Figueroa</h1>
+        <!-- ↓ ONE-LINE tagline -->
+        <p class="hero-subtitle">
+          PhD Candidate · [Your University] · Designing the next generation
+          of stimuli-responsive, self-healing materials.
+        </p>
+        <div class="hero-btns">
+          <a href="cv.pdf" class="btn btn-dark" target="_blank">↓ Download CV</a>
+          <a href="#research" class="btn btn-outline">View Research</a>
+          <a href="https://scholar.google.com" class="btn btn-outline" target="_blank">Scholar</a>
+        </div>
+      </div>
+
+      <!-- Scientific illustration banner -->
+      <div class="hero-banner">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-banner-text">
+          <!-- ↓ YOUR PRIMARY RESEARCH TOPIC — big white text on the banner -->
+          <h2 class="hero-research-title">
+            Designing Self-Healing<br />Multilayer Platforms
+          </h2>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       ABOUT
+       Replace the photo placeholder with your own image.
+  ====================================================== -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <p class="sec-label fi">About</p>
+          <h2 class="sec-title fi">Hi, I'm Ale</h2>
+          <div class="about-body fi">
+            <p>
+              I'm a PhD candidate in Chemical Engineering at [Your University],
+              where I work in the [Lab Name] lab under the supervision of
+              [Advisor Name]. My research focuses on designing
+              <strong>self-healing multilayer platforms</strong> — materials
+              that can sense damage and autonomously recover their structure
+              and function.
+            </p>
+            <p>
+              My work combines polymer chemistry, surface engineering, and
+              computational modeling to develop next-generation coatings and
+              membranes for [application area, e.g., biomedical devices,
+              anti-corrosion surfaces, soft robotics].
+            </p>
+            <p>
+              Outside the lab, I'm passionate about science communication
+              and mentoring students from underrepresented backgrounds in STEM.
+            </p>
+          </div>
+          <div class="about-links fi">
+            <a href="cv.pdf" class="btn btn-dark" target="_blank">↓ CV</a>
+            <a href="https://scholar.google.com" class="btn btn-outline" target="_blank">Google Scholar</a>
+            <a href="https://linkedin.com" class="btn btn-outline" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- ↓ PHOTO — swap the div for an <img src="photo.jpg"> when ready -->
+        <div class="about-photo-wrap fi" style="display:flex; flex-direction:column; align-items:center;">
+          <div class="photo-placeholder">👩‍🔬</div>
+          <!--
+            Replace the div above with your photo:
+            <img src="photo.jpg" alt="Alexandra Ramos Figueroa" class="about-photo" />
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       RESEARCH
+       Copy a .project-card block to add more projects.
+  ====================================================== -->
+  <section id="research">
+    <div class="wrap">
+      <p class="sec-label fi">Research</p>
+      <h2 class="sec-title fi">Selected Projects</h2>
+
+      <div class="project-list">
+
+        <!-- PROJECT 1 -->
+        <div class="project-card fi">
+          <div>
+            <div class="project-meta">
+              <span class="tag tag-accent">Current</span>
+              <span class="tag">Self-Healing</span>
+              <span class="tag">Layer-by-Layer</span>
+              <span class="project-year">2023 – present</span>
+            </div>
+            <p class="project-title">
+              Designing Self-Healing Multilayer Platforms via Dynamic
+              Covalent Cross-Links
+            </p>
+            <p class="project-desc">
+              Developing polyelectrolyte multilayer films with embedded
+              dynamic covalent bonds that allow autonomous structural recovery
+              after mechanical damage. Characterizing healing kinetics by
+              [method, e.g., QCM-D, AFM, FTIR].
+            </p>
+          </div>
+          <div class="project-links">
+            <a href="#" class="icon-link">Paper →</a>
+            <a href="#" class="icon-link">Code →</a>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="project-card fi">
+          <div>
+            <div class="project-meta">
+              <span class="tag">Stimuli-Responsive</span>
+              <span class="tag">Membranes</span>
+              <span class="project-year">2022 – 2023</span>
+            </div>
+            <p class="project-title">
+              pH-Responsive Multilayer Membranes for Controlled
+              Drug Release
+            </p>
+            <p class="project-desc">
+              Engineered thin-film membranes whose permeability switches
+              with pH, enabling on-demand release of therapeutic payloads.
+              Demonstrated [X]% change in flux across the physiological range.
+            </p>
+          </div>
+          <div class="project-links">
+            <a href="#" class="icon-link">Paper →</a>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-card fi">
+          <div>
+            <div class="project-meta">
+              <span class="tag">Computational</span>
+              <span class="tag">Polymer Physics</span>
+              <span class="project-year">2021</span>
+            </div>
+            <p class="project-title">
+              Molecular Dynamics Simulations of Polyelectrolyte
+              Adsorption on Charged Surfaces
+            </p>
+            <p class="project-desc">
+              Used MD simulations to probe the nanoscale structure of
+              adsorbed polyelectrolyte layers as a function of ionic strength
+              and chain architecture. Results guided experimental design.
+            </p>
+          </div>
+          <div class="project-links">
+            <a href="#" class="icon-link">arXiv →</a>
+            <a href="#" class="icon-link">Code →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       COURSE
+       Edit the course title, description, and link.
+  ====================================================== -->
+  <section id="course">
+    <div class="wrap">
+      <p class="sec-label fi">Teaching</p>
+      <h2 class="sec-title fi">Course</h2>
+
+      <!-- ↓ Edit this card for your course(s). Duplicate for more. -->
+      <div class="course-card fi">
+        <div>
+          <span class="course-chip">[Semester, Year] · [Course Code]</span>
+          <p class="course-title">[Course Title — e.g., "Transport Phenomena in Soft Materials"]</p>
+          <p class="course-desc">
+            Brief description of the course — who it's for, what topics it covers,
+            and what students will leave with. 2–3 sentences.
+            You can also include the platform (Canvas, course website, etc.)
+            and any open materials.
+          </p>
+        </div>
+        <div class="course-action">
+          <a href="#" class="btn btn-accent">View Course →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       EXPERIENCE
+       Most recent first. Duplicate .timeline-item to add more.
+  ====================================================== -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="sec-label fi">Background</p>
+      <h2 class="sec-title fi">Experience &amp; Education</h2>
+
+      <div class="timeline">
+        <div class="timeline-item fi">
+          <div class="tl-date">2022 – Present</div>
+          <div>
+            <p class="tl-role">PhD Candidate, Chemical Engineering</p>
+            <p class="tl-org">[Your University]</p>
+            <p class="tl-desc">Research: Self-healing multilayer platforms. Advised by [Name].</p>
+          </div>
+        </div>
+        <div class="timeline-item fi">
+          <div class="tl-date">Summer 2023</div>
+          <div>
+            <p class="tl-role">Research Intern</p>
+            <p class="tl-org">[Company or National Lab]</p>
+            <p class="tl-desc">Describe your role, methods used, and outcomes in 1–2 sentences.</p>
+          </div>
+        </div>
+        <div class="timeline-item fi">
+          <div class="tl-date">2018 – 2022</div>
+          <div>
+            <p class="tl-role">B.S. Chemical Engineering</p>
+            <p class="tl-org">[Undergraduate University]</p>
+            <p class="tl-desc">Graduated [with honors]. Thesis: "[Title]."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-row fi">
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">MATLAB</span>
+        <span class="skill-chip">COMSOL</span>
+        <span class="skill-chip">LAMMPS / MD</span>
+        <span class="skill-chip">QCM-D</span>
+        <span class="skill-chip">AFM</span>
+        <span class="skill-chip">FTIR</span>
+        <span class="skill-chip">Machine Learning</span>
+        <span class="skill-chip">Technical Writing</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       OUTREACH
+  ====================================================== -->
+  <section id="outreach">
+    <div class="wrap">
+      <p class="sec-label fi">Outreach</p>
+      <h2 class="sec-title fi">Community &amp; Service</h2>
+      <div class="outreach-grid">
+        <div class="outreach-card fi">
+          <div class="outreach-icon">🎓</div>
+          <p class="outreach-title">[Mentoring Program]</p>
+          <p class="outreach-desc">Who you mentor, what the program focuses on, and your role.</p>
+        </div>
+        <div class="outreach-card fi">
+          <div class="outreach-icon">🔬</div>
+          <p class="outreach-title">[Science Outreach]</p>
+          <p class="outreach-desc">Science fairs, demo days, science communication blog, etc.</p>
+        </div>
+        <div class="outreach-card fi">
+          <div class="outreach-icon">🤝</div>
+          <p class="outreach-title">[Student Org / DEI]</p>
+          <p class="outreach-desc">Officer role, workshops, or events for underrepresented students in STEM.</p>
+        </div>
+        <div class="outreach-card fi">
+          <div class="outreach-icon">📣</div>
+          <p class="outreach-title">[Talks / Panels]</p>
+          <p class="outreach-desc">Invited talks, panel discussions, conference organizing, etc.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       CONTACT
+  ====================================================== -->
+  <section id="contact">
+    <div class="wrap">
+      <div>
+        <p class="sec-label fi">Contact</p>
+        <h2 class="sec-title fi" style="margin-bottom:0">Let's connect</h2>
+        <p class="contact-blurb fi">
+          Open to research collaborations, outreach opportunities,
+          and general conversations. I usually respond within a few days.
+        </p>
+        <div class="contact-links fi">
+          <!-- ↓ Update your email and social handles -->
+          <a href="mailto:alex.alexandra.ramos12@gmail.com" class="c-link">
+            <span class="c-icon">✉️</span>
+            alex.alexandra.ramos12@gmail.com
+          </a>
+          <a href="https://linkedin.com/in/yourprofile" class="c-link" target="_blank">
+            <span class="c-icon">🔗</span>
+            linkedin.com/in/yourprofile
+          </a>
+          <a href="https://github.com/yourhandle" class="c-link" target="_blank">
+            <span class="c-icon">⌨️</span>
+            github.com/yourhandle
+          </a>
+        </div>
+      </div>
+
+      <!--
+        Contact form — connect to Formspree (free) to receive emails:
+        1. Go to formspree.io → create free account → new form
+        2. Replace YOUR_FORM_ID below with your form's ID
+      -->
+      <form class="contact-form fi" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="fg">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="fg">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="fg">
+          <label for="msg">Message</label>
+          <textarea id="msg" name="message" placeholder="What's on your mind?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-accent" style="align-self:flex-start">Send →</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer>
+    <p>© 2026 Alexandra L. Ramos Figueroa</p>
+  </footer>
+
+
+  <!-- =====================================================
+       SCRIPTS
+  ====================================================== -->
+  <script>
+    // ── Mobile nav ──
+    const toggle   = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navLinks.classList.remove('open'))
+    );
+
+    // ── Active nav highlight on scroll ──
+    const secs  = document.querySelectorAll('section[id]');
+    const navAs = document.querySelectorAll('.nav-links a');
+    function updateNav() {
+      let cur = '';
+      secs.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+      navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // ── Scroll fade-in ──
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+    // ── Hero canvas: animated polymer / multilayer network ──
+    (function () {
+      const canvas = document.getElementById('heroCanvas');
+      const ctx    = canvas.getContext('2d');
+
+      function resize() {
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Node configuration
+      // ↓ Edit colors to match your accent palette
+      const RED  = { fill: 'rgba(220,80,100,.85)',  stroke: 'rgba(200,60,80,.4)'  };
+      const BLUE = { fill: 'rgba(80,130,220,.85)',   stroke: 'rgba(60,100,190,.4)' };
+
+      const NODE_COUNT = 28;
+      let nodes = [];
+
+      function initNodes() {
+        nodes = [];
+        const W = canvas.width, H = canvas.height;
+        for (let i = 0; i < NODE_COUNT; i++) {
+          const col = Math.random() > 0.5 ? RED : BLUE;
+          const r   = 10 + Math.random() * 10;
+          nodes.push({
+            x:  Math.random() * W,
+            y:  Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r,
+            col,
+            // wavy path anchor for cables
+            cx1: (Math.random() - 0.5) * 120,
+            cy1: (Math.random() - 0.5) * 120,
+          });
+        }
+      }
+      initNodes();
+
+      const LINK_DIST = 160;
+
+      function draw() {
+        const W = canvas.width, H = canvas.height;
+        ctx.clearRect(0, 0, W, H);
+
+        // background gradient
+        const bg = ctx.createLinearGradient(0, 0, W, H);
+        bg.addColorStop(0,   '#c5bce6');
+        bg.addColorStop(0.5, '#a9b9e8');
+        bg.addColorStop(1,   '#c2d0f2');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+
+        // update node positions
+        nodes.forEach(n => {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < -20)  n.x = W + 20;
+          if (n.x > W+20) n.x = -20;
+          if (n.y < -20)  n.y = H + 20;
+          if (n.y > H+20) n.y = -20;
+        });
+
+        // draw wavy links
+        ctx.lineWidth = 1.8;
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist > LINK_DIST) continue;
+            const alpha = 1 - dist / LINK_DIST;
+            ctx.strokeStyle = `rgba(150,140,200,${alpha * 0.55})`;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            // wavy cubic bezier
+            const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+            ctx.bezierCurveTo(
+              mx + a.cx1 * alpha, my + a.cy1 * alpha,
+              mx - b.cx1 * alpha, my - b.cy1 * alpha,
+              b.x, b.y
+            );
+            ctx.stroke();
+          }
+        }
+
+        // draw nodes
+        nodes.forEach(n => {
+          // glow
+          const grd = ctx.createRadialGradient(n.x - n.r*.3, n.y - n.r*.3, 0, n.x, n.y, n.r * 1.6);
+          grd.addColorStop(0, n.col.fill.replace('.85', '1'));
+          grd.addColorStop(0.6, n.col.fill);
+          grd.addColorStop(1, n.col.stroke);
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
+  </script>
+
+</body>
+</html>
