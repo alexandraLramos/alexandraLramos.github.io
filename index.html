@@ -448,7 +448,7 @@
     .course-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
     .course-action { flex-shrink: 0; }
 
-/* =====================================================
+    /* =====================================================
        EXPERIENCE
     ====================================================== */
     .timeline { display: flex; flex-direction: column; }
@@ -463,8 +463,8 @@
     .tl-left { 
       display: flex; 
       flex-direction: column; 
-      align-items: center;           /* ← Centers the logos */
-      gap: 6px;                     /* ← Spacing between date & logo */
+      align-items: center;
+      gap: 6px;
     }
     .tl-date { font-size: .78rem; color: var(--muted); line-height: 1.5; text-align: center; }
     .tl-role { font-size: .98rem; font-weight: 500; margin-bottom: 2px; }
@@ -477,15 +477,31 @@
     
     /* Organization logos */
     .org-logo {
-      width: 30px;                  /* ← Logo width */
-      height: 30px;                 /* ← Logo height */
+      width: 30px;
+      height: 30px;
       object-fit: contain;
-      filter: opacity(0.6);         /* ← Subtle opacity */
+      filter: opacity(0.6);
       transition: opacity 0.15s;
     }
     .timeline-item:hover .org-logo {
-      filter: opacity(0.9);         /* ← Hover effect */
+      filter: opacity(0.9);
     }
+
+    .skills-row { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 8px; 
+      margin-top: 32px; 
+    }
+    .skill-chip {
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: .8rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+    }
+
     /* =====================================================
        OUTREACH
     ====================================================== */
@@ -613,29 +629,23 @@
 
   <!-- =====================================================
        NAV
-       Edit: your name (.nav-name), the link labels,
-       and your social media URLs in the icon links.
   ====================================================== -->
   <nav>
     <div class="nav-inner">
-      <!-- ↓ YOUR NAME — shown top-left in purple -->
       <a href="#hero" class="nav-name">Alexandra L. Ramos Figueroa</a>
 
       <div class="nav-right">
         <ul class="nav-links" id="navLinks">
           <li><a href="#about">About</a></li>
           <li><a href="#research">Research</a></li>
-          <li><a href="publications.html">Publications</a></li>
-          <li><a href="#course">Course</a></li>
+          <li><a href="#course">Teaching</a></li>
           <li><a href="#outreach">Outreach</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
 
         <div class="nav-divider"></div>
 
-        <!-- ↓ Social icon links — update href to your actual profiles -->
         <a href="https://x.com/alexandraLramos" target="_blank" class="nav-icon" title="Twitter">
-          <!-- Twitter/X icon -->
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
           </svg>
@@ -658,21 +668,14 @@
     </div>
   </nav>
 
-
   <!-- =====================================================
        HERO
-       The animated canvas replicates your polymer-network
-       illustration. Edit the research title text below.
   ====================================================== -->
   <div id="hero">
     <div class="hero-wrap">
-
-      <!-- Text above the banner -->
       <div class="hero-intro">
         <p class="hero-eyebrow">Chemical Engineering · Materials Science</p>
-        <!-- ↓ YOUR NAME as the big display heading -->
         <h1 class="hero-name">Alexandra L.<br />Ramos Figueroa</h1>
-        <!-- ↓ ONE-LINE tagline -->
         <p class="hero-subtitle">
           PhD Candidate · Stanford University · Designing the next generation
           of stimuli-responsive, self-healing materials.
@@ -684,24 +687,19 @@
         </div>
       </div>
 
-      <!-- Scientific illustration banner -->
       <div class="hero-banner">
         <canvas id="heroCanvas"></canvas>
         <div class="hero-banner-text">
-          <!-- ↓ YOUR PRIMARY RESEARCH TOPIC — big white text on the banner -->
           <h2 class="hero-research-title">
             Designing Self-Healing<br />Multilayer Platforms
           </h2>
         </div>
       </div>
-
     </div>
   </div>
 
-
   <!-- =====================================================
        ABOUT
-       Replace the photo placeholder with your own image.
   ====================================================== -->
   <section id="about">
     <div class="wrap">
@@ -712,7 +710,7 @@
           <div class="about-body fi">
             <p>
               I'm a PhD candidate in Chemical Engineering at Stanford University,
-              where I work in the [Lab Name] lab under the supervision of
+              where I work in the Bao lab under the supervision of
               Prof. Zhenan Bao. My research focuses on designing
               <strong>self-healing multilayer platforms</strong> — materials
               that can sense damage and autonomously recover their structure
@@ -721,8 +719,7 @@
             <p>
               My work combines polymer chemistry, surface engineering, and
               computational modeling to develop next-generation coatings and
-              membranes for [application area, e.g., biomedical devices,
-              anti-corrosion surfaces, soft robotics].
+              membranes for biomedical devices, wearable sensors, and flexible electronics.
             </p>
             <p>
               Outside the lab, I'm passionate about science communication
@@ -736,22 +733,15 @@
           </div>
         </div>
 
-        <!-- ↓ PHOTO — swap the div for an <img src="photo.jpg"> when ready -->
         <div class="about-photo-wrap fi" style="display:flex; flex-direction:column; align-items:center;">
           <div class="photo-placeholder">👩‍🔬</div>
-          <!--
-            Replace the div above with your photo:
-            <img src="photo.jpg" alt="Alexandra Ramos Figueroa" class="about-photo" />
-          -->
         </div>
       </div>
     </div>
   </section>
 
-
   <!-- =====================================================
        RESEARCH
-       Copy a .project-card block to add more projects.
   ====================================================== -->
   <section id="research">
     <div class="wrap">
@@ -759,12 +749,10 @@
       <h2 class="sec-title fi">Selected Publications</h2>
 
       <div class="project-list">
-
-        <!-- PROJECT 1 -->
         <div class="project-card fi">
           <div>
             <div class="project-meta">
-              <span class="tag tag-accent">Published</span>
+              <span class="tag tag-accent">Accepted</span>
               <span class="tag">AFM</span>
               <span class="tag">Nanomechanics</span>
               <span class="project-year">2025</span>
@@ -773,63 +761,74 @@
               A guide for nanomechanical characterization of soft matter via AFM: From mode selection to data reporting
             </p>
             <p class="project-desc">
-              E Kim, ALR Figueroa, M Schrock, E Zhang, CJ Newcomb, Z Bao, et al.
-              STAR protocols 6 (2), 2025. A comprehensive guide for conducting reproducible nanomechanical measurements on soft matter using atomic force microscopy (AFM).
+              Kim, E.*; Ramos Figueroa, A. L.*; Schrock, M.*; Zhang, E.*; Newcomb, C. J.; Bao, Z.; Michalek, L.
+              STAR protocols 6 (2), 2025. A comprehensive guide for conducting reproducible nanomechanical measurements on soft matter using atomic force microscopy.
             </p>
           </div>
           <div class="project-links">
             <a href="https://www.cell.com/star-protocols/fulltext/S2666-1667(25)00215-1" class="icon-link" target="_blank">Paper →</a>
           </div>
-        </div>        </div>
-
+        </div>
       </div>
     </div>
   </section>
 
-
   <!-- =====================================================
-       COURSE
-       Edit the course title, description, and link.
+       COURSE / TEACHING
   ====================================================== -->
   <section id="course">
     <div class="wrap">
       <p class="sec-label fi">Teaching</p>
-      <h2 class="sec-title fi">Course</h2>
+      <h2 class="sec-title fi">Teaching Experience</h2>
 
-      <!-- ↓ Edit this card for your course(s). Duplicate for more. -->
       <div class="course-card fi">
         <div>
-          <span class="course-chip">[Semester, Year] · [Course Code]</span>
-          <p class="course-title">[Course Title — e.g., "Transport Phenomena in Soft Materials"]</p>
+          <span class="course-chip">Winter 2026 · CHEME 447 / BIOENG 274</span>
+          <p class="course-title">Micro and Nano Processing Technologies for Medical Electronics</p>
           <p class="course-desc">
-            Brief description of the course — who it's for, what topics it covers,
-            and what students will leave with. 2–3 sentences.
-            You can also include the platform (Canvas, course website, etc.)
-            and any open materials.
+            Co-developed course and syllabus with Prof. Zhenan Bao for 40+ students. 
+            Designed lecture materials on materials selection for medical devices and 
+            delivered invited lectures covering micro/nanofabrication techniques for bioelectronics.
           </p>
         </div>
         <div class="course-action">
-          <a href="#" class="btn btn-accent">View Course →</a>
+          <a href="#" class="btn btn-accent">Course Info →</a>
         </div>
       </div>
 
+      <div class="course-card fi" style="margin-top: 14px;">
+        <div>
+          <span class="course-chip">Teaching Assistant · CHEME 440</span>
+          <p class="course-title">Micro- and Nanoscale Fabrication Engineering</p>
+          <p class="course-desc">
+            Teaching Assistant for Prof. Zhenan Bao. Supported 30 graduate and 
+            advanced undergraduate students through review sessions, office hours, 
+            and grading of assignments and exams.
+          </p>
+        </div>
+        <div class="course-action">
+          <a href="#" class="btn btn-accent">Course Info →</a>
+        </div>
+      </div>
     </div>
   </section>
 
-
   <!-- =====================================================
        EXPERIENCE
-       Most recent first. Duplicate .timeline-item to add more.
   ====================================================== -->
   <section id="experience">
     <div class="wrap">
       <p class="sec-label fi">Background</p>
       <h2 class="sec-title fi">Experience &amp; Education</h2>
+
       <!-- ── I. EDUCATION ── -->
       <h3 class="subsec-title fi" style="margin-top:2.5rem;margin-bottom:1.2rem;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);">I. Education</h3>
       <div class="timeline">
         <div class="timeline-item fi">
-          <div class="tl-date">Aug 2022 – Present</div>
+          <div class="tl-left">
+            <div class="tl-date">Aug 2022 – Present</div>
+            <img src="Logos/Stanford-Logo.avif" alt="Stanford" class="org-logo">
+          </div>
           <div>
             <p class="tl-role">Doctor of Philosophy in Chemical Engineering</p>
             <p class="tl-org">Stanford University</p>
@@ -837,14 +836,19 @@
           </div>
         </div>
         <div class="timeline-item fi">
-          <div class="tl-date">Aug 2016 – Dec 2021</div>
+          <div class="tl-left">
+            <div class="tl-date">Aug 2016 – Dec 2021</div>
+            <img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo">
+          </div>
           <div>
             <p class="tl-role">Bachelor of Science in Chemical Engineering, Minor in Applied Mathematics</p>
             <p class="tl-org">University of Puerto Rico – Mayagüez Campus (UPRM)</p>
           </div>
         </div>
         <div class="timeline-item fi">
-          <div class="tl-date">Spring 2018</div>
+          <div class="tl-left">
+            <div class="tl-date">Spring 2018</div>
+          </div>
           <div>
             <p class="tl-role">Cornell-UPR Interuniversity Hurricane María Academic Relief Program</p>
             <p class="tl-org">Cornell University</p>
@@ -855,23 +859,6 @@
       <!-- ── II. TECHNICAL EXPERIENCE ── -->
       <h3 class="subsec-title fi" style="margin-top:2.5rem;margin-bottom:1.2rem;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);">II. Technical Experience</h3>
       <div class="timeline">
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">May – Aug 2018</div>
-            <img src="Logos/3M-Logo.svg" alt="3M" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Product Development Engineer</p>
-            <p class="tl-org">3M, Minneapolis, MN</p>
-            <div class="tl-tags">
-              <span class="tag">Sustainable Foam Alternatives</span>
-              <span class="tag">Formulation</span>
-              <span class="tag">Pilot-Plant Run</span>
-              <span class="tag">Spray/Roll Coating</span>
-              <span class="tag">Consumer Products</span>
-            </div>
-          </div>
-        </div>
         <div class="timeline-item fi">
           <div class="tl-left">
             <div class="tl-date">Jan – Mar 2022</div>
@@ -905,22 +892,6 @@
         </div>
         <div class="timeline-item fi">
           <div class="tl-left">
-            <div class="tl-date">Aug 2019 – May 2021</div>
-            <img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Undergraduate Researcher Student — UPRM-UW Partnership for Research and Education in Materials</p>
-            <p class="tl-org">University of Puerto Rico, Mayagüez — Prof. Claribel Acevedo-Vélez's Group</p>
-            <div class="tl-tags">
-              <span class="tag">Gold Nanoparticles</span>
-              <span class="tag">Liquid Crystals</span>
-              <span class="tag">Surface Chemistry</span>
-              <span class="tag">Interfacial Properties</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
             <div class="tl-date">Aug – Dec 2020</div>
             <img src="Logos/ExxonMobil-Logo.png" alt="ExxonMobil" class="org-logo">
           </div>
@@ -937,17 +908,17 @@
         </div>
         <div class="timeline-item fi">
           <div class="tl-left">
-            <div class="tl-date">Aug 2018 – Dec 2019</div>
+            <div class="tl-date">Aug 2019 – May 2021</div>
             <img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo">
           </div>
           <div>
-            <p class="tl-role">Undergraduate Researcher</p>
-            <p class="tl-org">University of Puerto Rico, Mayagüez — Prof. L. Antonio Estévez's Supercritical Fluid Transport Phenomena Group</p>
+            <p class="tl-role">Undergraduate Researcher Student — UPRM-UW Partnership for Research and Education in Materials</p>
+            <p class="tl-org">University of Puerto Rico, Mayagüez — Prof. Claribel Acevedo-Vélez's Group</p>
             <div class="tl-tags">
-              <span class="tag">Thermodynamic Modeling</span>
-              <span class="tag">Peng-Robinson Equation of State</span>
-              <span class="tag">Thermal Expansivity</span>
-              <span class="tag">Transport Phenomena</span>
+              <span class="tag">Gold Nanoparticles</span>
+              <span class="tag">Liquid Crystals</span>
+              <span class="tag">Surface Chemistry</span>
+              <span class="tag">Interfacial Properties</span>
             </div>
           </div>
         </div>
@@ -970,6 +941,39 @@
         </div>
         <div class="timeline-item fi">
           <div class="tl-left">
+            <div class="tl-date">Aug 2018 – Dec 2019</div>
+            <img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo">
+          </div>
+          <div>
+            <p class="tl-role">Undergraduate Researcher</p>
+            <p class="tl-org">University of Puerto Rico, Mayagüez — Prof. L. Antonio Estévez's Supercritical Fluid Transport Phenomena Group</p>
+            <div class="tl-tags">
+              <span class="tag">Thermodynamic Modeling</span>
+              <span class="tag">Peng-Robinson Equation of State</span>
+              <span class="tag">Thermal Expansivity</span>
+              <span class="tag">Transport Phenomena</span>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item fi">
+          <div class="tl-left">
+            <div class="tl-date">May – Aug 2018</div>
+            <img src="Logos/3M-Logo.svg" alt="3M" class="org-logo">
+          </div>
+          <div>
+            <p class="tl-role">Product Development Engineer</p>
+            <p class="tl-org">3M, Minneapolis, MN</p>
+            <div class="tl-tags">
+              <span class="tag">Sustainable Foam Alternatives</span>
+              <span class="tag">Formulation</span>
+              <span class="tag">Pilot-Plant Run</span>
+              <span class="tag">Spray/Roll Coating</span>
+              <span class="tag">Consumer Products</span>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item fi">
+          <div class="tl-left">
             <div class="tl-date">May – Aug 2018</div>
             <img src="Logos/Merck-Logo.png" alt="Merck" class="org-logo">
           </div>
@@ -985,6 +989,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Skills Section - Properly placed outside timeline -->
       <div class="skills-row fi">
         <span class="skill-chip">Python</span>
         <span class="skill-chip">MATLAB</span>
@@ -1000,6 +1006,7 @@
       </div>
     </div>
   </section>
+
   <!-- =====================================================
        OUTREACH
   ====================================================== -->
@@ -1010,28 +1017,27 @@
       <div class="outreach-grid">
         <div class="outreach-card fi">
           <div class="outreach-icon">🎓</div>
-          <p class="outreach-title">[Mentoring Program]</p>
-          <p class="outreach-desc">Who you mentor, what the program focuses on, and your role.</p>
+          <p class="outreach-title">SURF &amp; EDGE Mentoring</p>
+          <p class="outreach-desc">Supervise undergraduate and graduate researchers, providing hands-on training in polymer synthesis and characterization.</p>
         </div>
         <div class="outreach-card fi">
           <div class="outreach-icon">🔬</div>
-          <p class="outreach-title">[Science Outreach]</p>
-          <p class="outreach-desc">Science fairs, demo days, science communication blog, etc.</p>
+          <p class="outreach-title">ChemE DEI Coordinator</p>
+          <p class="outreach-desc">Led department-wide diversity initiatives and graduate recruitment at conferences like NSBE, SHPE, and SACNAS.</p>
         </div>
         <div class="outreach-card fi">
           <div class="outreach-icon">🤝</div>
-          <p class="outreach-title">[Student Org / DEI]</p>
-          <p class="outreach-desc">Officer role, workshops, or events for underrepresented students in STEM.</p>
+          <p class="outreach-title">AIChE Leadership</p>
+          <p class="outreach-desc">Served as Vice-President and founded mentorship programs connecting 40+ underclassmen with industry professionals.</p>
         </div>
         <div class="outreach-card fi">
           <div class="outreach-icon">📣</div>
-          <p class="outreach-title">[Talks / Panels]</p>
-          <p class="outreach-desc">Invited talks, panel discussions, conference organizing, etc.</p>
+          <p class="outreach-title">Conference Workshops</p>
+          <p class="outreach-desc">Delivered workshops demystifying graduate school applications for first-generation and underrepresented students.</p>
         </div>
       </div>
     </div>
   </section>
-
 
   <!-- =====================================================
        CONTACT
@@ -1046,10 +1052,9 @@
           and general conversations. I usually respond within a few days.
         </p>
         <div class="contact-links fi">
-          <!-- ↓ Update your email and social handles -->
           <a href="mailto:aramosfi@stanford.edu" class="c-link">
             <span class="c-icon">✉️</span>
-            alex.alexandra.ramos12@gmail.com
+            aramosfi@stanford.edu
           </a>
           <a href="https://linkedin.com/in/aramosfi" class="c-link" target="_blank">
             <span class="c-icon">🔗</span>
@@ -1062,11 +1067,6 @@
         </div>
       </div>
 
-      <!--
-        Contact form — connect to Formspree (free) to receive emails:
-        1. Go to formspree.io → create free account → new form
-        2. Replace YOUR_FORM_ID below with your form's ID
-      -->
       <form class="contact-form fi" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="fg">
           <label for="name">Name</label>
@@ -1085,14 +1085,12 @@
     </div>
   </section>
 
-
   <!-- =====================================================
        FOOTER
   ====================================================== -->
   <footer>
     <p>© 2026 Alexandra L. Ramos Figueroa</p>
   </footer>
-
 
   <!-- =====================================================
        SCRIPTS
@@ -1136,8 +1134,6 @@
       resize();
       window.addEventListener('resize', resize);
 
-      // Node configuration
-      // ↓ Edit colors to match your accent palette
       const RED  = { fill: 'rgba(220,80,100,.85)',  stroke: 'rgba(200,60,80,.4)'  };
       const BLUE = { fill: 'rgba(80,130,220,.85)',   stroke: 'rgba(60,100,190,.4)' };
 
@@ -1157,7 +1153,6 @@
             vy: (Math.random() - 0.5) * 0.4,
             r,
             col,
-            // wavy path anchor for cables
             cx1: (Math.random() - 0.5) * 120,
             cy1: (Math.random() - 0.5) * 120,
           });
@@ -1171,7 +1166,6 @@
         const W = canvas.width, H = canvas.height;
         ctx.clearRect(0, 0, W, H);
 
-        // background gradient
         const bg = ctx.createLinearGradient(0, 0, W, H);
         bg.addColorStop(0,   '#c5bce6');
         bg.addColorStop(0.5, '#a9b9e8');
@@ -1179,7 +1173,6 @@
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, W, H);
 
-        // update node positions
         nodes.forEach(n => {
           n.x += n.vx;
           n.y += n.vy;
@@ -1189,7 +1182,6 @@
           if (n.y > H+20) n.y = -20;
         });
 
-        // draw wavy links
         ctx.lineWidth = 1.8;
         for (let i = 0; i < nodes.length; i++) {
           for (let j = i + 1; j < nodes.length; j++) {
@@ -1201,7 +1193,6 @@
             ctx.strokeStyle = `rgba(150,140,200,${alpha * 0.55})`;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
-            // wavy cubic bezier
             const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
             ctx.bezierCurveTo(
               mx + a.cx1 * alpha, my + a.cy1 * alpha,
@@ -1212,9 +1203,7 @@
           }
         }
 
-        // draw nodes
         nodes.forEach(n => {
-          // glow
           const grd = ctx.createRadialGradient(n.x - n.r*.3, n.y - n.r*.3, 0, n.x, n.y, n.r * 1.6);
           grd.addColorStop(0, n.col.fill.replace('.85', '1'));
           grd.addColorStop(0.6, n.col.fill);
