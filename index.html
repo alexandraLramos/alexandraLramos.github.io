@@ -448,7 +448,7 @@
     .course-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
     .course-action { flex-shrink: 0; }
 
-    /* =====================================================
+/* =====================================================
        EXPERIENCE
     ====================================================== */
     .timeline { display: flex; flex-direction: column; }
@@ -460,21 +460,32 @@
       border-bottom: 1px solid var(--border);
     }
     .timeline-item:last-child { border-bottom: none; }
-    .tl-date { font-size: .78rem; color: var(--muted); padding-top: 3px; line-height: 1.5; }
-    .tl-role { font-size: .98rem; font-weight: 500; margin-bottom: 2px; }
-    .tl-org  { font-size: .88rem; color: var(--accent); margin-bottom: 7px; }
-    .tl-desc { font-size: .87rem; color: var(--muted); line-height: 1.6; }
-
-    .skills-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
-    .skill-chip {
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-size: .8rem;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      color: var(--text);
+    .tl-left { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;           /* ← Centers the logos */
+      gap: 6px;                     /* ← Spacing between date & logo */
     }
-
+    .tl-date { font-size: .78rem; color: var(--muted); line-height: 1.5; text-align: center; }
+    .tl-role { font-size: .98rem; font-weight: 500; margin-bottom: 2px; }
+    .tl-org  { 
+      font-size: .88rem; 
+      color: var(--accent); 
+      margin-bottom: 7px; 
+    }
+    .tl-desc { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+    
+    /* Organization logos */
+    .org-logo {
+      width: 16px;                  /* ← Logo width (small) */
+      height: 16px;                 /* ← Logo height (small) */
+      object-fit: contain;
+      filter: opacity(0.6);         /* ← Subtle opacity */
+      transition: opacity 0.15s;
+    }
+    .timeline-item:hover .org-logo {
+      filter: opacity(0.9);         /* ← Hover effect */
+    }
     /* =====================================================
        OUTREACH
     ====================================================== */
