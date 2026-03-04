@@ -603,6 +603,21 @@
       padding-top: calc(var(--nav-h) + 60px);
       padding-bottom: var(--gap);
     }
+    .pub-divider {
+      margin: 3rem 0 2rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--accent-light);
+      font-size: 1.3rem;
+      font-family: var(--font-display);
+      letter-spacing: -.01em;
+      color: var(--text);
+    }
+    .pub-detail {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 4px;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -616,7 +631,7 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="#about">About</a></li>
           <li><a href="#research">Research</a></li>
-          <li><a href="#publications">Publications</a></li>
+          <li><a href="publications.html">Publications</a></li>
           <li><a href="#course">Course</a></li>
           <li><a href="#outreach">Outreach</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -652,16 +667,15 @@
 <div class="page-wrap">
   <div class="wrap">
     <p class="sec-label fi">Publications</p>
-    <h1 class="sec-title fi" style="margin-bottom:0.5rem;">All Publications</h1>
-    <p class="fi" style="color:var(--muted);font-size:.93rem;margin-bottom:3rem;">
-      A complete list of my publications, divided into selected first-author work and collaborative contributions.
-      <a href="CV.pdf" class="btn btn-dark" target="_blank" style="display:inline-flex;margin-left:16px;vertical-align:middle;">&darr; Download CV</a>
-    </p>
+    <h1 class="sec-title fi">Publications</h1>
 
-    <!-- Selected Publications -->
-    <h2 class="fi" style="font-size:1.3rem;font-family:var(--font-display);letter-spacing:-.01em;color:var(--text);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent-light);">Selected Publications</h2>
-    <div class="project-list" style="margin-bottom:3.5rem;">
+    <!-- ============================================================
+         SELECTED PUBLICATIONS
+         ============================================================ -->
+    <h2 class="pub-divider fi">Selected Publications</h2>
+    <div class="project-list">
 
+      <!-- PUB 1 -->
       <div class="project-card fi">
         <div>
           <div class="project-meta">
@@ -674,8 +688,10 @@
             A guide for nanomechanical characterization of soft matter via AFM: From mode selection to data reporting
           </p>
           <p class="project-desc">
-            E Kim, ALR Figueroa, M Schrock, E Zhang, CJ Newcomb, Z Bao, et al.
-            <em>STAR protocols</em> 6 (2), 2025.
+            Eunyoung Kim, <strong>Alexandra L. Ramos Figueroa</strong>, Max Schrock, Elizabeth Zhang, Christina J. Newcomb, Zhenan Bao, Lukas Michalek.
+          </p>
+          <p class="pub-detail">
+            <em>STAR Protocols</em>, Vol. 6, Issue 2, 2025. &mdash; Elsevier.
           </p>
         </div>
         <div class="project-links">
@@ -683,26 +699,154 @@
         </div>
       </div>
 
+      <!-- PUB 2 -->
+      <div class="project-card fi">
+        <div>
+          <div class="project-meta">
+            <span class="tag tag-accent">Published</span>
+            <span class="tag">Supercritical Fluids</span>
+            <span class="tag">Thermodynamics</span>
+            <span class="project-year">2019</span>
+          </div>
+          <p class="project-title">
+            Thermal expansivity of near- and supercritical fluids: equation-of-state models and calculations for carbon dioxide and C1 to C4 normal alkanes
+          </p>
+          <p class="project-desc">
+            <strong>Alexandra L. Ramos Figueroa</strong>, Rolando A. Carre&ntilde;o-Ch&aacute;vez, L. Antonio Est&eacute;vez.
+          </p>
+          <p class="pub-detail">
+            <em>Journal of Chemical &amp; Engineering Data</em>, Vol. 64, Issue 5, pp. 2126&ndash;2133, 2019. &mdash; American Chemical Society.
+          </p>
+        </div>
+        <div class="project-links">
+          <a href="https://pubs.acs.org/doi/full/10.1021/acs.jced.8b01069" class="icon-link" target="_blank">Paper &rarr;</a>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Collaborations -->
-    <h2 class="fi" style="font-size:1.3rem;font-family:var(--font-display);letter-spacing:-.01em;color:var(--text);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent-light);">Collaborations</h2>
+    <!-- ============================================================
+         COLLABORATIONS
+         ============================================================ -->
+    <h2 class="pub-divider fi">Collaborations</h2>
     <div class="project-list">
 
+      <!-- COLLAB 1 -->
       <div class="project-card fi">
         <div>
           <div class="project-meta">
             <span class="tag">Collaboration</span>
-            <span class="project-year">Year</span>
+            <span class="tag">Electrochemistry</span>
+            <span class="tag">Review</span>
+            <span class="project-year">2023</span>
           </div>
-          <p class="project-title">[Collaborative Publication Title]</p>
+          <p class="project-title">
+            Electrochemical manufacturing routes for organic chemical commodities
+          </p>
           <p class="project-desc">
-            [Authors]. <em>[Journal Name]</em> [Volume] ([Issue]), [Year].
-            Description of the collaborative work and your contribution.
+            Ricardo Mathison, <strong>Alexandra L. Ramos Figueroa</strong>, Casey Bloomquist, Miguel A. Modestino.
+          </p>
+          <p class="pub-detail">
+            <em>Annual Review of Chemical and Biomolecular Engineering</em>, Vol. 14, pp. 85&ndash;108, 2023. &mdash; Annual Reviews.
           </p>
         </div>
         <div class="project-links">
-          <a href="#" class="icon-link">Paper &rarr;</a>
+          <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-chembioeng-101121-090840" class="icon-link" target="_blank">Paper &rarr;</a>
+        </div>
+      </div>
+
+      <!-- COLLAB 2 -->
+      <div class="project-card fi">
+        <div>
+          <div class="project-meta">
+            <span class="tag">Collaboration</span>
+            <span class="tag">Electronic Skin</span>
+            <span class="tag">Self-Healing</span>
+            <span class="project-year">2025</span>
+          </div>
+          <p class="project-title">
+            A damage-perceptive, self-healing electronic skin with millimeter resolution
+          </p>
+          <p class="project-desc">
+            Samuel E. Root, Can Wu, Hojung Choi, Eric Sun, Gradie Ngaruka, Hyunchang Park, <strong>Alexandra L. Ramos Figueroa</strong>, Arielle Berman, Diego Uruchurtu Patino, Yuran Shi, Carla Pugh, Zhenan Bao.
+          </p>
+          <p class="pub-detail">
+            <em>Device</em>, Vol. 3, Issue 8, 2025. &mdash; Elsevier / Cell Press.
+          </p>
+        </div>
+        <div class="project-links">
+          <a href="https://www.cell.com/device/fulltext/S2666-9986(25)00115-2" class="icon-link" target="_blank">Paper &rarr;</a>
+        </div>
+      </div>
+
+      <!-- COLLAB 3 -->
+      <div class="project-card fi">
+        <div>
+          <div class="project-meta">
+            <span class="tag">Collaboration</span>
+            <span class="tag">Self-Healing</span>
+            <span class="tag">Elastomers</span>
+            <span class="project-year">2025</span>
+          </div>
+          <p class="project-title">
+            Supramolecular Nanostructures Enabling Mechanical Reinforcement and Recognitive Self-Healing in Elastomers
+          </p>
+          <p class="project-desc">
+            Hyunchang Park, Haeseung Lee, Younghun Kim, Hyunjun Kim, Jeong-Chul Kim, Eric Tianjiao Zhao, <strong>Alexandra L. Ramos Figueroa</strong>, Dongwan Lee, Zhenan Bao, Jiheong Kang.
+          </p>
+          <p class="pub-detail">
+            <em>Advanced Functional Materials</em>, e24010, 2025. &mdash; Wiley.
+          </p>
+        </div>
+        <div class="project-links">
+          <a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/adfm.202524010" class="icon-link" target="_blank">Paper &rarr;</a>
+        </div>
+      </div>
+
+      <!-- COLLAB 4 — AIChE 2024 conference talk -->
+      <div class="project-card fi">
+        <div>
+          <div class="project-meta">
+            <span class="tag">Conference</span>
+            <span class="tag">Self-Healing Polymers</span>
+            <span class="project-year">2024</span>
+          </div>
+          <p class="project-title">
+            Quantifying Interfaces and Multilayer Self-Healing of Periodic Dynamic Polymers with Identical Backbones and Distinct Dynamic Bonds
+          </p>
+          <p class="project-desc">
+            <strong>Alexandra Ramos Figueroa</strong>, Zhenan Bao.
+          </p>
+          <p class="pub-detail">
+            2024 AIChE Annual Meeting, 2024. &mdash; AIChE.
+          </p>
+        </div>
+        <div class="project-links">
+          <span class="icon-link" style="color:var(--muted);cursor:default;">Conference Talk</span>
+        </div>
+      </div>
+
+      <!-- COLLAB 5 — AIChE 2024 conference talk -->
+      <div class="project-card fi">
+        <div>
+          <div class="project-meta">
+            <span class="tag">Conference</span>
+            <span class="tag">DEI</span>
+            <span class="tag">Graduate Admissions</span>
+            <span class="project-year">2024</span>
+          </div>
+          <p class="project-title">
+            Demystifying Stanford Engineering's Graduate Application Process for First-Generation and/or Low-Income Students
+          </p>
+          <p class="project-desc">
+            Milenia Rojas Mendoza, Luz Jim&eacute;nez Ruvalcaba, <strong>Alexandra Ramos Figueroa</strong>, Wrayzene Willoughby.
+          </p>
+          <p class="pub-detail">
+            2024 AIChE Annual Meeting, 2024. &mdash; AIChE.
+          </p>
+        </div>
+        <div class="project-links">
+          <span class="icon-link" style="color:var(--muted);cursor:default;">Conference Talk</span>
         </div>
       </div>
 
@@ -721,7 +865,6 @@
   navLinks.querySelectorAll('a').forEach(a =>
     a.addEventListener('click', () => navLinks.classList.remove('open'))
   );
-
   const io = new IntersectionObserver(
     entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
