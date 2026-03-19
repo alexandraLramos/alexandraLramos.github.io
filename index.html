@@ -3,705 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alexandra L. Ramos Figueroa</title>
-
-  <!-- =====================================================
-       FONTS
-       Body: Inter  |  Display: Playfair Display
-       Change at fonts.google.com — swap the names below
-  ====================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
-    rel="stylesheet"
-  />
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
   <style>
-    /* =====================================================
-       DESIGN TOKENS — change colors / fonts here in one place
-    ====================================================== */
-    :root {
-      --bg:           #f7f7f8;
-      --surface:      #ffffff;
-      --text:         #111827;
-      --muted:        #6b7280;
-      --border:       #e5e7eb;
-      --hover:        #f3f4f6;
-
-      /* ↓ PRIMARY ACCENT — change this hex to restyle the whole site */
-      --accent:       #7c6fcd;   /* lavender-purple, matching your mockup */
-      --accent-light: #ede9f8;
-      --accent-dark:  #5b4fb8;
-
-      --font-body:    'Inter', sans-serif;
-      --font-display: 'Playfair Display', serif;
-
-      --nav-h:    70px;
-      --max-w:    900px;
-      --gap:      96px;
-    }
-
-    /* ---- reset ---- */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-weight: 400;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-    img { display: block; max-width: 100%; }
-    a   { color: inherit; text-decoration: none; }
-
-    /* ---- layout ---- */
-    .wrap {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-    section { padding: var(--gap) 0; }
-    section + section { border-top: 1px solid var(--border); }
-
-    /* =====================================================
-       NAV
-    ====================================================== */
-    nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      height: var(--nav-h);
-      background: rgba(247,247,248,.9);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      z-index: 200;
-    }
-    .nav-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 28px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    /* ↓ YOUR NAME in the top-left */
-    .nav-name {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--accent);
-      white-space: nowrap;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-   }
-
-    /* text links */
-    .nav-links {
-      display: flex;
-      list-style: none;
-      align-items: center;
-      gap: 4px;
-    }
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--muted);
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: color .18s, background .18s;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
-      background: var(--hover);
-    }
-
-    /* icon links (Twitter / LinkedIn / etc.) */
-    .nav-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 1rem;
-      transition: color .18s, background .18s;
-    }
-    .nav-icon:hover {
-      color: var(--text);
-      background: var(--hover);
-    }
-
-    /* divider between text links and icons */
-    .nav-divider {
-      width: 1px;
-      height: 20px;
-      background: var(--border);
-      margin: 0 6px;
-    }
-
-    /* mobile toggle */
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: .25s;
-    }
-
-    /* =====================================================
-       HERO
-    ====================================================== */
-    #hero {
-      padding: 0;
-      border-top: none;
-    }
-    .hero-wrap {
-      padding-top: var(--nav-h);
-    }
-
-    /* top strip: name + tagline */
-    .hero-intro {
-      padding: 56px 28px 40px;
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-    .hero-eyebrow {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 14px;
-    }
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      line-height: 1.1;
-      letter-spacing: -.02em;
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-    .hero-subtitle {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 540px;
-      margin-bottom: 28px;
-    }
-    .hero-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    /* ---- HERO BANNER (the scientific illustration area) ---- */
-    .hero-banner {
-      position: relative;
-      width: 100%;
-      height: clamp(300px, 42vw, 500px);
-      overflow: hidden;
-      background: linear-gradient(135deg, #c9c2e8 0%, #a9b8e8 50%, #c2d0f0 100%);
-    }
-
-    /* Canvas sits behind text */
-    #heroCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hero-banner-text {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 60px 44px 44px;
-      background: linear-gradient(to top, rgba(80,60,140,.55) 0%, transparent 100%);
-      display: flex;
-      align-items: flex-end;
-    }
-
-    .hero-research-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3.8vw, 2.6rem);
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.2;
-      max-width: 700px;
-      text-shadow: 0 2px 16px rgba(0,0,0,.3);
-    }
-
-    /* =====================================================
-       BUTTONS
-    ====================================================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 20px;
-      border-radius: 7px;
-      font-size: .875rem;
-      font-weight: 500;
-      transition: all .18s;
-      cursor: pointer;
-      font-family: var(--font-body);
-    }
-    .btn-dark {
-      background: var(--text);
-      color: #fff;
-    }
-    .btn-dark:hover { background: #333; }
-
-    .btn-outline {
-      border: 1.5px solid var(--border);
-      color: var(--text);
-      background: transparent;
-    }
-    .btn-outline:hover {
-      border-color: var(--text);
-      background: var(--hover);
-    }
-    .btn-accent {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-accent:hover { background: var(--accent-dark); }
-
-    /* =====================================================
-       SECTION HEADERS (shared)
-    ====================================================== */
-    .sec-label {
-      font-size: .73rem;
-      font-weight: 500;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-    .sec-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      letter-spacing: -.02em;
-      line-height: 1.2;
-      margin-bottom: 36px;
-    }
-
-    /* =====================================================
-       ABOUT
-    ====================================================== */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 200px;
-      gap: 48px;
-      align-items: start;
-    }
-    .about-body { font-size: .97rem; color: var(--text); }
-    .about-body p + p { margin-top: 14px; }
-
-    .about-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-
-    .about-photo {
-      width: 180px;
-      height: 180px;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 2px solid var(--border);
-      background: var(--border);
-    }
-    .photo-placeholder {
-      width: 180px;
-      height: 180px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #ede9f8, #c9c2e8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      border: 2px solid var(--border);
-    }
-
-    /* =====================================================
-       RESEARCH / PROJECTS
-    ====================================================== */
-    .project-list { display: flex; flex-direction: column; gap: 2px; }
-
-    .project-card {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: start;
-      gap: 16px;
-      padding: 22px 18px;
-      border-radius: 10px;
-      transition: background .18s;
-    }
-    .project-card:hover { background: var(--surface); }
-
-    .project-meta {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .tag {
-      display: inline-block;
-      padding: 2px 9px;
-      border-radius: 999px;
-      font-size: .71rem;
-      font-weight: 500;
-      letter-spacing: .04em;
-      background: var(--hover);
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-    .tag-accent {
-      background: var(--accent-light);
-      color: var(--accent-dark);
-      border-color: #c4b8ef;
-    }
-    .project-year { font-size: .78rem; color: var(--muted); }
-
-    .project-title {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 5px;
-      line-height: 1.35;
-    }
-    .project-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
-
-    .project-links {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      align-items: flex-end;
-      flex-shrink: 0;
-    }
-    .icon-link {
-      font-size: .78rem;
-      font-weight: 500;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      white-space: nowrap;
-      transition: opacity .18s;
-    }
-    .icon-link:hover { opacity: .65; }
-
-    /* =====================================================
-       COURSE
-    ====================================================== */
-    .course-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 28px 24px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: center;
-      transition: box-shadow .2s, transform .2s;
-    }
-    .course-card:hover {
-      box-shadow: 0 6px 28px rgba(0,0,0,.08);
-      transform: translateY(-2px);
-    }
-    .course-chip {
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-light);
-      border: 1px solid #c4b8ef;
-      padding: 3px 10px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-      display: inline-block;
-    }
-    .course-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .course-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
-    .course-action { flex-shrink: 0; }
-
-    /* =====================================================
-       EXPERIENCE
-    ====================================================== */
-    .timeline { display: flex; flex-direction: column; }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 128px 1fr;
-      gap: 20px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .timeline-item:last-child { border-bottom: none; }
-    .tl-left { 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center;
-      gap: 6px;
-    }
-    .tl-date { font-size: .78rem; color: var(--muted); line-height: 1.5; text-align: center; }
-    .tl-role { font-size: .98rem; font-weight: 500; margin-bottom: 2px; }
-    .tl-org  { 
-      font-size: .88rem; 
-      color: var(--accent); 
-      margin-bottom: 7px; 
-    }
-    .tl-desc { font-size: .87rem; color: var(--muted); line-height: 1.6; }
-    
-    /* Organization logos */
-    .org-logo {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-      filter: opacity(0.6);
-      transition: opacity 0.15s;
-    }
-    .timeline-item:hover .org-logo {
-      filter: opacity(0.9);
-    }
-
-    .skills-row { 
-      display: flex; 
-      flex-wrap: wrap; 
-      gap: 8px; 
-      margin-top: 32px; 
-    }
-    .skill-chip {
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-size: .8rem;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      color: var(--text);
-    }
-
-    /* =====================================================
-       OUTREACH
-    ====================================================== */
-    .outreach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 14px;
-    }
-    .outreach-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
-      transition: box-shadow .18s, transform .18s;
-    }
-    .outreach-card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,.07);
-      transform: translateY(-2px);
-    }
-    .outreach-icon { font-size: 1.4rem; margin-bottom: 10px; }
-    .outreach-title { font-size: .93rem; font-weight: 500; margin-bottom: 5px; }
-    .outreach-desc  { font-size: .84rem; color: var(--muted); line-height: 1.6; }
-
-    /* =====================================================
-       CONTACT
-    ====================================================== */
-    #contact .wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 52px;
-      align-items: start;
-    }
-    .contact-blurb {
-      font-size: .93rem;
-      color: var(--muted);
-      margin: 14px 0 26px;
-      line-height: 1.7;
-    }
-    .contact-links { display: flex; flex-direction: column; gap: 12px; }
-    .c-link {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      font-size: .88rem;
-      transition: color .18s;
-    }
-    .c-link:hover { color: var(--accent); }
-    .c-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 7px;
-      background: var(--hover);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .95rem;
-      flex-shrink: 0;
-      transition: background .18s;
-    }
-    .c-link:hover .c-icon { background: var(--accent-light); }
-
-    /* form */
-    .contact-form { display: flex; flex-direction: column; gap: 12px; }
-    .fg { display: flex; flex-direction: column; gap: 4px; }
-    .fg label { font-size: .77rem; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
-    .fg input, .fg textarea {
-      font-family: var(--font-body);
-      font-size: .88rem;
-      padding: 9px 13px;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      background: var(--surface);
-      color: var(--text);
-      outline: none;
-      transition: border-color .18s;
-      resize: vertical;
-    }
-    .fg input:focus, .fg textarea:focus { border-color: var(--accent); }
-    .fg textarea { min-height: 100px; }
-
-    /* =====================================================
-       FOOTER
-    ====================================================== */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      text-align: center;
-    }
-    footer p { font-size: .8rem; color: var(--muted); }
-    footer a { color: var(--accent); }
-
-    /* =====================================================
-       SCROLL ANIMATION
-    ====================================================== */
-    .fi {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .5s ease, transform .5s ease;
-    }
-    .fi.on { opacity: 1; transform: none; }
-
-    /* =====================================================
-       RESPONSIVE
-    ====================================================== */
-    @media (max-width: 660px) {
-      .about-grid, #contact .wrap { grid-template-columns: 1fr; }
-      .about-photo-wrap { order: -1; }
-      .photo-placeholder, .about-photo { width: 120px; height: 120px; }
-      .timeline-item { grid-template-columns: 1fr; gap: 2px; }
-      .tl-date { padding-top: 0; }
-      .project-card { grid-template-columns: 1fr; }
-      .project-links { flex-direction: row; }
-      .course-card { grid-template-columns: 1fr; }
-      .nav-links { display: none; flex-direction: column; position: absolute;
-        top: var(--nav-h); left: 0; right: 0; background: var(--surface);
-        border-bottom: 1px solid var(--border); padding: 14px 20px; gap: 4px; }
-      .nav-links.open { display: flex; }
-      .nav-toggle { display: flex; }
-      .nav-divider { display: none; }
-    }
+    :root { --bg:#f7f7f8;--surface:#ffffff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--hover:#f3f4f6;--accent:#7c6fcd;--accent-light:#ede9f8;--accent-dark:#5b4fb8;--font-body:'Inter',sans-serif;--font-display:'Playfair Display',serif;--nav-h:70px;--max-w:900px;--gap:96px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    img{display:block;max-width:100%;}
+    a{color:inherit;text-decoration:none;}
+    .wrap{max-width:var(--max-w);margin:0 auto;padding:0 28px;}
+    section{padding:var(--gap) 0;}
+    section+section{border-top:1px solid var(--border);}
+    nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);background:rgba(247,247,248,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:200;}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .nav-name{font-family:var(--font-body);font-size:1rem;font-weight:600;color:var(--accent);white-space:nowrap;letter-spacing:-0.01em;}
+    .nav-right{display:flex;align-items:center;gap:6px;}
+    .nav-links{display:flex;list-style:none;align-items:center;gap:4px;}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;transition:color .18s,background .18s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--hover);}
+    .nav-icon{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1rem;transition:color .18s,background .18s;}
+    .nav-icon:hover{color:var(--text);background:var(--hover);}
+    .nav-divider{width:1px;height:20px;background:var(--border);margin:0 6px;}
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px;}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.25s;}
+    .page-hero{padding:calc(var(--nav-h) + 52px) 28px 0;max-width:var(--max-w);margin:0 auto;}
+    .page-eyebrow{font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+    .page-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:8px;}
+    .page-subtitle{font-size:1rem;color:var(--muted);margin-bottom:0;}
+    .sec-label{font-size:.73rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+    .sec-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;line-height:1.2;margin-bottom:36px;}
+    .subsec-h{margin-top:2.5rem;margin-bottom:1.2rem;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+    .timeline{display:flex;flex-direction:column;}
+    .timeline-item{display:grid;grid-template-columns:128px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--border);}
+    .timeline-item:last-child{border-bottom:none;}
+    .tl-left{display:flex;flex-direction:column;align-items:center;gap:6px;}
+    .tl-date{font-size:.78rem;color:var(--muted);line-height:1.5;text-align:center;}
+    .tl-role{font-size:.98rem;font-weight:500;margin-bottom:2px;}
+    .tl-org{font-size:.88rem;color:var(--accent);margin-bottom:7px;}
+    .tl-desc{font-size:.87rem;color:var(--muted);line-height:1.6;}
+    .org-logo{width:30px;height:30px;object-fit:contain;filter:opacity(0.6);transition:opacity 0.15s;}
+    .timeline-item:hover .org-logo{filter:opacity(0.9);}
+    .tl-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+    .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.71rem;font-weight:500;letter-spacing:.04em;background:var(--hover);color:var(--muted);border:1px solid var(--border);}
+    .tag-accent{background:var(--accent-light);color:var(--accent-dark);border-color:#c4b8ef;}
+    .skills-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+    .skill-chip{padding:5px 14px;border-radius:999px;font-size:.8rem;background:var(--surface);border:1.5px solid var(--border);color:var(--text);}
+    .course-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 28px 24px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;transition:box-shadow .2s,transform .2s;}
+    .course-card:hover{box-shadow:0 6px 28px rgba(0,0,0,.08);transform:translateY(-2px);}
+    .course-chip{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);border:1px solid #c4b8ef;padding:3px 10px;border-radius:999px;margin-bottom:10px;display:inline-block;}
+    .course-title{font-size:1.05rem;font-weight:600;margin-bottom:6px;}
+    .course-desc{font-size:.88rem;color:var(--muted);line-height:1.6;}
+    .course-action{flex-shrink:0;}
+    .outreach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+    .outreach-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px;transition:box-shadow .18s,transform .18s;}
+    .outreach-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07);transform:translateY(-2px);}
+    .outreach-icon{font-size:1.4rem;margin-bottom:10px;}
+    .outreach-title{font-size:.93rem;font-weight:500;margin-bottom:5px;}
+    .outreach-desc{font-size:.84rem;color:var(--muted);line-height:1.6;}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:7px;font-size:.875rem;font-weight:500;transition:all .18s;cursor:pointer;font-family:var(--font-body);}
+    .btn-dark{background:var(--text);color:#fff;}
+    .btn-dark:hover{background:#333;}
+    .btn-outline{border:1.5px solid var(--border);color:var(--text);background:transparent;}
+    .btn-outline:hover{border-color:var(--text);background:var(--hover);}
+    .btn-accent{background:var(--accent);color:#fff;}
+    .btn-accent:hover{background:var(--accent-dark);}
+    /* Option D honors layout */
+    .honors-split{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+    .honors-col-title{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+    .fellow-card{background:var(--accent-light);border:0.5px solid #c4b8ef;border-radius:10px;padding:13px 15px;margin-bottom:8px;}
+    .fellow-card:last-child{margin-bottom:0;}
+    .fellow-year{font-size:.72rem;color:var(--accent-dark);font-weight:500;margin-bottom:3px;}
+    .fellow-name{font-size:.88rem;font-weight:500;color:var(--text);line-height:1.35;margin-bottom:2px;}
+    .fellow-org{font-size:.78rem;color:var(--muted);}
+    .honor-row{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:0.5px solid var(--border);}
+    .honor-row:last-child{border-bottom:none;}
+    .honor-yr{font-size:.75rem;color:var(--accent);font-weight:500;min-width:42px;flex-shrink:0;}
+    .honor-nm{font-size:.84rem;color:var(--text);line-height:1.4;}
+    .trophy{font-size:.72rem;}
+    @media(max-width:660px){.honors-split{grid-template-columns:1fr;}}
+    .c-link{display:flex;align-items:center;gap:11px;font-size:.88rem;transition:color .18s;}
+    .c-link:hover{color:var(--accent);}
+    .c-icon{width:34px;height:34px;border-radius:7px;background:var(--hover);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:background .18s;}
+    .c-link:hover .c-icon{background:var(--accent-light);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+    .contact-blurb{font-size:.93rem;color:var(--muted);margin:14px 0 26px;line-height:1.7;}
+    .contact-links{display:flex;flex-direction:column;gap:12px;}
+    .contact-form{display:flex;flex-direction:column;gap:12px;}
+    .fg{display:flex;flex-direction:column;gap:4px;}
+    .fg label{font-size:.77rem;font-weight:500;color:var(--muted);letter-spacing:.04em;}
+    .fg input,.fg textarea{font-family:var(--font-body);font-size:.88rem;padding:9px 13px;border:1.5px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);outline:none;transition:border-color .18s;resize:vertical;}
+    .fg input:focus,.fg textarea:focus{border-color:var(--accent);}
+    .fg textarea{min-height:100px;}
+    footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;}
+    footer p{font-size:.8rem;color:var(--muted);}
+    footer a{color:var(--accent);}
+    .fi{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+    .fi.on{opacity:1;transform:none;}
+    @media(max-width:660px){
+      .timeline-item{grid-template-columns:1fr;gap:2px;}
+      .course-card{grid-template-columns:1fr;}
+      .contact-grid{grid-template-columns:1fr;}
+      .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;gap:4px;}
+      .nav-links.open{display:flex;}
+      .nav-toggle{display:flex;}
+      .nav-divider{display:none;}
+    }
+    /* index-specific */
+    #hero{padding:0;border-top:none;}
+    .hero-wrap{padding-top:var(--nav-h);}
+    .hero-intro{padding:56px 28px 40px;max-width:var(--max-w);margin:0 auto;}
+    .hero-eyebrow{font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+    .hero-name{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:16px;}
+    .hero-subtitle{font-size:1.05rem;color:var(--muted);max-width:540px;margin-bottom:28px;}
+    .hero-btns{display:flex;flex-wrap:wrap;gap:10px;}
+    .hero-banner{position:relative;width:100%;height:clamp(300px,42vw,500px);overflow:hidden;background:linear-gradient(135deg,#c9c2e8 0%,#a9b8e8 50%,#c2d0f0 100%);}
+    #heroCanvas{position:absolute;inset:0;width:100%;height:100%;}
+    .hero-banner-text{position:absolute;bottom:0;left:0;right:0;padding:60px 44px 44px;background:linear-gradient(to top,rgba(80,60,140,.55) 0%,transparent 100%);display:flex;align-items:flex-end;}
+    .hero-research-title{font-family:var(--font-display);font-size:clamp(1.5rem,3.8vw,2.6rem);font-weight:700;color:#ffffff;line-height:1.2;max-width:700px;text-shadow:0 2px 16px rgba(0,0,0,.3);}
+    .about-grid{display:grid;grid-template-columns:1fr 200px;gap:48px;align-items:start;}
+    .about-body{font-size:.97rem;color:var(--text);}
+    .about-body p+p{margin-top:14px;}
+    .about-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+    .about-photo{width:180px;height:180px;border-radius:12px;object-fit:cover;border:2px solid var(--border);}
+    .photo-placeholder{width:180px;height:180px;border-radius:12px;background:linear-gradient(135deg,#ede9f8,#c9c2e8);display:flex;align-items:center;justify-content:center;font-size:3rem;border:2px solid var(--border);}
+    @media(max-width:660px){.about-grid{grid-template-columns:1fr;}.about-photo-wrap{order:-1;}.about-photo,.photo-placeholder{width:120px;height:120px;}}
   </style>
 </head>
 <body>
-
-  <!-- =====================================================
-       NAV
-  ====================================================== -->
   <nav>
     <div class="nav-inner">
-      <a href="#hero" class="nav-name">Alexandra L. Ramos Figueroa</a>
-
+      <a href="index.html" class="nav-name">Alexandra L. Ramos Figueroa</a>
       <div class="nav-right">
         <ul class="nav-links" id="navLinks">
-          <li><a href="#about">About</a></li>
-          
+          <li><a href="index.html" class="active">About</a></li>
           <li><a href="publications.html">Publications</a></li>
-          <li><a href="#course">Teaching</a></li>
-          <li><a href="#outreach">Outreach</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="teaching-outreach.html">Teaching &amp; Outreach</a></li>
         </ul>
-
         <div class="nav-divider"></div>
-
-        <a href="https://x.com/alexandraLramos" target="_blank" class="nav-icon" title="Twitter">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
-          </svg>
-        </a>
-        <a href="https://linkedin.com/in/aramosfi" target="_blank" class="nav-icon" title="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-        </a>
-        <a href="https://orcid.org/0000-0001-8548-6481" target="_blank" class="nav-icon" title="ORCID / Scholar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 3.872-2.203 3.872-3.722 0-2.016-1.109-3.722-3.884-3.722h-2.285z"/>
-          </svg>
-        </a>
+        <a href="https://x.com/alexandraLramos" target="_blank" class="nav-icon" title="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+        <a href="https://linkedin.com/in/aramosfi" target="_blank" class="nav-icon" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://orcid.org/0000-0001-8548-6481" target="_blank" class="nav-icon" title="ORCID"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 3.872-2.203 3.872-3.722 0-2.016-1.109-3.722-3.884-3.722h-2.285z"/></svg></a>
       </div>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
-
-  <!-- =====================================================
-       HERO
-  ====================================================== -->
   <div id="hero">
     <div class="hero-wrap">
       <div class="hero-intro">
         <p class="hero-eyebrow">Chemical Engineering · Materials Science</p>
         <h1 class="hero-name">Alexandra L.<br />Ramos Figueroa</h1>
-        <p class="hero-subtitle">
-          PhD Candidate · Stanford University · Designing the next generation
-          of stimuli-responsive, self-healing multilayer platforms.
-        </p>
+        <p class="hero-subtitle">PhD Candidate · Stanford University · Designing the next generation of stimuli-responsive, self-healing materials.</p>
         <div class="hero-btns">
           <a href="CV.pdf" class="btn btn-dark" target="_blank">↓ Download CV</a>
           <a href="publications.html" class="btn btn-outline">Publications</a>
           <a href="https://scholar.google.com/citations?user=GxvcJ3YAAAAJ&hl=en" class="btn btn-outline" target="_blank">Scholar</a>
         </div>
       </div>
-
       <div class="hero-banner">
         <canvas id="heroCanvas"></canvas>
         <div class="hero-banner-text">
-          <h2 class="hero-research-title">
-            Designing Self-Healing<br />Multilayer Platforms
-          </h2>
+          <h2 class="hero-research-title">Designing Self-Healing<br />Multilayer Platforms</h2>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- =====================================================
-       ABOUT
-  ====================================================== -->
+  <!-- ABOUT -->
   <section id="about">
     <div class="wrap">
       <div class="about-grid">
@@ -709,23 +179,9 @@
           <p class="sec-label fi">About</p>
           <h2 class="sec-title fi">Alexandra L. Ramos Figueroa</h2>
           <div class="about-body fi">
-            <p>
-              I'm a PhD candidate in Chemical Engineering at Stanford University,
-              where I work in the Bao lab under the supervision of
-              Prof. Zhenan Bao. My research focuses on designing
-              <strong>self-healing multilayer platforms</strong> — materials
-              that can sense damage and autonomously recover their structure
-              and function.
-            </p>
-            <p>
-              My work combines polymer chemistry, surface engineering, and
-              computational modeling to develop next-generation coatings and
-              membranes for biomedical devices, wearable sensors, and flexible electronics.
-            </p>
-            <p>
-              Outside the lab, I'm passionate about science communication
-              and mentoring students from underrepresented backgrounds in STEM.
-            </p>
+            <p>I'm a PhD candidate in Chemical Engineering at Stanford University, where I work in the Bao lab under the supervision of Prof. Zhenan Bao. My research focuses on designing <strong>self-healing multilayer platforms</strong> — materials that can sense damage and autonomously recover their structure and function.</p>
+            <p>My work combines polymer chemistry, surface engineering, and computational modeling to develop next-generation coatings and membranes for biomedical devices, wearable sensors, and flexible electronics.</p>
+            <p>Outside the lab, I'm passionate about science communication and mentoring students from underrepresented backgrounds in STEM.</p>
           </div>
           <div class="about-links fi">
             <a href="CV.pdf" class="btn btn-dark" target="_blank">↓ CV</a>
@@ -733,345 +189,135 @@
             <a href="https://linkedin.com/in/aramosfi" class="btn btn-outline" target="_blank">LinkedIn</a>
           </div>
         </div>
-
-        <div class="about-photo-wrap fi" style="display:flex; flex-direction:column; align-items:center;">
+        <div class="about-photo-wrap fi" style="display:flex;flex-direction:column;align-items:center;">
           <img src="WebsitePics/AR_Headshot.jpg" alt="Alexandra L. Ramos Figueroa" class="about-photo" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =====================================================
-       COURSE / TEACHING
-  ====================================================== -->
-  <section id="course">
-    <div class="wrap">
-      <p class="sec-label fi">Teaching</p>
-      <h2 class="sec-title fi">Teaching Experience</h2>
-
-      <div class="course-card fi">
-        <div>
-          <span class="course-chip">Winter 2026 · CHEME 447 / BIOENG 274</span>
-          <p class="course-title">Micro and Nano Processing Technologies for Medical Electronics</p>
-          <p class="course-desc">
-            Co-developed course and syllabus with Prof. Zhenan Bao for 40+ students. 
-            Designed lecture materials on materials selection for medical devices and 
-            delivered invited lectures covering micro/nanofabrication techniques for bioelectronics.
-          </p>
-        </div>
-        <div class="course-action">
-          <a href="#" class="btn btn-accent">Course Info →</a>
-        </div>
-      </div>
-
-      <div class="course-card fi" style="margin-top: 14px;">
-        <div>
-          <span class="course-chip">Teaching Assistant · CHEME 440</span>
-          <p class="course-title">Micro- and Nanoscale Fabrication Engineering</p>
-          <p class="course-desc">
-            Teaching Assistant for Prof. Zhenan Bao. Supported 30 graduate and 
-            advanced undergraduate students through review sessions, office hours, 
-            and grading of assignments and exams.
-          </p>
-        </div>
-        <div class="course-action">
-          <a href="#" class="btn btn-accent">Course Info →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =====================================================
-       EDUCATION
-  ====================================================== -->
+  <!-- EDUCATION -->
   <section id="education">
     <div class="wrap">
-      <p class="sec-label fi">Background</p>
-      <h2 class="sec-title fi">Education</h2>
-
+      <p class="sec-label fi">Education</p>
+      <h2 class="sec-title fi">Academic Background</h2>
       <div class="timeline">
         <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Aug 2022 – Present</div>
-            <img src="Logos/Stanford-Logo.avif" alt="Stanford" class="org-logo">
-          </div>
+          <div class="tl-left"><div class="tl-date">Aug 2022 – Present</div><img src="Logos/Stanford-Logo.avif" alt="Stanford" class="org-logo"></div>
           <div>
             <p class="tl-role">Doctor of Philosophy in Chemical Engineering</p>
             <p class="tl-org">Stanford University</p>
-            <p class="tl-desc">Awarded Master of Science in Chemical Engineering in June 2025</p>
+            <p class="tl-desc">Awarded Master of Science in Chemical Engineering in June 2025. Advisor: Prof. Zhenan Bao.</p>
           </div>
         </div>
         <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Aug 2016 – Dec 2021</div>
-            <img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo">
-          </div>
+          <div class="tl-left"><div class="tl-date">Aug 2016 – Dec 2021</div><img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo"></div>
           <div>
             <p class="tl-role">Bachelor of Science in Chemical Engineering, Minor in Applied Mathematics</p>
             <p class="tl-org">University of Puerto Rico – Mayagüez Campus (UPRM)</p>
           </div>
         </div>
         <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Spring 2018</div>
-          </div>
+          <div class="tl-left"><div class="tl-date">Spring 2018</div></div>
           <div>
             <p class="tl-role">Cornell-UPR Interuniversity Hurricane María Academic Relief Program</p>
             <p class="tl-org">Cornell University</p>
           </div>
         </div>
       </div>
-
-      <!-- ── II. TECHNICAL EXPERIENCE ── -->
-      <h3 class="subsec-title fi" style="margin-top:2.5rem;margin-bottom:1.2rem;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);">II. Technical Experience</h3>
-      <div class="timeline">
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Jan – Mar 2022</div>
-            <img src="Logos/NYU-Logo.png" alt="NYU" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Research Assistant</p>
-            <p class="tl-org">New York University — Prof. Miguel Modestino's Organic Electrosynthesis Group</p>
-            <div class="tl-tags">
-              <span class="tag">Electrosynthesis</span>
-              <span class="tag">Chemical Manufacturing</span>
-              <span class="tag">Reaction Selectivity</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Jun – Aug 2021</div>
-            <img src="Logos/UCBerkeley-Logo.svg" alt="UC Berkeley" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Amgen Scholars Program</p>
-            <p class="tl-org">University of California, Berkeley — Prof. Phillip B. Messersmith's Group</p>
-            <div class="tl-tags">
-              <span class="tag">Mussel-Inspired Polymers</span>
-              <span class="tag">Polydopamine Coating</span>
-              <span class="tag">Solubility Enhancement</span>
-              <span class="tag">Regenerative Medicine</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Aug – Dec 2020</div>
-            <img src="Logos/ExxonMobil-Logo.png" alt="ExxonMobil" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Real-time Optimization Engineer</p>
-            <p class="tl-org">ExxonMobil Research &amp; Engineering, Spring, TX</p>
-            <div class="tl-tags">
-              <span class="tag">Large-Scale Plant Real-Time Optimization</span>
-              <span class="tag">Process Modeling</span>
-              <span class="tag">Visual Mesa</span>
-              <span class="tag">ROMeo</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Aug 2019 – May 2021</div>
-            <img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Undergraduate Researcher Student — UPRM-UW Partnership for Research and Education in Materials</p>
-            <p class="tl-org">University of Puerto Rico, Mayagüez — Prof. Claribel Acevedo-Vélez's Group</p>
-            <div class="tl-tags">
-              <span class="tag">Gold Nanoparticles</span>
-              <span class="tag">Liquid Crystals</span>
-              <span class="tag">Surface Chemistry</span>
-              <span class="tag">Interfacial Properties</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Jun – Aug 2019</div>
-            <img src="Logos/Stanford-Logo.avif" alt="Stanford" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Stanford Undergraduate Research Fellowship</p>
-            <p class="tl-org">Stanford University — Prof. Jian Qin's Group</p>
-            <div class="tl-tags">
-              <span class="tag">Coarsed-Grained Molecular Dynamics Simulations</span>
-              <span class="tag">LAMMPS</span>
-              <span class="tag">Self-Healing Polymers</span>
-              <span class="tag">Dendrite Formation Suppresion</span>
-              <span class="tag">Lithium Metal Batteries</span>  
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">Aug 2018 – Dec 2019</div>
-            <img src="Logos/UPRM-logo.png" alt="UPRM" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Undergraduate Researcher</p>
-            <p class="tl-org">University of Puerto Rico, Mayagüez — Prof. L. Antonio Estévez's Supercritical Fluid Transport Phenomena Group</p>
-            <div class="tl-tags">
-              <span class="tag">Thermodynamic Modeling</span>
-              <span class="tag">Peng-Robinson Equation of State</span>
-              <span class="tag">Thermal Expansivity</span>
-              <span class="tag">Transport Phenomena</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">May – Aug 2018</div>
-            <img src="Logos/3M-Logo.svg" alt="3M" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Product Development Engineer</p>
-            <p class="tl-org">3M, Minneapolis, MN</p>
-            <div class="tl-tags">
-              <span class="tag">Sustainable Foam Alternatives</span>
-              <span class="tag">Formulation</span>
-              <span class="tag">Pilot-Plant Run</span>
-              <span class="tag">Spray/Roll Coating</span>
-              <span class="tag">Consumer Products</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item fi">
-          <div class="tl-left">
-            <div class="tl-date">May – Aug 2018</div>
-            <img src="Logos/Merck-Logo.png" alt="Merck" class="org-logo">
-          </div>
-          <div>
-            <p class="tl-role">Associate Specialist Process Engineer</p>
-            <p class="tl-org">Merck &amp; Co., West Point, PA</p>
-            <div class="tl-tags">
-              <span class="tag">Procurement</span>
-              <span class="tag">Vaccine Manufacturing</span>
-              <span class="tag">Aerosol Mitigation</span>
-              <span class="tag">Animal Health</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Skills Section - Properly placed outside timeline -->
-      <div class="skills-row fi">
-        <span class="skill-chip">Python</span>
-        <span class="skill-chip">MATLAB</span>
-        <span class="skill-chip">Contact Angle</span>
-        <span class="skill-chip">UV-Vis</span>
-        <span class="skill-chip">Atomic Force Microscopy</span>
-        <span class="skill-chip">Rheology</span>
-        <span class="skill-chip">Instron</span>
-        <span class="skill-chip">LAMMPS / CGMD</span>
-        <span class="skill-chip">Wearable Devices</span>
-        <span class="skill-chip">Technical Writing</span>
-        <span class="skill-chip">Scientific Communication</span>
-      </div>
     </div>
   </section>
 
-  <!-- =====================================================
-       OUTREACH
-  ====================================================== -->
-  <section id="outreach">
+  <!-- HONORS & AWARDS -->
+  <section id="honors">
     <div class="wrap">
-      <p class="sec-label fi">Outreach</p>
-      <h2 class="sec-title fi">Community &amp; Service</h2>
-      <div class="outreach-grid">
-        <div class="outreach-card fi">
-          <div class="outreach-icon">🎓</div>
-          <p class="outreach-title">SURF &amp; EDGE Mentoring</p>
-          <p class="outreach-desc">Supervise undergraduate and graduate researchers, providing hands-on training in polymer synthesis and characterization.</p>
+      <p class="sec-label fi">Recognition</p>
+      <h2 class="sec-title fi">Honors &amp; Awards</h2>
+      <div class="honors-split fi">
+        <!-- LEFT: Fellowships -->
+        <div class="honors-left">
+          <p class="honors-col-title">Fellowships</p>
+          <div class="fellow-card">
+            <div class="fellow-year">2025</div>
+            <div class="fellow-name">Diversifying Academia, Recruiting Excellence (DARE) Fellowship</div>
+            <div class="fellow-org">Stanford University</div>
+          </div>
+          <div class="fellow-card">
+            <div class="fellow-year">2022</div>
+            <div class="fellow-name">NSF Graduate Research Fellowship (NSF-GRFP)</div>
+            <div class="fellow-org">National Science Foundation</div>
+          </div>
+          <div class="fellow-card">
+            <div class="fellow-year">2022</div>
+            <div class="fellow-name">Stanford Graduate Fellowship — Robert &amp; Marvel Kirby Fellow</div>
+            <div class="fellow-org">Stanford University</div>
+          </div>
+          <div class="fellow-card">
+            <div class="fellow-year">2022</div>
+            <div class="fellow-name">Enhancing Diversity in Graduate Education (EDGE) Fellowship</div>
+            <div class="fellow-org">Stanford University</div>
+          </div>
+          <div class="fellow-card">
+            <div class="fellow-year">2021</div>
+            <div class="fellow-name">GEM Fellowship</div>
+            <div class="fellow-org">3M Company</div>
+          </div>
         </div>
-        <div class="outreach-card fi">
-          <div class="outreach-icon">🔬</div>
-          <p class="outreach-title">ChemE DEI Coordinator</p>
-          <p class="outreach-desc">Led department-wide diversity initiatives and graduate recruitment at conferences like NSBE, SHPE, and SACNAS.</p>
-        </div>
-        <div class="outreach-card fi">
-          <div class="outreach-icon">🤝</div>
-          <p class="outreach-title">AIChE Leadership</p>
-          <p class="outreach-desc">Served as Vice-President and founded mentorship programs connecting 40+ underclassmen with industry professionals.</p>
-        </div>
-        <div class="outreach-card fi">
-          <div class="outreach-icon">📣</div>
-          <p class="outreach-title">Conference Workshops</p>
-          <p class="outreach-desc">Delivered workshops demystifying graduate school applications for first-generation and underrepresented students.</p>
+        <!-- RIGHT: All honors -->
+        <div class="honors-right">
+          <p class="honors-col-title">All Honors &amp; Awards</p>
+          <div class="honor-row"><span class="honor-yr">2025</span><span class="honor-nm">Stanford Community Impact Award</span></div>
+          <div class="honor-row"><span class="honor-yr">2024</span><span class="honor-nm">1st Place Poster — International Stimuli Responsive Materials Conference <span class="trophy">🏆</span></span></div>
+          <div class="honor-row"><span class="honor-yr">2024</span><span class="honor-nm">Chemical Engineering Service Award, Stanford</span></div>
+          <div class="honor-row"><span class="honor-yr">2024</span><span class="honor-nm">Dean's GSAC JEDI Conference Travel Funding Award, Stanford</span></div>
+          <div class="honor-row"><span class="honor-yr">2024</span><span class="honor-nm">1st Place Poster — Stanford Polymer Collective Poster Symposium <span class="trophy">🏆</span></span></div>
+          <div class="honor-row"><span class="honor-yr">2022</span><span class="honor-nm">Magna Cum Laude, UPRM</span></div>
+          <div class="honor-row"><span class="honor-yr">2018–21</span><span class="honor-nm">Chemical Engineering Honor Roll, UPRM</span></div>
+          <div class="honor-row"><span class="honor-yr">2021</span><span class="honor-nm">1st Place Undergraduate Poster — AIChE Annual Student Conference <span class="trophy">🏆</span></span></div>
+          <div class="honor-row"><span class="honor-yr">2019</span><span class="honor-nm">ExxonMobil LOFT Scholarship</span></div>
+          <div class="honor-row"><span class="honor-yr">2018</span><span class="honor-nm">Cornell–UPR Interuniversity Relief Scholarship</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =====================================================
-       CONTACT
-  ====================================================== -->
+    <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
-      <div>
-        <p class="sec-label fi">Contact</p>
-        <h2 class="sec-title fi" style="margin-bottom:0">Let's connect</h2>
-        <p class="contact-blurb fi">
-          Open to research collaborations, outreach opportunities,
-          and general conversations. I usually respond within a few days.
-        </p>
-        <div class="contact-links fi">
-          <a href="/cdn-cgi/l/email-protection#cbaab9aaa6a4b8ada28bb8bfaaa5ada4b9afe5aeafbe" class="c-link">
-            <span class="c-icon">✉️</span>
-            <span class="__cf_email__" data-cfemail="58392a3935372b3e31182b2c39363e372a3c763d3c2d">[email&#160;protected]</span>
-          </a>
-          <a href="https://linkedin.com/in/aramosfi" class="c-link" target="_blank">
-            <span class="c-icon">🔗</span>
-            linkedin.com/in/aramosfi
-          </a>
-          <a href="https://x.com/alexandraLramos" class="c-link" target="_blank">
-            <span class="c-icon">⌨️</span>
-            x.com/alexandraLramos
-          </a>
+      <div class="contact-grid">
+        <div>
+          <p class="sec-label fi">Contact</p>
+          <h2 class="sec-title fi" style="margin-bottom:0">Let's connect</h2>
+          <p class="contact-blurb fi">Open to research collaborations, outreach opportunities, and general conversations. I usually respond within a few days.</p>
+          <div class="contact-links fi">
+            <a href="mailto:aramosfi@stanford.edu" class="c-link"><span class="c-icon">✉️</span>aramosfi@stanford.edu</a>
+            <a href="https://linkedin.com/in/aramosfi" class="c-link" target="_blank"><span class="c-icon">🔗</span>linkedin.com/in/aramosfi</a>
+            <a href="https://x.com/alexandraLramos" class="c-link" target="_blank"><span class="c-icon">⌨️</span>x.com/alexandraLramos</a>
+          </div>
         </div>
+        <form class="contact-form fi" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="fg"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your name" required /></div>
+          <div class="fg"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required /></div>
+          <div class="fg"><label for="msg">Message</label><textarea id="msg" name="message" placeholder="What's on your mind?" required></textarea></div>
+          <button type="submit" class="btn btn-accent" style="align-self:flex-start">Send →</button>
+        </form>
       </div>
-
-      <form class="contact-form fi" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="fg">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required />
-        </div>
-        <div class="fg">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="your@email.com" required />
-        </div>
-        <div class="fg">
-          <label for="msg">Message</label>
-          <textarea id="msg" name="message" placeholder="What's on your mind?" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-accent" style="align-self:flex-start">Send →</button>
-      </form>
     </div>
   </section>
 
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-  <footer>
-    <p>© 2026 Alexandra L. Ramos Figueroa</p>
-  </footer>
-
-  <!-- =====================================================
-       SCRIPTS
-  ====================================================== -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ── Mobile nav ──
-    const toggle   = document.getElementById('navToggle');
+  <footer><p>© 2026 Alexandra L. Ramos Figueroa</p></footer>
+  <script>
+    const toggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
     toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => navLinks.classList.remove('open'))
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }),
+      { threshold: 0.1 }
     );
-
-    // ── Active nav highlight on scroll ──
-    const secs  = document.querySelectorAll('section[id]');
+    document.querySelectorAll('.fi').forEach(el => io.observe(el));
+      // ── Active nav highlight on scroll ──
+    const secs = document.querySelectorAll('section[id]');
     const navAs = document.querySelectorAll('.nav-links a');
     function updateNav() {
       let cur = '';
@@ -1080,14 +326,7 @@
     }
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
-
-    // ── Scroll fade-in ──
-    const io = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.fi').forEach(el => io.observe(el));
-
+    // ── HERO ANIMATION ──
     // ── HERO ANIMATION ──
     (function () {
       const canvas = document.getElementById('heroCanvas');
@@ -1293,3 +532,5 @@
       draw();
     })();
   </script>
+</body>
+</html>
