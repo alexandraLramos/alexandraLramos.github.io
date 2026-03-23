@@ -73,11 +73,14 @@
     footer p{font-size:.8rem;color:var(--muted);}
     .fi{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
     .fi.on{opacity:1;transform:none;}
-    @media(max-width:660px){
+    @media(max-width:768px){
       .timeline-item{grid-template-columns:1fr;gap:2px;}
       .course-card{grid-template-columns:1fr;}
-      .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;gap:4px;}
+      .contact-grid{grid-template-columns:1fr;}
+      .nav-icon { display: none; }
+      .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;gap:4px;box-shadow:0 4px 16px rgba(0,0,0,.08);}
       .nav-links.open{display:flex;}
+      .nav-links a{padding:10px 12px;font-size:1rem;width:100%;}
       .nav-toggle{display:flex;}
       .nav-divider{display:none;}
     }
