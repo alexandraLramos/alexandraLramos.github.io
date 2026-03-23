@@ -82,7 +82,7 @@
     .honor-yr{font-size:.75rem;color:var(--accent);font-weight:500;min-width:42px;flex-shrink:0;}
     .honor-nm{font-size:.84rem;color:var(--text);line-height:1.4;}
     .trophy{font-size:.72rem;}
-    @media(max-width:660px){.honors-split{grid-template-columns:1fr;}}
+    @media(max-width:768px){.honors-split{grid-template-columns:1fr;}}
     .c-link{display:flex;align-items:center;gap:11px;font-size:.88rem;transition:color .18s;}
     .c-link:hover{color:var(--accent);}
     .c-icon{width:34px;height:34px;border-radius:7px;background:var(--hover);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:background .18s;}
@@ -101,12 +101,14 @@
     footer a{color:var(--accent);}
     .fi{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
     .fi.on{opacity:1;transform:none;}
-    @media(max-width:660px){
+    @media(max-width:768px){
       .timeline-item{grid-template-columns:1fr;gap:2px;}
       .course-card{grid-template-columns:1fr;}
       .contact-grid{grid-template-columns:1fr;}
-      .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;gap:4px;}
+      .nav-icon { display: none; }
+      .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;gap:4px;box-shadow:0 4px 16px rgba(0,0,0,.08);}
       .nav-links.open{display:flex;}
+      .nav-links a{padding:10px 12px;font-size:1rem;width:100%;}
       .nav-toggle{display:flex;}
       .nav-divider{display:none;}
     }
@@ -128,7 +130,7 @@
     .about-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
     .about-photo{width:180px;height:180px;border-radius:12px;object-fit:cover;border:2px solid var(--border);}
     .photo-placeholder{width:180px;height:180px;border-radius:12px;background:linear-gradient(135deg,#ede9f8,#c9c2e8);display:flex;align-items:center;justify-content:center;font-size:3rem;border:2px solid var(--border);}
-    @media(max-width:660px){.about-grid{grid-template-columns:1fr;}.about-photo-wrap{order:-1;}.about-photo,.photo-placeholder{width:120px;height:120px;}}
+    @media(max-width:768px){.about-grid{grid-template-columns:1fr;}.about-photo-wrap{order:-1;}.about-photo,.photo-placeholder{width:120px;height:120px;}}
   </style>
 </head>
 <body>
