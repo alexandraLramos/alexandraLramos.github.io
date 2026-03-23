@@ -87,18 +87,17 @@
       .nav-toggle{display:flex;}
       .nav-divider{display:none;}
     }
-    
-    @media(max-width:768px){
-    .timeline-item{grid-template-columns:1fr;gap:2px;}
-    .course-card{grid-template-columns:1fr;}
-    .contact-grid{grid-template-columns:1fr;}
-    .nav-icon{display:none;}
-    .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;gap:4px;box-shadow:0 4px 16px rgba(0,0,0,.08);}
-    .nav-links.open{display:flex;}
-    .nav-links a{padding:10px 12px;font-size:1rem;width:100%;}    ← ADD this whole line
-    .nav-toggle{display:flex;}
-    .nav-divider{display:none;}
-  }
+/* Option 5 — community cards */
+  .community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .community-card{border-radius:12px;overflow:hidden;border:0.5px solid var(--border);}
+  .community-img{width:100%;height:140px;object-fit:cover;background:linear-gradient(135deg,#ede9f8,#c9c2e8);display:flex;align-items:center;justify-content:center;font-size:2rem;}
+  .community-body{padding:12px 14px 16px;background:var(--surface);}
+  .community-cat{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+  .community-line{width:20px;height:2px;background:var(--accent);border-radius:999px;margin-bottom:6px;opacity:.5;}
+  .community-title{font-size:.9rem;font-weight:500;color:var(--text);line-height:1.3;margin-bottom:4px;}
+  .community-desc{font-size:.8rem;color:var(--muted);line-height:1.5;}
+  @media(max-width:768px){.community-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.community-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -128,7 +127,7 @@
       <h2 class="sec-title fi">Teaching Experience</h2>
       <div class="course-card fi">
         <div>
-          <span class="course-chip">Course Developer · CHEME (247)447 / BIOENG 274</span>
+          <span class="course-chip">CD/TA · CHEME (247)447 / BIOENG 274</span>
           <p class="course-title">Micro and Nano Processing Technologies for Medical Electronics</p>
           <p class="course-desc">Co-developed course and syllabus with Prof. Zhenan Bao for 40+ students. Built lecture slide banks, conducted literature reviews, coordinated industry guest lecturers, and delivered invited lectures covering micro/nanofabrication techniques for bioelectronics.</p>
         </div>
@@ -136,27 +135,77 @@
       </div>
       <div class="course-card fi" style="margin-top:14px;">
         <div>
-          <span class="course-chip">Teaching Assistant · CHEME (240)440</span>
+          <span class="course-chip">TA · CHEME (240)440</span>
           <p class="course-title">Micro- and Nanoscale Fabrication Engineering</p>
-          <p class="course-desc">Teaching Assistant for Prof. Zhenan Bao. Supported 30 graduate and advanced undergraduate students through review sessions, office hours, and grading of assignments and exams.</p>
+          <p class="course-desc">Teaching Assistant for Prof. Zhenan Bao. Supported 30+ graduate and advanced undergraduate students through review sessions, office hours, and grading of assignments and exams.</p>
         </div>
         <div class="course-action"><a href="#" class="btn btn-accent">Course Info →</a></div>
       </div>
     </div>
   </section>
 
-  <section id="outreach">
-    <div class="wrap">
-      <p class="sec-label fi">Outreach</p>
-      <h2 class="sec-title fi">Community &amp; Service</h2>
-      <div class="outreach-grid">
-        <div class="outreach-card fi"><div class="outreach-icon">🎓</div><p class="outreach-title">SURF &amp; EDGE Mentoring</p><p class="outreach-desc">Supervise undergraduate and graduate researchers, providing hands-on training in polymer synthesis and characterization.</p></div>
-        <div class="outreach-card fi"><div class="outreach-icon">🔬</div><p class="outreach-title">ChemE DEI Coordinator</p><p class="outreach-desc">Led department-wide diversity initiatives and graduate recruitment at conferences like NSBE, SHPE, and SACNAS.</p></div>
-        <div class="outreach-card fi"><div class="outreach-icon">🤝</div><p class="outreach-title">AIChE Leadership</p><p class="outreach-desc">Served as Vice-President and founded mentorship programs connecting 40+ underclassmen with industry professionals.</p></div>
-        <div class="outreach-card fi"><div class="outreach-icon">📣</div><p class="outreach-title">Conference Workshops</p><p class="outreach-desc">Delivered workshops demystifying graduate school applications for first-generation and underrepresented students.</p></div>
-      </div>
+ <div class="community-grid">
+  <div class="community-card fi">
+    <img class="community-img" src="WebsitePics/outreach1.jpg" alt="SURF EDGE Mentoring" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="community-fallback" style="display:none">🎓</div>
+    <div class="community-body">
+      <div class="community-cat">Mentoring</div>
+      <div class="community-line"></div>
+      <div class="community-title">SURF &amp; EDGE Mentoring</div>
+      <div class="community-desc">Hands-on training in polymer synthesis for undergrad and grad researchers.</div>
     </div>
-  </section>
+  </div>
+  <div class="community-card fi">
+    <img class="community-img" src="WebsitePics/outreach2.jpg" alt="ChemE DEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="community-fallback" style="display:none">🔬</div>
+    <div class="community-body">
+      <div class="community-cat">DEI</div>
+      <div class="community-line"></div>
+      <div class="community-title">ChemE DEI Coordinator</div>
+      <div class="community-desc">Department-wide diversity initiatives and recruiting at NSBE, SHPE, and SACNAS.</div>
+    </div>
+  </div>
+  <div class="community-card fi">
+    <img class="community-img" src="WebsitePics/outreach3.jpg" alt="AIChE Leadership" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="community-fallback" style="display:none">🤝</div>
+    <div class="community-body">
+      <div class="community-cat">Leadership</div>
+      <div class="community-line"></div>
+      <div class="community-title">AIChE Vice-President</div>
+      <div class="community-desc">Founded mentorship programs connecting 40+ underclassmen with industry professionals.</div>
+    </div>
+  </div>
+  <div class="community-card fi">
+    <img class="community-img" src="WebsitePics/outreach4.jpg" alt="Conference Workshops" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="community-fallback" style="display:none">📣</div>
+    <div class="community-body">
+      <div class="community-cat">Outreach</div>
+      <div class="community-line"></div>
+      <div class="community-title">Conference Workshops</div>
+      <div class="community-desc">Demystifying graduate school applications for first-generation students.</div>
+    </div>
+  </div>
+  <div class="community-card fi">
+    <img class="community-img" src="WebsitePics/outreach5.jpg" alt="Guest Lecturer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="community-fallback" style="display:none">🏫</div>
+    <div class="community-body">
+      <div class="community-cat">Teaching</div>
+      <div class="community-line"></div>
+      <div class="community-title">Guest Lecturer</div>
+      <div class="community-desc">Invited lectures in CHEME 447 / BIOENG 274 on micro/nanofabrication for bioelectronics.</div>
+    </div>
+  </div>
+  <div class="community-card fi">
+    <img class="community-img" src="WebsitePics/outreach6.jpg" alt="Graduate Panels" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="community-fallback" style="display:none">✨</div>
+    <div class="community-body">
+      <div class="community-cat">Community</div>
+      <div class="community-line"></div>
+      <div class="community-title">Graduate School Panels</div>
+      <div class="community-desc">Supporting first-generation students navigating PhD applications.</div>
+    </div>
+  </div>
+</div>  
 
   <footer><p>© 2026 Alexandra L. Ramos Figueroa</p></footer>
   <script>
