@@ -581,21 +581,23 @@
     /* =====================================================
        RESPONSIVE
     ====================================================== */
-    @media (max-width: 660px) {
-      .about-grid, #contact .wrap { grid-template-columns: 1fr; }
-      .about-photo-wrap { order: -1; }
-      .photo-placeholder, .about-photo { width: 120px; height: 120px; }
-      .timeline-item { grid-template-columns: 1fr; gap: 2px; }
-      .tl-date { padding-top: 0; }
-      .project-card { grid-template-columns: 1fr; }
-      .project-links { flex-direction: row; }
-      .course-card { grid-template-columns: 1fr; }
-      .nav-links { display: none; flex-direction: column; position: absolute;
-        top: var(--nav-h); left: 0; right: 0; background: var(--surface);
-        border-bottom: 1px solid var(--border); padding: 14px 20px; gap: 4px; }
-      .nav-links.open { display: flex; }
-      .nav-toggle { display: flex; }
-      .nav-divider { display: none; }
+  @media (max-width: 768px) {
+    .about-grid, #contact .wrap { grid-template-columns: 1fr; }
+    .about-photo-wrap { order: -1; }
+    .photo-placeholder, .about-photo { width: 120px; height: 120px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 2px; }
+    .course-card { grid-template-columns: 1fr; }
+    .honors-split { grid-template-columns: 1fr; }
+    .nav-icon { display: none; }
+    .nav-links { display: none; flex-direction: column; position: absolute;
+      top: var(--nav-h); left: 0; right: 0; background: var(--surface);
+      border-bottom: 1px solid var(--border); padding: 14px 20px; gap: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 10px 12px; font-size: 1rem; width: 100%; }
+    .nav-toggle { display: flex; }
+    .nav-divider { display: none; }
+  }
     }
   </style>
   <style>
