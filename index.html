@@ -181,7 +181,7 @@
             <p>Outside the lab, I'm passionate about science communication and mentoring students from underrepresented backgrounds in STEM.</p>
           </div>
           <div class="about-links fi">
-            <a href="CV.pdf" class="btn btn-dark" target="_blank">↓ CV</a>
+            <button onclick="document.getElementById('cv-modal').style.display='flex'" class="btn btn-dark">Request CV</button>
             <a href="https://scholar.google.com/citations?user=GxvcJ3YAAAAJ&hl=en" class="btn btn-outline" target="_blank">Google Scholar</a>
             <a href="https://linkedin.com/in/aramosfi" class="btn btn-outline" target="_blank">LinkedIn</a>
           </div>
@@ -528,7 +528,29 @@
       }
 
       draw();
-    })();
-  </script>
+      </script>
+
+<!-- CV Request Modal -->
+<div id="cv-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:14px;padding:36px;width:100%;max-width:420px;margin:20px;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;">
+    <button onclick="document.getElementById('cv-modal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#6b7280;">✕</button>
+    <p class="sec-label" style="margin-bottom:6px;">CV Request</p>
+    <h3 style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:20px;">Request My CV</h3>
+    <form class="contact-form" action="https://formspree.io/f/xreynabq" method="POST">
+      <input type="hidden" name="_subject" value="CV Request" />
+      <div class="fg"><label for="cv-name">Name</label><input type="text" id="cv-name" name="name" placeholder="Your name" required /></div>
+      <div class="fg"><label for="cv-email">Email</label><input type="email" id="cv-email" name="email" placeholder="your@email.com" required /></div>
+      <div class="fg"><label for="cv-comments">Comments</label><textarea id="cv-comments" name="comments" placeholder="Any comments or reason for request..."></textarea></div>
+      <button type="submit" class="btn btn-accent" style="align-self:flex-start;margin-top:4px;">Submit →</button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById('cv-modal').addEventListener('click', function(e) {
+  if (e.target === this) this.style.display = 'none';
+});
+</script>
 </body>
 </html>
+    })();
