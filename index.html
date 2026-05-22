@@ -125,13 +125,17 @@
     #heroCanvas{position:absolute;inset:0;width:100%;height:100%;}
     .hero-banner-text{position:absolute;bottom:0;left:0;right:0;padding:60px 44px 44px;background:linear-gradient(to top,rgba(80,60,140,.55) 0%,transparent 100%);display:flex;align-items:flex-end;}
     .hero-research-title{font-family:var(--font-display);font-size:clamp(1.5rem,3.8vw,2.6rem);font-weight:700;color:#ffffff;line-height:1.2;max-width:700px;text-shadow:0 2px 16px rgba(0,0,0,.3);}
-    .about-grid{display:grid;grid-template-columns:1fr 200px;gap:48px;align-items:start;}
+gmail.com
     .about-body{font-size:.97rem;color:var(--text);text-align:justify;}
     .about-body p+p{margin-top:14px;}
     .about-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
     .about-photo{width:180px;height:180px;border-radius:12px;object-fit:cover;border:2px solid var(--border);}
     .photo-placeholder{width:180px;height:180px;border-radius:12px;background:linear-gradient(135deg,#ede9f8,#c9c2e8);display:flex;align-items:center;justify-content:center;font-size:3rem;border:2px solid var(--border);}
     @media(max-width:768px){.about-grid{grid-template-columns:1fr;}.about-photo-wrap{order:-1;}.about-photo,.photo-placeholder{width:120px;height:120px;}}
+    .copy-badge{display:none;position:absolute;background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:6px;pointer-events:none;white-space:nowrap;margin-left:8px;top:50%;transform:translateY(-50%);}
+    .copy-badge.show{display:inline-block;animation:copyfadeout 1.4s ease forwards;}
+    @keyframes copyfadeout{0%{opacity:1;}80%{opacity:1;}100%{opacity:0;}}
+    #email-copy-link{position:relative;cursor:pointer;}
   </style>
 </head>
 <body>
@@ -276,8 +280,8 @@
           <div class="honor-row"><span class="honor-yr">2021</span><span class="honor-nm">1st Place Undergraduate Poster — AIChE Annual Student Conference <span class="trophy">🏆</span></span></div>
           <div class="honor-row"><span class="honor-yr">2019</span><span class="honor-nm">ExxonMobil LOFT Scholarship</span></div>
           <div class="honor-row"><span class="honor-yr">2018</span><span class="honor-nm">Cornell–UPR Interuniversity Relief Scholarship</span></div>
+        </body>
         </div>
-      </div>
     </div>
   </section>
 
@@ -290,7 +294,7 @@
           <h2 class="sec-title fi" style="margin-bottom:0">Let's connect</h2>
           <p class="contact-blurb fi">Open to research collaborations, outreach opportunities, and general conversations. I usually respond within a few days.</p>
           <div class="contact-links fi">
-            <a href="mailto:alexandraLramos.phd@gmail.com" class="c-link"><span class="c-icon">✉️</span>alexandraLramos.phd@gmail.com</a>
+            <a href="mailto:alexandraLramos.phd@gmail.com" class="c-link" id="email-copy-link" onclick="copyEmail(event)" title="Click to copy email address"><span class="c-icon">✉</span>span>alexandraLramos.phd@gmail.com<span class="copy-badge" id="copy-badge">Copied!</span>span></a>a>
             <a href="https://linkedin.com/in/aramosfi" class="c-link" target="_blank"><span class="c-icon">🔗</span>linkedin.com/in/aramosfi</a>
             <a href="https://x.com/alexandraLramos" class="c-link" target="_blank"><span class="c-icon">⌨️</span>x.com/alexandraLramos</a>
           </div>
@@ -554,6 +558,14 @@
 document.getElementById('cv-modal').addEventListener('click', function(e) {
   if (e.target === this) this.style.display = 'none';
 });
+  function copyEmail(e) {
+      e.preventDefault();
+      navigator.clipboard.writeText('alexandraLramos.phd@gmail.com').then(function() {
+            var badge = document.getElementById('copy-badge');
+            badge.classList.add('show');
+            setTimeout(function() { badge.classList.remove('show'); }, 1400);
+      });
+  }
 </script>
 </body>
 </html>
