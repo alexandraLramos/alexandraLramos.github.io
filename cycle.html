@@ -92,6 +92,14 @@
     .org-k{font-size:.7rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
     .org-name{font-size:1.2rem;font-weight:600;letter-spacing:-.015em;margin-bottom:8px;display:flex;align-items:center;gap:10px;}
     .org-dot{width:10px;height:10px;border-radius:50%;background:var(--c);}
+    .org-art{position:relative;margin:4px 0 14px;border-radius:12px;background:var(--bg);aspect-ratio:16/9;overflow:hidden;}
+    .org-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;display:none;}
+    .org-art.has img{display:block;}
+    .org-art.has .org-ph{display:none;}
+    .org-ph{position:absolute;inset:8px;border:1.5px dashed #c4b8ef;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--accent-dark);text-align:center;padding:10px;}
+    .org-ph span{font-size:1.3rem;opacity:.7;}
+    .org-ph b{font-size:.85rem;font-weight:600;}
+    .org-ph small{font-size:.72rem;color:var(--muted);font-family:ui-monospace,Menlo,monospace;}
     .org-text{font-size:.92rem;color:var(--text);line-height:1.7;}
     .org-know{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-size:.84rem;color:var(--muted);line-height:1.6;}
     .org-know b{color:var(--text);font-weight:600;}
@@ -197,6 +205,7 @@
             <div class="org-tabs" id="tabs"></div>
             <div class="org-k" id="orgK">What's happening</div>
             <div class="org-name"><span class="org-dot" id="orgDot"></span><span id="orgName"></span></div>
+            <div class="org-art" id="orgArt"><img id="orgImg" alt=""><div class="org-ph" id="orgPh"><span>✎</span><b id="orgPhT"></b><small id="orgPhF"></small></div></div>
             <p class="org-text" id="orgText"></p>
             <p class="org-know" id="orgKnow"></p>
           </div>
@@ -309,6 +318,17 @@
       if(k==='ovary')return clamp(0.2+0.5*v('E')+0.5*v('LH')+(preg&&d>=21?0.3:0));
       if(k==='uterus')return d<=5?1:clamp(0.25+0.65*Math.min(1,(d-5)/9)+(preg&&d>=21?0.1:0));}
     function pick(k){sel=k;render()}
+    // Alexandra's drawings: WebsitePics/cycle/<organ>-<phase>.png, falling back to <organ>.png
+    const PH={men:'menstrual',fol:'follicular',ovu:'ovulation',lut:'luteal',preg:'pregnancy'};
+    const FILE={brain:'brain',thyroid:'thyroid',breast:'breasts',ovary:'ovary',uterus:'uterus'};
+    const imgCache={};
+    function tryImg(src){if(src in imgCache)return imgCache[src];return imgCache[src]=new Promise(r=>{const i=new Image();i.onload=()=>r(true);i.onerror=()=>r(false);i.src=src})}
+    let artTok=0;
+    async function showArt(k,pk){const tok=++artTok,f=FILE[k],ph=PH[pk];
+      const c=['WebsitePics/cycle/'+f+'-'+ph+'.png'].concat(pk==='preg'?['WebsitePics/cycle/'+f+'-luteal.png']:[],['WebsitePics/cycle/'+f+'.png']);
+      $('orgPhT').textContent='Drawing coming: '+O[k].n+' · '+ph[0].toUpperCase()+ph.slice(1);$('orgPhF').textContent=f+'-'+ph+'.png';
+      for(const s of c){if(await tryImg(s)){if(tok!==artTok)return;$('orgImg').src=s;$('orgImg').alt=O[k].n+', '+ph+' phase, drawn by Alexandra';$('orgArt').classList.add('has');return}}
+      if(tok===artTok)$('orgArt').classList.remove('has')}
     // chart
     const W=800,Ht=210,L=8,R=8,T=34,B=26,cw=W-L-R,ch=Ht-T-B;
     const X=d=>L+(d-1)/27*cw,Y=v=>T+ch-(v*ch);
@@ -333,7 +353,7 @@
       const o=O[sel];
       $('orgDot').style.setProperty('--c',o.c);$('orgName').textContent=o.n;
       $('orgK').textContent=o.sub;
-      $('orgText').textContent=o[p.k];$('orgKnow').innerHTML=o.know;
+      $('orgText').textContent=o[p.k];showArt(sel,p.k);$('orgKnow').innerHTML=o.know;
       $('cl').setAttribute('x1',X(day));$('cl').setAttribute('x2',X(day));
       Object.keys(H).forEach(k=>{const c=$('cd-'+k);if(!c)return;const v=H[k].f(day);c.setAttribute('cx',X(day));c.setAttribute('cy',Y(clamp(v)));c.style.display=(k==='hCG'&&(!preg||v<0.01))?'none':''});
       $('day').value=day;
