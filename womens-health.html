@@ -88,6 +88,8 @@
     .st-live{color:#2f7a55;background:#e6f4ec;border:1px solid #bfe3cf;}
     .st-dev{color:var(--accent-dark);background:var(--accent-light);border:1px solid #c4b8ef;}
     .wh-name{font-size:1.35rem;font-weight:600;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;}
+    .tag-link{transition:background .15s,border-color .15s;}
+    .tag-link:hover{background:#ddd5f5;border-color:var(--accent);}
     .wh-by{font-size:.85rem;font-weight:500;color:var(--accent-dark);margin:-2px 0 10px;}
     .wh-desc{font-size:.92rem;color:var(--muted);line-height:1.7;margin-bottom:18px;}
     .wh-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px;}
@@ -181,7 +183,7 @@
             <h3 class="wh-name">Invisible Woman</h3>
             <p class="wh-by">Alexandra L. Ramos Figueroa &amp; Milenia Rojas</p>
             <p class="wh-desc">Built at the Claude Code AI Hackathon. Most drug trials averaged women and men together, so Invisible Woman breaks the data back out by sex: a sex-specific re-analysis of FDA adverse-event reports using the AwareDX machine-learning model (Columbia, <i>Patterns</i> 2020), an open pregnancy registry, and a community study where women share the medicines they take and the side effects they notice.</p>
-            <div class="wh-tags"><span class="tag tag-accent">AwareDX</span><span class="tag tag-accent">FDA data</span><span class="tag tag-accent">Pregnancy</span><span class="tag tag-accent">Community science</span></div>
+            <div class="wh-tags"><a class="tag tag-accent tag-link" href="https://doi.org/10.1016/j.patter.2020.100108" target="_blank" title="Chandak & Tatonetti, Using machine learning to identify adverse drug effects posing increased risk to women, Patterns 2020">AwareDX ↗</a><a class="tag tag-accent tag-link" href="https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries" target="_blank" title="FDA List of Pregnancy Exposure Registries">FDA pregnancy registries ↗</a><span class="tag tag-accent">Community science</span></div>
             <div class="wh-actions"><a href="https://invisiblewomen.vercel.app" target="_blank" class="btn btn-accent">Visit project →</a></div>
           </div>
         </article>
