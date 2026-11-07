@@ -94,8 +94,13 @@
     .wh-quote p{font-size:clamp(1.25rem,2.6vw,1.6rem);font-weight:400;letter-spacing:-.015em;line-height:1.45;}
     .wh-quote p em{color:var(--accent);}
     .wh-quote small{display:block;margin-top:16px;font-size:.8rem;color:var(--muted);}
+    .wh-hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;}
+    .wh-face{width:100%;max-width:300px;justify-self:end;}
+    .wh-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 72%;mix-blend-mode:multiply;}
+    .art-body{background:linear-gradient(160deg,#f1eefb,#e8e3f8);}
+    .art-body .wh-num{color:rgba(91,79,184,.55);}
     .btn[aria-disabled="true"]{opacity:.5;pointer-events:none;}
-    @media(max-width:768px){.wh-card{grid-template-columns:1fr;}.wh-art{min-height:150px;}.wh-body{padding:22px 20px;}.wh-stats{gap:24px;}}
+    @media(max-width:768px){.wh-hero-grid{grid-template-columns:1fr;}.wh-face{max-width:200px;justify-self:start;order:-1;}.wh-card{grid-template-columns:1fr;}.wh-art{min-height:150px;}.wh-body{padding:22px 20px;}.wh-stats{gap:24px;}}
     @media(max-width:768px){
       .course-card{grid-template-columns:1fr;}
       .course-actions{flex-direction:row;flex-wrap:wrap;}
@@ -138,15 +143,13 @@
   
   <!-- Hero -->
   <section class="wh-hero">
-    <div class="wrap">
-      <span class="wh-kicker fi">Women's Health</span>
-      <h1 class="wh-title fi">Medicine that sees <em>women</em>.</h1>
-      <p class="wh-lede fi">Most medicines were tested and dosed on men, and the data was averaged. My women's health work uses open data, community science and engineering to close that gap, so women and pregnant women can see how treatments really affect them.</p>
-      <div class="wh-stats fi">
-        <div class="wh-stat"><b>1993</b><span>Year NIH required women in clinical research</span></div>
-        <div class="wh-stat"><b>~1%</b><span>Of trial participants are pregnant women</span></div>
-        <div class="wh-stat"><b>3</b><span>Projects in progress</span></div>
+    <div class="wrap wh-hero-grid">
+      <div>
+        <span class="wh-kicker fi">Women's Health</span>
+        <h1 class="wh-title fi">Medicine that sees <em>women</em>.</h1>
+        <p class="wh-lede fi">My training is in chemical engineering, but women's health is where my curiosity keeps pulling me. These are passion projects, a little random and very personal, about the biology, data and medicines that were never built with women in mind.</p>
       </div>
+      <img class="wh-face fi" src="WebsitePics/WH_Face.webp" alt="Line drawing of a woman's profile with petals" />
     </div>
   </section>
 
@@ -160,33 +163,33 @@
         <article class="wh-card fi">
           <div class="wh-art art-1"><svg viewBox="0 0 260 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2"><circle cx="190" cy="70" r="46"/><circle cx="190" cy="70" r="74"/><circle cx="190" cy="70" r="104"/><circle cx="190" cy="70" r="6" fill="rgba(255,255,255,.8)"/></g></svg><span class="wh-num">01</span></div>
           <div class="wh-body">
-            <div class="wh-meta"><span class="wh-status st-live">Live</span><span class="tag">Co-founder</span></div>
+            <div class="wh-meta"><span class="wh-status st-live">Live</span><span class="tag">Claude Code AI Hackathon</span><span class="tag">with Milenia Rojas</span></div>
             <h3 class="wh-name">invisiblewomen</h3>
             <p class="wh-desc">A community-based observational clinical trial, run by Stanford PhD scientists. Women share the medicines they take and the side effects they notice, alongside a sex-specific re-analysis of FDA adverse-event data and an open pregnancy registry.</p>
             <div class="wh-tags"><span class="tag tag-accent">Pharmacovigilance</span><span class="tag tag-accent">Pregnancy</span><span class="tag tag-accent">Community science</span></div>
-            <div class="wh-actions"><a href="https://alexandralramos.com/invisiblewomen/" target="_blank" class="btn btn-accent">Visit project →</a></div>
+            <div class="wh-actions"><a href="https://invisiblewomen.vercel.app" target="_blank" class="btn btn-accent">Visit project →</a></div>
           </div>
         </article>
 
         <article class="wh-card fi">
-          <div class="wh-art art-2"><svg viewBox="0 0 260 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2"><circle cx="40" cy="60" r="8"/><circle cx="76" cy="94" r="12"/><circle cx="112" cy="128" r="16"/><circle cx="148" cy="60" r="8"/><circle cx="184" cy="94" r="12"/><circle cx="220" cy="128" r="16"/><circle cx="256" cy="60" r="8"/><path d="M20 190 C80 140,140 220,240 150"/></g></svg><span class="wh-num">02</span></div>
+          <div class="wh-art art-2"><svg viewBox="0 0 260 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 70 Q16 52 32 70 T64 70 Q80 52 96 70 T128 70 Q144 52 160 70 T192 70 Q208 52 224 70 T256 70 Q272 52 288 70 T320 70M0 115 Q16 85 32 115 T64 115 Q80 85 96 115 T128 115 Q144 85 160 115 T192 115 Q208 85 224 115 T256 115 Q272 85 288 115 T320 115M0 160 Q16 146 32 160 T64 160 Q80 146 96 160 T128 160 Q144 146 160 160 T192 160 Q208 146 224 160 T256 160 Q272 146 288 160 T320 160" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.4"/><path d="M0 200 H150 L160 185 L170 215 L180 170 L190 200 H260" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.6"/></svg><span class="wh-num">02</span></div>
           <div class="wh-body">
-            <div class="wh-meta"><span class="wh-status st-dev">In development</span></div>
-            <h3 class="wh-name">Project Two</h3>
-            <p class="wh-desc">A short description of the second project goes here: the problem it addresses, who it helps and what it builds.</p>
-            <div class="wh-tags"><span class="tag tag-accent">Topic</span><span class="tag tag-accent">Topic</span></div>
-            <div class="wh-actions"><a class="btn btn-outline" aria-disabled="true">Coming soon</a></div>
+            <div class="wh-meta"><span class="wh-status st-dev">Research</span><span class="tag">Stanford BIOS 237</span></div>
+            <h3 class="wh-name">Longitudinal Respiratory Rate Monitoring with Wearables</h3>
+            <p class="wh-desc">Using months of wearable-device data to track breathing rate over time, revealing how breathing and heart rhythms move together (cardiorespiratory coupling) and how both follow daily circadian patterns.</p>
+            <div class="wh-tags"><span class="tag tag-accent">Wearables</span><span class="tag tag-accent">Physiological signals</span><span class="tag tag-accent">Circadian rhythms</span></div>
+            <div class="wh-actions"><a class="btn btn-outline" aria-disabled="true">Poster coming soon</a></div>
           </div>
         </article>
 
         <article class="wh-card fi">
-          <div class="wh-art art-3"><svg viewBox="0 0 260 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.2"><path d="M130 20 C200 60,200 170,130 210 C60 170,60 60,130 20Z"/><path d="M130 50 C180 80,180 150,130 180 C80 150,80 80,130 50Z"/><path d="M130 80 C160 100,160 130,130 150 C100 130,100 100,130 80Z"/></g></svg><span class="wh-num">03</span></div>
+          <div class="wh-art art-body"><img src="WebsitePics/WH_Body.webp" alt="" /><span class="wh-num">03</span></div>
           <div class="wh-body">
-            <div class="wh-meta"><span class="wh-status st-dev">In development</span></div>
-            <h3 class="wh-name">Project Three</h3>
-            <p class="wh-desc">A short description of the third project goes here: the problem it addresses, who it helps and what it builds.</p>
-            <div class="wh-tags"><span class="tag tag-accent">Topic</span><span class="tag tag-accent">Topic</span></div>
-            <div class="wh-actions"><a class="btn btn-outline" aria-disabled="true">Coming soon</a></div>
+            <div class="wh-meta"><span class="wh-status st-live">Interactive</span><span class="tag">Illustration + code</span></div>
+            <h3 class="wh-name">Inside the Cycle</h3>
+            <p class="wh-desc">An interactive map of the menstrual cycle. Move through the 28 days to see what the brain, thyroid, breasts, ovaries and uterus are doing, how hormones rise and fall, what changes when a pregnancy begins, and which common issues are worth a doctor's visit.</p>
+            <div class="wh-tags"><span class="tag tag-accent">Menstrual health</span><span class="tag tag-accent">Hormones</span><span class="tag tag-accent">Pregnancy</span></div>
+            <div class="wh-actions"><a href="cycle.html" class="btn btn-accent">Explore the cycle →</a></div>
           </div>
         </article>
 

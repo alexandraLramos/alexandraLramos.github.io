@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <title>The Cycle · Alexandra L. Ramos Figueroa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#f7f7f8;--surface:#ffffff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--hover:#f3f4f6;--accent:#7c6fcd;--accent-light:#ede9f8;--accent-dark:#5b4fb8;--font-body:'Geist',sans-serif;--font-display:'Geist',serif;--nav-h:70px;--max-w:900px;--gap:96px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    img{display:block;max-width:100%;}
+    a{color:inherit;text-decoration:none;}
+    .wrap{max-width:var(--max-w);margin:0 auto;padding:0 28px;}
+    section{padding:var(--gap) 0;}
+    section+section{border-top:1px solid var(--border);}
+    nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);background:rgba(247,247,248,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:200;}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .nav-name{font-family:var(--font-body);font-size:1rem;font-weight:600;color:var(--accent);white-space:nowrap;letter-spacing:-0.01em;}
+    .nav-right{display:flex;align-items:center;gap:6px;}
+    .nav-links{display:flex;list-style:none;align-items:center;gap:4px;}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;transition:color .18s,background .18s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--hover);}
+    .nav-icon{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1rem;transition:color .18s,background .18s;}
+    .nav-icon:hover{color:var(--text);background:var(--hover);}
+    .nav-divider{width:1px;height:20px;background:var(--border);margin:0 6px;}
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px;}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.25s;}
+    .sec-label{font-size:.73rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+    .sec-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;line-height:1.2;margin-bottom:36px;}
+    .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.71rem;font-weight:500;letter-spacing:.04em;background:var(--hover);color:var(--muted);border:1px solid var(--border);}
+    .tag-accent{background:var(--accent-light);color:var(--accent-dark);border-color:#c4b8ef;}
+    .course-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 28px 24px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;transition:box-shadow .2s,transform .2s;}
+    .course-card:hover{box-shadow:0 6px 28px rgba(0,0,0,.08);transform:translateY(-2px);}
+    .course-chip{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);border:1px solid #c4b8ef;padding:3px 10px;border-radius:999px;margin-bottom:10px;display:inline-block;}
+    .course-title{font-size:1.05rem;font-weight:600;margin-bottom:6px;}
+    .course-desc{font-size:.88rem;color:var(--muted);line-height:1.6;}
+    .course-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0;}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:7px;font-size:.875rem;font-weight:500;transition:all .18s;cursor:pointer;font-family:var(--font-body);border:none;}
+    .btn-dark{background:var(--text);color:#fff;}
+    .btn-dark:hover{background:#333;}
+    .btn-outline{border:1.5px solid var(--border);color:var(--text);background:transparent;}
+    .btn-outline:hover{border-color:var(--text);background:var(--hover);}
+    .btn-accent{background:var(--accent);color:#fff;}
+    .btn-accent:hover{background:var(--accent-dark);}
+    .community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    .community-card{border-radius:12px;overflow:hidden;border:0.5px solid var(--border);}
+    .community-img{width:100%;height:140px;object-fit:cover;background:linear-gradient(135deg,#ede9f8,#c9c2e8);display:flex;align-items:center;justify-content:center;font-size:2rem;}
+    .community-body{padding:12px 14px 16px;background:var(--surface);}
+    .community-cat{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+    .community-line{width:20px;height:2px;background:var(--accent);border-radius:999px;margin-bottom:6px;opacity:.5;}
+    .community-title{font-size:.9rem;font-weight:500;color:var(--text);line-height:1.3;margin-bottom:4px;}
+    .community-desc{font-size:.8rem;color:var(--muted);line-height:1.5;}
+    footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;}
+    footer p{font-size:.8rem;color:var(--muted);}
+    .fi{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+    .fi.on{opacity:1;transform:none;}
+
+    
+    
+    /* ── Cycle explorer ── */
+    .cy-hero{padding-top:calc(var(--nav-h) + 56px);padding-bottom:28px;}
+    .cy-back{font-size:.82rem;color:var(--muted);display:inline-flex;gap:6px;margin-bottom:22px;}
+    .cy-back:hover{color:var(--accent);}
+    .cy-title{font-size:clamp(2rem,4.6vw,3rem);font-weight:600;letter-spacing:-.035em;line-height:1.08;margin:14px 0 14px;}
+    .cy-title em{font-style:italic;font-weight:400;color:var(--accent);}
+    .cy-lede{color:var(--muted);max-width:60ch;}
+    .cy-app{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:28px;align-items:start;}
+    .cy-figure{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 18px 0;overflow:hidden;}
+    .cy-body{position:relative;width:100%;max-width:400px;margin:0 auto;}
+    .cy-body img{width:100%;height:auto;user-select:none;-webkit-user-drag:none;}
+    .hs{position:absolute;transform:translate(-50%,-50%);width:var(--s,60px);height:var(--s,60px);border-radius:50%;border:none;background:none;cursor:pointer;padding:0;}
+    .hs::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,var(--c) 0%,transparent 68%);opacity:var(--a,.4);transform:scale(var(--k,1));transition:opacity .45s,transform .45s;}
+    .hs::after{content:"";position:absolute;inset:22%;border-radius:50%;border:1.5px solid var(--c);opacity:0;transition:opacity .2s;}
+    .hs:hover::after,.hs.sel::after{opacity:.9;}
+    .hs.sel::after{animation:ring 1.8s ease-out infinite;}
+    @keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.6);opacity:0}}
+    .hs .lbl{position:absolute;left:50%;top:100%;transform:translate(-50%,2px);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-dark);background:rgba(255,255,255,.92);border:1px solid var(--border);padding:2px 8px;border-radius:999px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;}
+    .hs:hover .lbl,.hs.sel .lbl{opacity:1;}
+    .cy-hint{position:absolute;top:14px;left:16px;font-size:.72rem;color:var(--muted);}
+    .cy-panel{display:flex;flex-direction:column;gap:16px;}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 24px;}
+    .cy-day{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .cy-daynum{font-size:2.4rem;font-weight:600;letter-spacing:-.04em;line-height:1;}
+    .cy-daynum small{font-size:.85rem;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:6px;}
+    .cy-phase{font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:4px 12px;border-radius:999px;color:#fff;background:var(--pc,var(--accent));transition:background .3s;}
+    .cy-phasetext{font-size:.9rem;color:var(--muted);margin-top:12px;line-height:1.65;}
+    .org-k{font-size:.7rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
+    .org-name{font-size:1.2rem;font-weight:600;letter-spacing:-.015em;margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+    .org-dot{width:10px;height:10px;border-radius:50%;background:var(--c);}
+    .org-text{font-size:.92rem;color:var(--text);line-height:1.7;}
+    .org-know{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-size:.84rem;color:var(--muted);line-height:1.6;}
+    .org-know b{color:var(--text);font-weight:600;}
+    .org-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+    .org-tab{font:inherit;font-size:.78rem;font-weight:500;padding:5px 12px;border-radius:999px;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;transition:.15s;}
+    .org-tab:hover{color:var(--text);}
+    .org-tab.on{background:var(--accent-light);border-color:#c4b8ef;color:var(--accent-dark);}
+    .cy-controls{margin-top:28px;}
+    .cy-row{display:flex;align-items:center;gap:14px;}
+    .cy-play{flex-shrink:0;width:42px;height:42px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+    .cy-play:hover{background:var(--accent-dark);}
+    input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:999px;background:linear-gradient(90deg,#e58fa0 0 16%,#b7a9ec 16% 48%,#e9a07f 48% 52%,#9e8fe0 52% 100%);outline:none;}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 2px 8px rgba(91,79,184,.3);cursor:grab;}
+    input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--accent);cursor:grab;}
+    .cy-chart{margin-top:18px;}
+    .cy-chart svg{width:100%;height:auto;display:block;overflow:visible;}
+    .cy-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.78rem;color:var(--muted);}
+    .cy-legend span{display:inline-flex;align-items:center;gap:6px;}
+    .cy-legend i{width:14px;height:3px;border-radius:2px;background:var(--c);display:inline-block;}
+    .cy-switch{display:inline-flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text);cursor:pointer;user-select:none;}
+    .cy-switch input{display:none;}
+    .cy-switch .tr{width:38px;height:22px;border-radius:999px;background:var(--border);position:relative;transition:.2s;}
+    .cy-switch .tr::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:.2s;}
+    .cy-switch input:checked+.tr{background:#4f9d7a;}
+    .cy-switch input:checked+.tr::after{left:19px;}
+    .cy-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+    .cy-top h3{font-size:1rem;font-weight:600;}
+    .flags{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    .flag{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:.88rem;color:var(--muted);line-height:1.55;}
+    .flag b{display:block;color:var(--text);font-weight:600;margin-bottom:4px;font-size:.92rem;}
+    .cy-src{font-size:.78rem;color:var(--muted);line-height:1.7;margin-top:28px;}
+    .cy-src a{color:var(--accent);}
+    @media(max-width:860px){.cy-app{grid-template-columns:1fr;}.cy-body{max-width:320px;}.flags{grid-template-columns:1fr;}}
+    @media(max-width:768px){.wh-card{grid-template-columns:1fr;}.wh-art{min-height:150px;}.wh-body{padding:22px 20px;}.wh-stats{gap:24px;}}
+    @media(max-width:768px){
+      .course-card{grid-template-columns:1fr;}
+      .course-actions{flex-direction:row;flex-wrap:wrap;}
+      .community-grid{grid-template-columns:1fr 1fr;}
+      .nav-icon{display:none;}
+      .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;gap:4px;box-shadow:0 4px 16px rgba(0,0,0,.08);}
+      .nav-links.open{display:flex;}
+      .nav-links a{padding:10px 12px;font-size:1rem;width:100%;}
+      .nav-toggle{display:flex;}
+      .nav-divider{display:none;}
+      .modal{padding:24px 20px 20px;}
+      .modal-meta-grid{grid-template-columns:1fr;}
+    }
+    @media(max-width:480px){.community-grid{grid-template-columns:1fr;}}
+      .nav-links a{white-space:nowrap;}
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">Alexandra L. Ramos Figueroa</a>
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">About</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="teaching-outreach.html">Teaching &amp; Outreach</a></li>
+          <li><a href="womens-health.html" class="active">Women's Health</a></li>
+        </ul>
+        <div class="nav-divider"></div>
+        <a href="https://x.com/alexandraLramos" target="_blank" class="nav-icon" title="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+        <a href="https://linkedin.com/in/aramosfi" target="_blank" class="nav-icon" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://orcid.org/0000-0001-8548-6481" target="_blank" class="nav-icon" title="ORCID"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 3.872-2.203 3.872-3.722 0-2.016-1.109-3.722-3.884-3.722h-2.285z"/></svg></a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  
+  
+  <section class="cy-hero">
+    <div class="wrap">
+      <a href="womens-health.html" class="cy-back">← Women's Health</a>
+      <p class="sec-label">Interactive · Project 03</p>
+      <h1 class="cy-title">Inside <em>the cycle</em>.</h1>
+      <p class="cy-lede">The menstrual cycle isn't just about the uterus. Move through the 28 days and tap an organ to see what your brain, thyroid, breasts, ovaries and uterus are doing each day, and what changes if a pregnancy begins.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:12px">
+    <div class="wrap">
+      <div class="cy-app">
+        <div class="cy-figure">
+          <span class="cy-hint">Tap a glowing organ</span>
+          <div class="cy-body" id="body">
+            <img src="WebsitePics/WH_Body.webp" alt="Illustration of a woman's body showing the brain, thyroid, breasts, ovaries and uterus">
+          </div>
+        </div>
+        <div class="cy-panel">
+          <div class="card">
+            <div class="cy-day">
+              <div class="cy-daynum" id="dayNum">Day 1<small>of 28</small></div>
+              <span class="cy-phase" id="phase">Menstrual</span>
+            </div>
+            <p class="cy-phasetext" id="phaseText"></p>
+          </div>
+          <div class="card">
+            <div class="org-tabs" id="tabs"></div>
+            <div class="org-k" id="orgK">What's happening</div>
+            <div class="org-name"><span class="org-dot" id="orgDot"></span><span id="orgName"></span></div>
+            <p class="org-text" id="orgText"></p>
+            <p class="org-know" id="orgKnow"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card cy-controls">
+        <div class="cy-top">
+          <h3>Hormones across the cycle</h3>
+          <label class="cy-switch"><input type="checkbox" id="preg"><span class="tr"></span>What if pregnancy begins?</label>
+        </div>
+        <div class="cy-row">
+          <button class="cy-play" id="play" aria-label="Play the cycle"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" id="playIcon"><path d="M3 1.5v11l9.5-5.5z"/></svg></button>
+          <input type="range" id="day" min="1" max="28" step="1" value="1" aria-label="Cycle day">
+        </div>
+        <div class="cy-chart"><svg id="chart" viewBox="0 0 800 210" role="img" aria-label="Relative hormone levels across a 28-day cycle"></svg></div>
+        <div class="cy-legend" id="legend"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="sec-label">Worth knowing</p>
+      <h2 class="sec-title">When to talk to a doctor</h2>
+      <div class="flags">
+        <div class="flag"><b>Cycles shorter than 21 or longer than 35 days</b>Or cycles that suddenly become irregular. Can point to PCOS, thyroid disease, stress or perimenopause.</div>
+        <div class="flag"><b>Very heavy bleeding</b>Soaking a pad or tampon every hour for several hours, passing large clots, or bleeding more than 7 days. Fibroids, polyps and bleeding disorders are common causes.</div>
+        <div class="flag"><b>Pain that stops your life</b>Cramps that painkillers don't help, pain during sex or bowel movements. Endometriosis takes 7 to 10 years to diagnose on average.</div>
+        <div class="flag"><b>A missed period</b>Take a pregnancy test first. Otherwise it can come from thyroid problems, high prolactin, under-eating, intense exercise or PCOS.</div>
+        <div class="flag"><b>Mood changes that feel severe</b>Depression, anxiety or rage that arrives before each period and lifts after it may be PMDD, which is treatable.</div>
+        <div class="flag"><b>Bleeding between periods or after sex</b>Usually harmless, but worth checking, especially if it keeps happening.</div>
+      </div>
+      <p class="cy-src">Educational only, not medical advice. Hormone curves are relative and show a textbook 28-day cycle; real cycles vary from person to person and month to month.<br>
+      Sources: Reed BG, Carr BR. <a href="https://www.ncbi.nlm.nih.gov/books/NBK279054/" target="_blank">The Normal Menstrual Cycle and the Control of Ovulation</a>. Endotext, NCBI Bookshelf. · ACOG, <a href="https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding" target="_blank">Heavy Menstrual Bleeding</a> · ACOG, <a href="https://www.acog.org/womens-health/faqs/endometriosis" target="_blank">Endometriosis</a>.<br>Illustration by Alexandra L. Ramos Figueroa.</p>
+    </div>
+  </section>
+
+  <footer><p>© 2026 Alexandra L. Ramos Figueroa</p></footer>
+
+  <script>
+    const toggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
+    toggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+    const $=id=>document.getElementById(id);
+    const g=(d,m,s)=>Math.exp(-((d-m)**2)/(2*s*s));
+    const clamp=v=>Math.max(0,Math.min(1,v));
+    let preg=false;
+    const H={
+      E:{n:'Estrogen',c:'#7c6fcd',f:d=>preg&&d>19?0.55+0.02*(d-19):0.1+0.85*g(d,12.5,2.3)+0.42*g(d,21,3.2)},
+      P:{n:'Progesterone',c:'#e58fa0',f:d=>preg&&d>21.5?0.96:0.04+0.92*g(d,21.5,3.3)},
+      LH:{n:'LH',c:'#e9a07f',f:d=>0.07+0.9*g(d,14,0.75)},
+      FSH:{n:'FSH',c:'#8fb0d6',f:d=>0.16+0.24*g(d,3,2.2)+0.36*g(d,14,0.8)+(preg?0:0.16*g(d,28.6,1.8))},
+      hCG:{n:'hCG',c:'#4f9d7a',f:d=>preg&&d>20.5?clamp(0.03*Math.exp((d-21)*0.5)):0}
+    };
+    function phase(d){
+      if(preg&&d>=21)return{k:'preg',n:'Early pregnancy',c:'#4f9d7a',t:'About 6 to 10 days after ovulation, the embryo implants in the thick uterine lining and starts making hCG, the hormone pregnancy tests detect. hCG keeps progesterone high, so the lining stays and no period comes. A test is usually reliable from the day a period would have been due.'};
+      if(d<=5)return{k:'men',n:'Menstrual',c:'#e58fa0',t:'Day 1 is the first day of bleeding. Estrogen and progesterone are at their lowest, so the uterine lining sheds. Meanwhile the brain is already raising FSH to start the next cycle.'};
+      if(d<=13)return{k:'fol',n:'Follicular',c:'#9e8fe0',t:'FSH wakes a group of follicles in the ovaries. One becomes dominant and pumps out estrogen, which rebuilds the uterine lining. Energy and mood often rise.'};
+      if(d===14)return{k:'ovu',n:'Ovulation',c:'#e9a07f',t:'High estrogen triggers a surge of LH from the pituitary. About 24 to 36 hours later the dominant follicle releases an egg, which can be fertilised for roughly 12 to 24 hours.'};
+      return{k:'lut',n:'Luteal',c:'#7c6fcd',t:'The empty follicle becomes the corpus luteum and makes progesterone, preparing the lining for a possible pregnancy and raising body temperature slightly. Without pregnancy it breaks down after about 12 to 14 days, hormones fall, and the next period starts.'};
+    }
+    const O={
+      brain:{n:'Brain',sub:'Hypothalamus & pituitary',c:'#b07fb8',pos:[[50.3,13]],s:'30%',
+        men:'Falling estrogen and progesterone release the brake on the hypothalamus. It pulses GnRH faster, and the pituitary raises FSH to start growing new follicles. Low energy and lower mood are common.',
+        fol:'Rising estrogen acts on brain regions for mood, memory and reward. Many people feel more energetic, social and focused in this phase.',
+        ovu:'At high enough levels, estrogen flips from braking the pituitary to triggering it, causing the LH surge that releases the egg.',
+        lut:'Progesterone acts on the hypothalamus to raise basal body temperature by about 0.3 to 0.5 °C and makes many people sleepier. When hormones drop late in the phase, PMS symptoms like irritability, cravings and poor sleep can appear.',
+        preg:'Progesterone stays high, so body temperature stays up instead of dropping. Tiredness is often the first thing people notice; nausea usually starts around week 6.',
+        know:'<b>Common findings:</b> PMS affects most menstruating people to some degree; about 3 to 8% have PMDD, a severe form tied to the brain\'s sensitivity to hormone changes. Migraines often cluster around the period.'},
+      thyroid:{n:'Thyroid',sub:'The metabolism gland',c:'#e9a07f',pos:[[50.4,30.8]],s:'17%',
+        men:'Thyroid hormone stays fairly steady across a healthy cycle, but it sets the stage: too little is linked to heavy or long periods.',
+        fol:'Thyroid hormone helps the follicle mature. Rising estrogen increases the protein that carries thyroid hormone in the blood.',
+        ovu:'Ovulation depends on normal thyroid function. Both underactive and overactive thyroid can stop ovulation from happening.',
+        lut:'An underactive thyroid can shorten the luteal phase and raise prolactin, making cycles irregular and pregnancy harder.',
+        preg:'hCG mildly stimulates the thyroid, and the body needs about 20 to 50% more thyroid hormone. For the first trimester the baby relies entirely on the mother\'s.',
+        know:'<b>Common findings:</b> Thyroid disease is 5 to 8 times more common in women than men. Irregular, very heavy or missing periods are a reason to get a TSH blood test.'},
+      breast:{n:'Breasts',sub:'Ducts & milk glands',c:'#c7a3d9',pos:[[38.6,52.5],[61.4,52.5]],s:'22%',
+        men:'As progesterone falls, the swelling and tenderness from the previous week ease off.',
+        fol:'Estrogen stimulates growth of the milk ducts. Breast tissue is usually softest now, which is why this week is often recommended for self-exams.',
+        ovu:'Some people start to feel a little fullness or sensitivity right after ovulation.',
+        lut:'Progesterone stimulates the milk glands and the body holds more fluid, so breasts can feel swollen, heavy and tender (cyclic breast pain).',
+        preg:'Tender, fuller breasts are one of the earliest signs of pregnancy, often before a missed period.',
+        know:'<b>Common findings:</b> Cyclic breast pain and lumpy "fibrocystic" changes are very common and usually harmless. A lump that stays after your period is worth having checked.'},
+      ovary:{n:'Ovaries',sub:'Follicles & corpus luteum',c:'#f2a7bd',pos:[[39.5,86.5],[61.5,86.5]],s:'14%',
+        men:'A new group of follicles, each holding an immature egg, starts to grow in response to FSH.',
+        fol:'One follicle becomes dominant, grows to about 2 cm and produces most of the estrogen. The others stop growing.',
+        ovu:'The dominant follicle ruptures and releases the egg into the fallopian tube. Some people feel a one-sided twinge called mittelschmerz.',
+        lut:'The empty follicle turns into the corpus luteum, a temporary gland that makes progesterone and estrogen for about 12 to 14 days.',
+        preg:'hCG keeps the corpus luteum alive, so it keeps making progesterone until the placenta takes over at around 7 to 10 weeks.',
+        know:'<b>Common findings:</b> PCOS affects about 1 in 10 women and causes irregular or missing ovulation. Functional ovarian cysts form and disappear on their own in many cycles.'},
+      uterus:{n:'Uterus',sub:'Endometrium & cervix',c:'#e07a93',pos:[[50.9,81]],s:'20%',
+        men:'The lining (endometrium) sheds. Prostaglandins make the uterine muscle contract to push it out, which causes cramps. A typical period loses about 30 to 40 mL of blood.',
+        fol:'Estrogen rebuilds and thickens the lining. Cervical mucus becomes wetter as ovulation approaches.',
+        ovu:'The lining is thick and the cervical mucus is clear and stretchy, like egg white, helping sperm reach the egg.',
+        lut:'Progesterone turns the lining into a nutrient-rich layer ready for an embryo. Mucus becomes thick and sticky again.',
+        preg:'The embryo burrows into the lining. Some people see light "implantation spotting." The lining is kept, so there is no period.',
+        know:'<b>Common findings:</b> Endometriosis affects about 1 in 10 women and fibroids are found in up to 70 to 80% by age 50. Severe cramps or very heavy bleeding are not something you just have to live with.'}
+    };
+    const order=['brain','thyroid','breast','ovary','uterus'];
+    let sel='uterus',day=1;
+    const body=$('body'),tabs=$('tabs');
+    order.forEach(k=>{const o=O[k];
+      o.els=o.pos.map((p,i)=>{const b=document.createElement('button');b.className='hs';b.style.left=p[0]+'%';b.style.top=p[1]+'%';b.style.width=o.s;b.style.height='0';b.style.paddingBottom=o.s;b.style.setProperty('--c',o.c);b.setAttribute('aria-label',o.n);
+      b.innerHTML=i===0||o.pos.length===1?'<span class="lbl">'+o.n+'</span>':'';b.onclick=()=>pick(k);body.appendChild(b);return b});
+      const t=document.createElement('button');t.className='org-tab';t.textContent=o.n;t.onclick=()=>pick(k);tabs.appendChild(t);o.tab=t;});
+    function act(k,d){const v=k2=>H[k2].f(d);
+      if(k==='brain')return clamp(0.3+0.7*Math.max(v('LH'),v('FSH')));
+      if(k==='thyroid')return preg&&d>=21?0.75:0.45;
+      if(k==='breast')return clamp(0.2+0.75*v('P'));
+      if(k==='ovary')return clamp(0.2+0.5*v('E')+0.5*v('LH')+(preg&&d>=21?0.3:0));
+      if(k==='uterus')return d<=5?1:clamp(0.25+0.65*Math.min(1,(d-5)/9)+(preg&&d>=21?0.1:0));}
+    function pick(k){sel=k;render()}
+    // chart
+    const W=800,Ht=210,L=8,R=8,T=34,B=26,cw=W-L-R,ch=Ht-T-B;
+    const X=d=>L+(d-1)/27*cw,Y=v=>T+ch-(v*ch);
+    function path(f){let s='';for(let d=1;d<=28;d+=0.25){s+=(s?'L':'M')+X(d).toFixed(1)+' '+Y(clamp(f(d))).toFixed(1)}return s}
+    function drawChart(){
+      const bands=[[1,5.5,'Menstrual','#e58fa0'],[5.5,13.5,'Follicular','#9e8fe0'],[13.5,14.5,'Ovul.','#e9a07f'],[14.5,28,preg?'Luteal → pregnancy':'Luteal',preg?'#4f9d7a':'#7c6fcd']];
+      let s='';
+      bands.forEach(b=>{s+='<rect x="'+X(b[0])+'" y="'+(T-24)+'" width="'+(X(b[1])-X(b[0]))+'" height="'+(ch+24)+'" fill="'+b[3]+'" opacity=".06"/><text x="'+((X(b[0])+X(b[1]))/2)+'" y="'+(T-10)+'" text-anchor="middle" font-size="11" font-weight="600" fill="'+b[3]+'" letter-spacing=".5">'+b[2]+'</text>'});
+      s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ch)+'" y2="'+(T+ch)+'" stroke="#e5e7eb"/>';
+      [1,7,14,21,28].forEach(d=>s+='<text x="'+X(d)+'" y="'+(Ht-6)+'" text-anchor="middle" font-size="11" fill="#6b7280">Day '+d+'</text>');
+      Object.keys(H).forEach(k=>{if(k==='hCG'&&!preg)return;s+='<path d="'+path(H[k].f)+'" fill="none" stroke="'+H[k].c+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'});
+      s+='<g id="cursor"><line id="cl" y1="'+(T-2)+'" y2="'+(T+ch)+'" stroke="#111827" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>'+Object.keys(H).map(k=>'<circle id="cd-'+k+'" r="4.5" fill="#fff" stroke="'+H[k].c+'" stroke-width="2.5"/>').join('')+'</g>';
+      $('chart').innerHTML=s;
+      $('legend').innerHTML=Object.keys(H).filter(k=>k!=='hCG'||preg).map(k=>'<span style="--c:'+H[k].c+'"><i></i>'+H[k].n+'</span>').join('');
+    }
+    function render(){
+      const p=phase(day);
+      $('dayNum').innerHTML='Day '+day+'<small>of 28</small>';
+      $('phase').textContent=p.n;$('phase').style.setProperty('--pc',p.c);
+      $('phaseText').textContent=p.t;
+      order.forEach(k=>{const o=O[k],a=act(k,day);o.els.forEach(el=>{el.style.setProperty('--a',(0.25+0.75*a).toFixed(2));el.style.setProperty('--k',(0.7+0.5*a).toFixed(2));el.classList.toggle('sel',k===sel)});o.tab.classList.toggle('on',k===sel)});
+      const o=O[sel];
+      $('orgDot').style.setProperty('--c',o.c);$('orgName').textContent=o.n;
+      $('orgK').textContent=o.sub;
+      $('orgText').textContent=o[p.k];$('orgKnow').innerHTML=o.know;
+      $('cl').setAttribute('x1',X(day));$('cl').setAttribute('x2',X(day));
+      Object.keys(H).forEach(k=>{const c=$('cd-'+k);if(!c)return;const v=H[k].f(day);c.setAttribute('cx',X(day));c.setAttribute('cy',Y(clamp(v)));c.style.display=(k==='hCG'&&(!preg||v<0.01))?'none':''});
+      $('day').value=day;
+    }
+    $('day').oninput=e=>{day=+e.target.value;render()};
+    $('preg').onchange=e=>{preg=e.target.checked;drawChart();render()};
+    let timer=null;
+    $('play').onclick=()=>{if(timer){clearInterval(timer);timer=null;$('playIcon').innerHTML='<path d="M3 1.5v11l9.5-5.5z"/>';return}
+      $('playIcon').innerHTML='<path d="M3 1.5h3v11H3zM8 1.5h3v11H8z"/>';if(day>=28)day=0;
+      timer=setInterval(()=>{day++;if(day>28){clearInterval(timer);timer=null;day=28;$('playIcon').innerHTML='<path d="M3 1.5v11l9.5-5.5z"/>'}render()},650)};
+    document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'){day=Math.min(28,day+1);render()}if(e.key==='ArrowLeft'){day=Math.max(1,day-1);render()}});
+    drawChart();render();
+  </script>
+</body>
+</html>
