@@ -126,6 +126,9 @@
     .feel h3{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:8px;}
     .chips{display:flex;flex-wrap:wrap;gap:8px;}
     .chip{font-size:.92rem;padding:7px 12px;border-radius:999px;background:color-mix(in srgb,var(--pc) 12%,#fff);color:var(--ink);border:1px solid color-mix(in srgb,var(--pc) 30%,#fff);}
+    .wowlist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+    .wowlist li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.95rem;line-height:1.5;color:var(--ink);background:#fff;border:1.5px dashed color-mix(in srgb,var(--pc) 45%,#fff);border-radius:12px;padding:9px 12px;}
+    .wowlist li i{font-style:normal;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;background:color-mix(in srgb,var(--pc) 14%,#fff);}
     .note{margin-top:14px;font-size:.92rem;line-height:1.55;padding:10px 14px;border-radius:12px;background:var(--accent-light);color:#3b2f8f;}
     .note.blood{background:#fbeef0;color:#5c1424;}
 
@@ -260,6 +263,7 @@
               <div class="row"><div class="pic"><div><div class="hormone-pic" id="hbars"></div><div class="hlab"><span>E</span><span>P</span><span>LH</span><span>FSH</span></div></div></div><div><h3>Hormones</h3><p id="txtHorm"></p></div></div>
             </div>
             <div class="feel"><h3>You might notice</h3><div class="chips" id="chips"></div></div>
+            <div class="feel wow"><h3>Surprising effects</h3><ul class="wowlist" id="wow"></ul></div>
             <div id="notes"></div>
           </div>
         </div>
@@ -342,6 +346,10 @@
       lut:[['Blood sugar','some people with type 1 diabetes need more insulin.<sup>8</sup>'],['Premenstrual asthma','often starts before the period.<sup>7</sup>'],['PMS and PMDD','mood symptoms peak in the last week.<sup>1</sup>'],['Heat strain','higher body temperature makes hot workouts harder.<sup>1</sup>']]};
     const IUD={msg:'With a hormonal IUD, most people still ovulate, so the phases continue, but bleeding is much lighter or stops.<sup>4</sup>',
       note:['Bleeding is usually much lighter, or none at all. Spotting is common in the first months.','Estrogen still rises; most users keep ovulating.','Ovulation usually still happens, but the IUD makes pregnancy very unlikely.','PMS and breast tenderness can continue.']};
+    const WOW={men:[['🫁','Asthma can flare around the period in many women with asthma.<sup>7</sup>'],['⚡','In some people with epilepsy, seizures cluster around the period.<sup>6</sup>'],['🧠','Migraines cluster as estrogen drops.<sup>9</sup>']],
+      fol:[['🦵','Knee ligaments start to loosen as estrogen climbs, so ACL injury risk begins rising.<sup>3</sup>']],
+      ovu:[['🦵','ACL tears are more likely around ovulation, when ligaments are loosest.<sup>3</sup>'],['⚡','Some people with epilepsy have seizures clustered around ovulation.<sup>6</sup>']],
+      lut:[['🌡️','Your body runs about 0.3 to 0.5 °C warmer, so hot workouts feel harder.<sup>1</sup>'],['🩸','People with type 1 diabetes may need more insulin in this phase.<sup>8</sup>'],['🫁','Asthma can worsen in the days before the period.<sup>7</sup>']]};
     const phIdx=d=>d<=5?0:d<=13?1:d===14?2:3;
     const isPreg=()=>preg&&day>=21;
     const pkey=()=>isPreg()?'preg':PH[phIdx(day)].k;
@@ -468,61 +476,84 @@
     const bez=(p,t)=>{const u=1-t;return [u*u*u*p[0][0]+3*u*u*t*p[1][0]+3*u*t*t*p[2][0]+t*t*t*p[3][0],u*u*u*p[0][1]+3*u*u*t*p[1][1]+3*u*t*t*p[2][1]+t*t*t*p[3][1]]};
     const fol=(x,y,r,op)=>'<g opacity="'+(op==null?1:op).toFixed(2)+'"><circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="url(#gFol)" stroke="#d76d8e" stroke-width="1.3"/><circle cx="'+(x-r*.35).toFixed(1)+'" cy="'+(y-r*.38).toFixed(1)+'" r="'+Math.max(.8,r*.22).toFixed(1)+'" fill="#fff" opacity=".9"/></g>';
     const egg=(x,y,r)=>'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="url(#gEgg)" stroke="#c2416b" stroke-width="1.2"/><circle cx="'+(x+r*.15).toFixed(1)+'" cy="'+(y+r*.1).toFixed(1)+'" r="'+(r*.35).toFixed(1)+'" fill="#c2416b" opacity=".7"/>';
-    const TR=[[236,92],[272,52],[322,48],[330,98]], TL=[[144,92],[108,52],[58,48],[50,98]];
+    // ── uterus, tubes and ovaries: soft, rounded, in the style of Alexandra's drawing ──
+    // right-side geometry; the left side is mirrored around x = 190
+    const MX=x=>380-x;
+    const TR=[[230,74],[284,18],[360,34],[348,126]];            // tube: horn -> fimbriae
+    const TL=TR.map(p=>[MX(p[0]),p[1]]);
+    const OR={x:322,y:162,rx:31,ry:21,rot:-16}, OL={x:MX(322),y:162,rx:31,ry:21,rot:16};
     const cpath=p=>'M'+p[0]+' C'+p[1]+' '+p[2]+' '+p[3];
-    const drop=(x,y,s,delay)=>'<g class="drip" style="animation-delay:'+delay+'s"><path transform="translate('+x+' '+y+') scale('+s+')" d="M0 -7 C2.5 -2.5 5 0 5 3.2 A5 5 0 1 1 -5 3.2 C-5 0 -2.5 -2.5 0 -7Z" fill="#c0283f"/><circle cx="'+(x-1.4*s)+'" cy="'+(y+2*s)+'" r="'+(1.1*s)+'" fill="#fff" opacity=".55"/></g>';
+    const drop=(x,y,s,delay)=>'<g class="drip" style="animation-delay:'+delay+'s"><path transform="translate('+x+' '+y+') scale('+s+')" d="M0 -7 C2.6 -2.4 5 0 5 3.2 A5 5 0 1 1 -5 3.2 C-5 0 -2.6 -2.4 0 -7Z" fill="#c0283f"/><circle cx="'+(x-1.5*s).toFixed(1)+'" cy="'+(y+2*s).toFixed(1)+'" r="'+(1.1*s).toFixed(1)+'" fill="#fff" opacity=".6"/></g>';
+    function tube(T,side){ // thick soft tube with an inner channel and a highlight
+      let s='<path d="'+cpath(T)+'" stroke="#e98fa9" stroke-width="23" fill="none" stroke-linecap="round"/>';
+      s+='<path d="'+cpath(T)+'" stroke="#f3a9bd" stroke-width="19" fill="none" stroke-linecap="round"/>';
+      s+='<path d="'+cpath(T.map(p=>[p[0]+side*-2,p[1]-4]))+'" stroke="#fbd3de" stroke-width="5" fill="none" stroke-linecap="round" opacity=".75"/>';
+      return s}
+    function fimbriae(end,ov,side){ // finger-like ends that cup the top of the ovary
+      let s='';const tops=[-20,-10,0,10,19];
+      tops.forEach((dx,i)=>{const tx=ov.x+side*dx*0.9+side*6,ty=ov.y-ov.ry+3+Math.abs(dx)*0.18,mx=(end[0]+tx)/2+side*6,my=(end[1]+ty)/2-2;
+        s+='<path d="M'+end[0]+' '+end[1]+' Q'+mx.toFixed(1)+' '+my.toFixed(1)+' '+tx.toFixed(1)+' '+ty.toFixed(1)+'" stroke="#ef9fb4" stroke-width="7" fill="none" stroke-linecap="round"/>';
+        s+='<circle cx="'+tx.toFixed(1)+'" cy="'+ty.toFixed(1)+'" r="3.8" fill="#f3a9bd"/>'});
+      return s}
+    function ovary(o){return '<g transform="rotate('+o.rot+' '+o.x+' '+o.y+')"><ellipse cx="'+o.x+'" cy="'+(o.y+2)+'" rx="'+o.rx+'" ry="'+o.ry+'" fill="#e9a3b7" opacity=".35"/><ellipse cx="'+o.x+'" cy="'+o.y+'" rx="'+o.rx+'" ry="'+o.ry+'" fill="url(#aOv)" stroke="#e7a1b5" stroke-width="1.6"/><ellipse cx="'+(o.x-9)+'" cy="'+(o.y-8)+'" rx="10" ry="5" fill="#fff" opacity=".45"/></g>'}
     function duoSVG(x){const v=dv(x),d=dayOf(x),pg=preg&&v>=21,pgT=preg&&v>=14.6,men=d<=5&&!pg,iud=bc==='hiud';
-      const th=pg?13:liningAt(x)*1.75*(iud?.5:1); // lining thickness in px (≈2.6 to 14)
-      let s='<defs><radialGradient id="aMyo" cx=".5" cy=".35" r=".8"><stop offset="0" stop-color="#f9c6d3"/><stop offset="1" stop-color="#ee9db3"/></radialGradient><radialGradient id="aOv" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#fde8ef"/><stop offset="1" stop-color="#f5bfcf"/></radialGradient><radialGradient id="gFol" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f6ecfc"/><stop offset="1" stop-color="#d4bdf0"/></radialGradient><radialGradient id="gEgg" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff7f9"/><stop offset="1" stop-color="#f4a6bd"/></radialGradient><radialGradient id="gCL" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#f2b93b"/></radialGradient><radialGradient id="gAlb" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#e8dfca"/></radialGradient></defs>';
-      // ligaments
-      s+='<path d="M150 118 Q110 124 92 126 M230 118 Q270 124 288 126" stroke="#f3c4d1" stroke-width="5" fill="none" stroke-linecap="round"/>';
-      // fallopian tubes: wall + inner channel
-      [TL,TR].forEach(T=>{s+='<path d="'+cpath(T)+'" stroke="#ee9db3" stroke-width="12" fill="none" stroke-linecap="round"/><path d="'+cpath(T)+'" stroke="#fde3ea" stroke-width="4" fill="none" stroke-linecap="round"/>'});
-      // fimbriae
-      [[50,98,-1],[330,98,1]].forEach(f=>{for(let i=0;i<5;i++){const a=(-60+i*30)*Math.PI/180;s+='<path d="M'+f[0]+' '+f[1]+' q'+(f[2]*Math.sin(a)*4)+' 6 '+(f[2]*(4+Math.sin(a)*9))+' '+(10+Math.cos(a)*4)+'" stroke="#ee9db3" stroke-width="4" fill="none" stroke-linecap="round"/>'}});
-      // ovaries
-      const OVL=[82,138],OVR=[298,138];
-      [OVL,OVR].forEach(o=>s+='<ellipse cx="'+o[0]+'" cy="'+o[1]+'" rx="34" ry="22" fill="url(#aOv)" stroke="#e39ab0" stroke-width="1.6"/>');
-      // uterus wall (myometrium), cervix and vagina
-      s+='<path d="M190 66 C232 66 250 84 250 112 C250 146 222 168 208 186 L208 214 L172 214 L172 186 C158 168 130 146 130 112 C130 84 148 66 190 66Z" fill="url(#aMyo)" stroke="#d47f99" stroke-width="2"/>';
-      s+='<path d="M174 214 L172 262 L208 262 L206 214Z" fill="#f6bccb" stroke="#d47f99" stroke-width="1.6"/>';
-      s+='<path d="M186 186 L186 214 M194 186 L194 214" stroke="#e48aa2" stroke-width="1.2"/>';
-      // endometrium (lining): outer triangle fixed, cavity shrinks as the lining thickens
-      const A=[[150,92],[230,92],[190,178]],cx=190,cy=120,k=Math.max(0,1-th/30);
+      const th=pg?13:liningAt(x)*1.7*(iud?.5:1);
+      let s='<defs>'
+        +'<radialGradient id="aMyo" cx=".42" cy=".3" r=".85"><stop offset="0" stop-color="#fbd0dc"/><stop offset=".6" stop-color="#f4adc0"/><stop offset="1" stop-color="#ea93ab"/></radialGradient>'
+        +'<radialGradient id="aOv" cx=".42" cy=".38" r=".75"><stop offset="0" stop-color="#fff1f5"/><stop offset="1" stop-color="#f8cbd8"/></radialGradient>'
+        +'<radialGradient id="gFol" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f6ecfc"/><stop offset="1" stop-color="#d4bdf0"/></radialGradient>'
+        +'<radialGradient id="gEgg" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff7f9"/><stop offset="1" stop-color="#f4a6bd"/></radialGradient>'
+        +'<radialGradient id="gCL" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#f2b93b"/></radialGradient>'
+        +'<radialGradient id="gAlb" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#e8dfca"/></radialGradient>'
+        +'<linearGradient id="aLin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+(men?'#c0384f':'#dd6f8d')+'"/><stop offset="1" stop-color="'+(men?'#9e2440':'#c95676')+'"/></linearGradient>'
+        +'</defs>';
+      // ovarian ligaments (ovary to uterus)
+      s+='<path d="M300 170 Q270 160 246 128" stroke="#f1bccb" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M'+MX(300)+' 170 Q'+MX(270)+' 160 '+MX(246)+' 128" stroke="#f1bccb" stroke-width="7" fill="none" stroke-linecap="round"/>';
+      // ovaries sit under the cupped ends of the tubes
+      s+=ovary(OL)+ovary(OR);
+      // tubes and fimbriae
+      s+=tube(TL,-1)+tube(TR,1)+fimbriae(TL[3],OL,-1)+fimbriae(TR[3],OR,1);
+      // uterus body
+      s+='<path d="M190 46 C238 44 256 70 254 104 C252 136 230 158 216 176 L214 206 Q214 216 204 217 L176 217 Q166 216 166 206 L164 176 C150 158 128 136 126 104 C124 70 142 44 190 46Z" fill="url(#aMyo)" stroke="#e48aa3" stroke-width="1.4"/>';
+      s+='<path d="M150 70 C160 56 178 52 192 53" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".45"/>';
+      // cervix with rings (like the drawing) and the vagina below
+      s+='<path d="M174 220 L172 258 Q190 266 208 258 L206 220Z" fill="#f7c7d3" stroke="#eba0b4" stroke-width="1.2"/>';
+      s+='<rect x="182" y="174" width="16" height="43" rx="6" fill="#d9718e"/>';
+      for(let yy=182;yy<214;yy+=6)s+='<path d="M184 '+yy+' Q190 '+(yy+2.5)+' 196 '+yy+'" stroke="#f6bccb" stroke-width="1.3" fill="none"/>';
+      // lining (endometrium): outer triangle fixed, cavity shrinks as the lining thickens
+      const A=[[154,82],[226,82],[190,168]],cx=190,cy=110,k=Math.max(.18,1-th/24);
+      const tri=P3=>'M'+P3[0][0].toFixed(1)+' '+P3[0][1].toFixed(1)+' L'+P3[1][0].toFixed(1)+' '+P3[1][1].toFixed(1)+' L'+P3[2][0].toFixed(1)+' '+P3[2][1].toFixed(1)+'Z';
+      s+='<path d="'+tri(A)+'" fill="url(#aLin)" stroke="url(#aLin)" stroke-width="8" stroke-linejoin="round"/>';
       const inner=A.map(p=>[cx+(p[0]-cx)*k,cy+(p[1]-cy)*k]);
-      const lin=men?'#c4364f':'#e6738f';
-      let outerP='M'+A[0]+' L'+A[1]+' L'+A[2]+'Z';
-      s+='<path d="'+outerP+'" fill="'+lin+'" stroke="#c45773" stroke-width="1" stroke-linejoin="round"/>';
-      // glands / vessels inside the lining (coiled in the luteal phase)
-      const coil=!men&&v>14?Math.min(1,(v-14)/6):0;
-      for(let i=0;i<7;i++){const t0=(i+.5)/7,px=A[0][0]+(A[1][0]-A[0][0])*t0,py=92;const ex=cx+(px-cx)*k,ey=cy+(py-cy)*k;let g='M'+px.toFixed(1)+' '+py;for(let j=1;j<=5;j++){const u=j/5;g+=' L'+(px+(ex-px)*u+Math.sin(j*1.8)*coil*3).toFixed(1)+' '+(py+(ey-py)*u).toFixed(1)}
-        if(th>4)s+='<path d="'+g+'" stroke="#fbd0db" stroke-width="1.2" fill="none" opacity=".8"/>'}
-      // cavity
-      s+='<path d="M'+inner[0].map(n=>n.toFixed(1))+' L'+inner[1].map(n=>n.toFixed(1))+' L'+inner[2].map(n=>n.toFixed(1))+'Z" fill="#fff4f7" stroke="'+(men?'#a7243b':'#d97a95')+'" stroke-width="'+(men?1.6:1)+'"/>';
-      if(men){// shed tissue in the cavity + drops leaving through the cervix
-        const n=iud?1:(d<=2?3:d===3?2:1);
-        for(let i=0;i<(iud?2:5);i++){const px=cx-14+i*7,py=cy+8+(i%2)*10;s+='<ellipse cx="'+px+'" cy="'+py+'" rx="2.6" ry="1.8" fill="#c0283f" opacity=".85"/>'}
-        for(let j=0;j<n;j++)s+=drop(190+(j-1)*5,222,1.15,j*.55)}
-      if(iud)s+='<g stroke-linecap="round"><path d="M172 99 Q190 104 208 99 M190 101 L190 150" stroke="#fff" stroke-width="6" fill="none"/><path d="M172 99 Q190 104 208 99 M190 101 L190 150" stroke="#5b4fb8" stroke-width="3.2" fill="none"/><path d="M190 150 L188 214 L186 240 M190 150 L192 214 L194 240" stroke="#5b4fb8" stroke-width=".9" fill="none"/></g>'+'<text x="112" y="188" text-anchor="end" font-size="10.5" font-weight="700" fill="#5b4fb8" font-family="Geist,sans-serif">IUD</text><path d="M114 185 L186 130" stroke="#a99be6" stroke-width="1"/>';
-      if(pg)s+='<g>'+eggC(206,100,4.5)+'</g><text x="262" y="84" font-size="10" font-weight="700" fill="#2f7a55" font-family="Geist,sans-serif">implanted embryo</text><path d="M260 82 L212 98" stroke="#8fc4a8" stroke-width="1"/>';
-      // follicles: left ovary rests, right ovary ovulates this cycle
-      [[-12,-5],[6,6],[14,-6]].forEach(o=>s+=fol(OVL[0]+o[0],OVL[1]+o[1],3.4,0.85));
-      const RO=OVR,small=[[-18,-4],[-6,10],[10,-10],[18,6]];
-      if(v<5.5){const kk=(v-1)/4.5;small.forEach(o=>s+=fol(RO[0]+o[0],RO[1]+o[1],3+kk*2))}
-      else if(v<13.5){const kk=(v-5.5)/8,r=6+kk*12;small.forEach(o=>s+=fol(RO[0]+o[0]*1.2,RO[1]+o[1]*1.2,Math.max(1.5,4.8-kk*3.2),1-kk*.6));s+=fol(RO[0]+4,RO[1]-2,r)+egg(RO[0]+4+r*.35,RO[1]-2-r*.35,2.4+kk*1.4)}
-      else if(v<14.6){const kk=(v-13.5)/1.1,F=TR[3];s+='<circle cx="'+(RO[0]+4)+'" cy="'+(RO[1]-2)+'" r="17" fill="none" stroke="#d76d8e" stroke-width="2" stroke-dasharray="22 6"/>';
-        [[22,-22],[28,-6],[8,-26]].forEach((o,j)=>{const sx=RO[0]+o[0],sy=RO[1]+o[1],z=2.5+2*Math.sin((kk+j*.3)*Math.PI);s+='<path d="M'+sx+' '+(sy-z)+' L'+sx+' '+(sy+z)+' M'+(sx-z)+' '+sy+' L'+(sx+z)+' '+sy+'" stroke="#f0a92e" stroke-width="1.8" stroke-linecap="round"/>'});
-        const ex=RO[0]+10+(F[0]-RO[0]-10)*kk,ey=RO[1]-14+(F[1]+6-RO[1]+14)*kk;s+=eggC(ex,ey,4)}
-      else{const grw=pgT?1:(v<=21?Math.min(1,(v-14.6)/6.4):Math.max(0,1-(v-21)/7)),r=8+grw*8,toY=Math.min(1,(v-14.6)/2),pale=!pg&&v>24;
-        small.slice(0,2).forEach(o=>s+=fol(RO[0]+o[0]*1.2,RO[1]+o[1]*1.2,2.2+(!pg&&v>25?(v-25)*.6:0),.8));
-        s+=cl(RO[0]+4,RO[1]-2,r*1.6,toY,false);if(pale)s+=cl(RO[0]+4,RO[1]-2,r*1.6,Math.min(1,(v-24)/4),true);
-        // egg travels inside the tube, from the fimbriae toward the uterus
-        const span=pgT?6.4:2.6,f=Math.min(1,(v-14.6)/span),q=bez(TR,1-f*(pgT?1:.55));
-        if(pgT){if(v<21){s+=eggC(q[0],q[1],4);if(v<16.2)s+='<text x="'+(q[0]+8).toFixed(0)+'" y="'+(q[1]-6).toFixed(0)+'" font-size="10" font-weight="700" fill="#2f7a55" font-family="Geist,sans-serif">fertilized</text>'}}
+      s+='<path d="'+tri(inner)+'" fill="#fde6ec" stroke="#fde6ec" stroke-width="4" stroke-linejoin="round"/>';
+      if(!men&&v>14&&th>6){for(let i=0;i<6;i++){const px=164+i*10.5,py=86+Math.abs(i-2.5)*1.5;s+='<path d="M'+px.toFixed(1)+' '+py+' q2 4 0 8 q-2 4 0 8" stroke="#f4a3b9" stroke-width="1.2" fill="none" opacity=".8"/>'}}
+      if(men){const n=iud?1:(d<=2?3:d===3?2:1);
+        for(let i=0;i<(iud?2:6);i++){const px=176+i*5.5,py=104+(i%3)*9;s+='<ellipse cx="'+px+'" cy="'+py+'" rx="2.8" ry="2" fill="#b8243e" opacity=".85" transform="rotate('+(i*35)+' '+px+' '+py+')"/>'}
+        for(let j=0;j<n;j++)s+=drop(190+(j-1)*6,224,1.2,j*.55)}
+      // IUD: T shape with one string
+      if(iud)s+='<g stroke-linecap="round" fill="none"><path d="M172 96 Q190 101 208 96 M190 98 L190 146" stroke="#fff" stroke-width="7"/><path d="M172 96 Q190 101 208 96 M190 98 L190 146" stroke="#5b4fb8" stroke-width="3.6"/><path d="M190 146 C190 170 190 200 191 244" stroke="#5b4fb8" stroke-width="1.1"/></g><text x="104" y="232" text-anchor="end" font-size="10.5" font-weight="700" fill="#5b4fb8" font-family="Geist,sans-serif">IUD</text><path d="M106 229 L184 140" stroke="#b3a8ea" stroke-width="1"/>';
+      // follicles: left ovary rests; right ovary ovulates this cycle
+      const rp=(dx,dy)=>{const a=OR.rot*Math.PI/180;return [OR.x+dx*Math.cos(a)-dy*Math.sin(a),OR.y+dx*Math.sin(a)+dy*Math.cos(a)]};
+      const lp=(dx,dy)=>{const a=OL.rot*Math.PI/180;return [OL.x+dx*Math.cos(a)-dy*Math.sin(a),OL.y+dx*Math.sin(a)+dy*Math.cos(a)]};
+      [[-12,-4],[3,7],[14,-5]].forEach(o=>{const q=lp(o[0],o[1]);s+=fol(q[0],q[1],3.6,0.9)});
+      const small=[[-17,-3],[-5,9],[9,-8],[17,5]],DOM=rp(4,-1);
+      if(v<5.5){const kk=(v-1)/4.5;small.forEach(o=>{const q=rp(o[0],o[1]);s+=fol(q[0],q[1],3.2+kk*2)})}
+      else if(v<13.5){const kk=(v-5.5)/8,r=6+kk*10;small.forEach(o=>{const q=rp(o[0]*1.15,o[1]*1.15);s+=fol(q[0],q[1],Math.max(1.6,4.8-kk*3),1-kk*.6)});s+=fol(DOM[0],DOM[1],r)+egg(DOM[0]+r*.35,DOM[1]-r*.35,2.4+kk*1.4)}
+      else if(v<14.6){const kk=(v-13.5)/1.1,F=TR[3];s+='<circle cx="'+DOM[0].toFixed(1)+'" cy="'+DOM[1].toFixed(1)+'" r="15" fill="none" stroke="#d76d8e" stroke-width="2" stroke-dasharray="21 6"/>';
+        [[20,-20],[27,-4],[6,-25]].forEach((o,j)=>{const sx=DOM[0]+o[0],sy=DOM[1]+o[1],z=2.5+2*Math.sin((kk+j*.3)*Math.PI);s+='<path d="M'+sx.toFixed(1)+' '+(sy-z).toFixed(1)+' L'+sx.toFixed(1)+' '+(sy+z).toFixed(1)+' M'+(sx-z).toFixed(1)+' '+sy.toFixed(1)+' L'+(sx+z).toFixed(1)+' '+sy.toFixed(1)+'" stroke="#f0a92e" stroke-width="1.8" stroke-linecap="round"/>'});
+        s+=eggC(DOM[0]+(F[0]-DOM[0])*kk,DOM[1]-10+(F[1]+2-DOM[1]+10)*kk,4)}
+      else{const grw=pgT?1:(v<=21?Math.min(1,(v-14.6)/6.4):Math.max(0,1-(v-21)/7)),r=7+grw*6,toY=Math.min(1,(v-14.6)/2),pale=!pgT&&v>24;
+        small.slice(0,2).forEach(o=>{const q=rp(o[0]*1.15,o[1]*1.15);s+=fol(q[0],q[1],2.2+(!pgT&&v>25?(v-25)*.6:0),.8)});
+        s+=cl(DOM[0],DOM[1],r,toY,false);if(pale)s+=cl(DOM[0],DOM[1],r,Math.min(1,(v-24)/4),true);
+        // the egg travels inside the tube toward the uterus
+        const span=pgT?6.4:2.6,f=Math.min(1,(v-14.6)/span),q=bez(TR,1-f*(pgT?1:.5));
+        if(pgT){if(v<21){s+=eggC(q[0],q[1],4);if(v<16.2)s+='<text x="'+(q[0]-4).toFixed(0)+'" y="'+(q[1]-14).toFixed(0)+'" text-anchor="end" font-size="10" font-weight="700" fill="#2f7a55" font-family="Geist,sans-serif">fertilized</text>'}}
         else if(v<17.2)s+='<g opacity="'+Math.max(0,1-(v-16)/1.2).toFixed(2)+'">'+eggC(q[0],q[1],4)+'</g>'}
+      if(pg)s+=eggC(206,100,4.5)+'<text x="268" y="70" font-size="10" font-weight="700" fill="#2f7a55" font-family="Geist,sans-serif">implanted embryo</text><path d="M266 68 L211 97" stroke="#8fc4a8" stroke-width="1"/>';
       // labels
       const L=(x0,y0,txt,anc)=>'<text x="'+x0+'" y="'+y0+'" text-anchor="'+(anc||'middle')+'" font-size="11" font-weight="600" fill="#4b5563" font-family="Geist,sans-serif">'+txt+'</text>';
-      s+=L(82,176,'Ovary')+L(298,176,'Ovary')+L(190,40,'Fallopian tubes')+'<path d="M150 44 Q120 46 104 54 M230 44 Q260 46 276 54" stroke="#c9c2e0" stroke-width="1" fill="none"/>'+L(262,104,'Lining','start')+'<path d="M260 101 L222 104" stroke="#c9c2e0" stroke-width="1"/>'+L(226,204,'Cervix','start')+'<path d="M224 201 L208 200" stroke="#c9c2e0" stroke-width="1"/>'+L(226,250,'Vagina','start');
+      s+=L(MX(322),200,'Ovary')+L(322,200,'Ovary')+L(190,14,'Fallopian tubes')+'<path d="M152 17 Q128 20 112 30 M228 17 Q252 20 268 30" stroke="#cfc8e6" stroke-width="1" fill="none"/>'
+        +L(262,104,'Lining','start')+'<path d="M260 101 L222 100" stroke="#cfc8e6" stroke-width="1"/>'+L(222,198,'Cervix','start')+'<path d="M220 195 L200 195" stroke="#cfc8e6" stroke-width="1"/>'+L(218,250,'Vagina','start');
       return s}
     // ── ring ──
     const C=160,R=144,DEG=360/28,pol=(a,r)=>[C+r*Math.sin(a*Math.PI/180),C-r*Math.cos(a*Math.PI/180)];
@@ -555,6 +586,7 @@
       $('hbars').innerHTML=['E','P','LH','FSH'].map(k=>'<i class="hbar" style="--hc:'+H[k].c+';height:'+Math.round(6+40*clamp(H[k].f(day)))+'px"></i>').join('');
       $('txtHorm').textContent=pr?PREG.horm:p.horm;
       const feel=pr?PREG.feel:p.feel.filter(f=>!(bc==='hiud'&&f==='Bleeding'));
+      $('wow').innerHTML=(pr?[['🧪','A pregnancy test detects hCG from about the day the period would have been due.<sup>1</sup>']]:WOW[p.k]).map(w=>'<li><i aria-hidden="true">'+w[0]+'</i><span>'+w[1]+'</span></li>').join('');
       $('chips').innerHTML=(bc==='hiud'&&i===0?['Light or no bleeding']:[]).concat(feel).map(f=>'<span class="chip">'+f+'</span>').join('');
       let notes='';
       if(i===0&&!pr)notes+='<p class="note blood"><b>Bleeding today: '+(bc==='hiud'?'light or none':(day<=2?'heavier':day===3?'medium':'lighter'))+'.</b> A whole period is usually about 30 to 40 mL, 2 to 3 tablespoons.<sup>1</sup></p>';
