@@ -674,8 +674,9 @@
     function stop(){if(timer){clearInterval(timer);timer=null;$('play').setAttribute('aria-label','Play the cycle');$('playIco').innerHTML='<path d="M3 1.5v11l9.5-5.5z"/>'}}
     $('play').onclick=()=>{if(timer){stop();return}$('play').setAttribute('aria-label','Pause');$('playIco').innerHTML='<path d="M3 1.5h3v11H3zM8 1.5h3v11H8z"/>';
       timer=setInterval(()=>{if(day>=28){stop();return}set(day+1)},RM?1500:900)};
-    $('optPreg').onchange=e=>{preg=e.target.checked;chart();render()};
-    $('optIud').onchange=e=>{bc=e.target.checked?'hiud':'none';render()};
+    // the two switches are exclusive: turning one on turns the other off
+    $('optPreg').onchange=e=>{preg=e.target.checked;if(preg&&bc==='hiud'){bc='none';$('optIud').checked=false}chart();render()};
+    $('optIud').onchange=e=>{bc=e.target.checked?'hiud':'none';if(bc==='hiud'&&preg){preg=false;$('optPreg').checked=false;chart()}render()};
     chart();render();
   })();
   </script>
