@@ -62,7 +62,8 @@
 
     
     /* ── Women's Health ── */
-    .wh-hero{padding-top:calc(var(--nav-h) + 72px);padding-bottom:72px;}
+    .wh-hero{padding-top:calc(var(--nav-h) + 72px);padding-bottom:40px;}
+    .wh-list{padding-top:0;border-top:none!important;}
     .wh-kicker{display:inline-flex;align-items:center;gap:8px;font-size:.73rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);}
     .wh-kicker::before{content:"";width:24px;height:1.5px;background:var(--accent);border-radius:2px;}
     .wh-title{font-size:clamp(2rem,4.6vw,3rem);font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:18px 0 22px;max-width:none;}
@@ -107,6 +108,11 @@
     .art-fig img{object-fit:contain;padding:14px;mix-blend-mode:normal;}
     .art-fig .wh-num{color:rgba(91,79,184,.35);}
     .art-body img{object-fit:contain;object-position:50% 100%;padding:16px 16px 0;}
+    .art-ring svg{position:absolute;left:0;right:0;top:0;width:100%;height:calc(100% - 34px);}
+    .art-ring img{inset:auto;left:50%;top:calc(50% - 17px);transform:translate(-50%,-50%);width:auto;height:58%;padding:0;object-fit:contain;border-radius:50%;}
+    .ring-key{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;flex-wrap:wrap;gap:4px 10px;font-size:.66rem;font-weight:500;color:var(--muted);}
+    .ring-key span{display:inline-flex;align-items:center;gap:4px;}
+    .ring-key span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c);}
     .art-body{background:linear-gradient(160deg,#f1eefb,#e8e3f8);}
     .art-body .wh-num{color:rgba(91,79,184,.55);}
     .btn[aria-disabled="true"]{opacity:.5;pointer-events:none;}
@@ -163,10 +169,8 @@
   </section>
 
   <!-- Projects -->
-  <section id="projects">
+  <section id="projects" class="wh-list">
     <div class="wrap">
-      <p class="sec-label fi">Projects</p>
-      <h2 class="sec-title fi">Current Work</h2>
       <div class="wh-projects">
 
         <article class="wh-card fi">
@@ -194,11 +198,11 @@
         </article>
 
         <article class="wh-card fi">
-          <div class="wh-art art-body"><img src="WebsitePics/WH_Body.webp" alt="Alexandra's illustration of the body with brain, thyroid and uterus" /><span class="wh-num">03</span></div>
+          <div class="wh-art art-body art-ring"><svg viewBox="0 0 280 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true" font-family="Geist,sans-serif"><circle cx="140" cy="150" r="118" fill="none" stroke="#fff" stroke-width="9" opacity=".7"/><path d="M140.0 32.0 A118 118 0 0 1 244.5 95.1" fill="none" stroke="#e58fa0" stroke-width="9" stroke-linecap="round"/><path d="M246.3 98.8 A118 118 0 0 1 170.3 264.1" fill="none" stroke="#b7a9ec" stroke-width="9" stroke-linecap="round"/><path d="M166.3 265.0 A118 118 0 0 1 144.1 267.9" fill="none" stroke="#e9a07f" stroke-width="9" stroke-linecap="round"/><path d="M140.0 268.0 A118 118 0 0 1 135.9 32.1" fill="none" stroke="#7c6fcd" stroke-width="9" stroke-linecap="round"/><text x="140" y="35" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">1</text></svg><img src="WebsitePics/WH_Body.webp" alt="Alexandra's illustration of the body with brain, thyroid and uterus" /><div class="ring-key"><span style="--c:#e58fa0">Menstrual</span><span style="--c:#b7a9ec">Follicular</span><span style="--c:#e9a07f">Ovulation</span><span style="--c:#7c6fcd">Luteal</span></div></div>
           <div class="wh-body">
-            <div class="wh-meta"><span class="wh-status st-live">Interactive</span><span class="tag">Illustration + code</span></div>
+            <div class="wh-meta"><span class="wh-status st-live">Interactive</span><span class="tag">Hand-drawn + code</span></div>
             <h3 class="wh-name">Inside the Cycle</h3>
-            <p class="wh-desc">An interactive map of the menstrual cycle. Move through the 28 days to see what the brain, thyroid, breasts, ovaries and uterus are doing, how hormones rise and fall, what changes when a pregnancy begins, and which common issues are worth a doctor's visit.</p>
+            <p class="wh-desc">An interactive map of the menstrual cycle. Move through the 28 days to see what the brain, thyroid, breasts, ovaries and uterus are doing, how hormones rise and fall, what changes when a pregnancy begins, and which common issues are worth a doctor's visit. I love drawing, so the illustrations are my own.</p>
             <div class="wh-tags"><span class="tag tag-accent">Menstrual health</span><span class="tag tag-accent">Hormones</span><span class="tag tag-accent">Pregnancy</span></div>
             <div class="wh-actions"><a href="cycle.html" class="btn btn-accent">Explore the cycle →</a></div>
           </div>
