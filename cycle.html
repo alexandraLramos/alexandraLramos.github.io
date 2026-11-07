@@ -117,7 +117,7 @@
     @media(max-width:420px){.minis{grid-template-columns:1fr}}
     .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
     .tile{margin:0;background:linear-gradient(180deg,#fdf6f9,#f7f1fc);border:1px solid #efe3f0;border-radius:14px;overflow:hidden;}
-    .tile svg{width:100%;height:auto;display:block;}
+    .tile svg{width:100%;height:auto;aspect-ratio:300/170;display:block;}
     .tile figcaption{padding:2px 12px 10px;font-size:.84rem;line-height:1.35;color:#4b5563;}
     .tile figcaption b{display:block;color:var(--text);font-size:.9rem;}
     @media(max-width:420px){.tiles{grid-template-columns:1fr}}
@@ -292,7 +292,7 @@
             <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="iAnt" cx=".45" cy=".45" r=".6"><stop offset="0" stop-color="#f6ecfc"/><stop offset="1" stop-color="#c9aee8"/></radialGradient></defs></svg>
             <div class="tiles">
               <figure class="tile"><svg id="ovsvg" viewBox="0 0 300 170" role="img" aria-labelledby="ovcap"></svg><figcaption><b>Ovary</b><span id="ovcap"></span></figcaption></figure>
-              <figure class="tile"><svg id="lnsvg" viewBox="0 0 300 170" role="img" aria-labelledby="lncap"></svg><figcaption><b>Uterine lining</b><span id="lncap"></span></figcaption></figure>
+              <figure class="tile"><svg id="lnsvg" viewBox="0 0 380 260" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="lncap"></svg><figcaption><b>Uterus &amp; lining</b><span id="lncap"></span></figcaption></figure>
             </div>
             <ol class="steps" id="steps" aria-label="What the ovary is doing">
               <li><i><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="8" fill="#f2a3c0" stroke="#d977a0" stroke-width="1.5"/><circle cx="14" cy="14" r="3" fill="#9c3d7c"/></svg></i>Follicles wake up</li><li><i><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="url(#iAnt)" stroke="#e08fb0" stroke-width="2"/><circle cx="19" cy="9" r="4" fill="#fbd0d8" stroke="#e57f95" stroke-width="1"/><circle cx="19" cy="9" r="1.4" fill="#e0607e"/></svg></i>Dominant follicle</li><li><i><svg viewBox="0 0 28 28"><circle cx="24.0" cy="14.0" r="1.7" fill="#f2a3c0"/><circle cx="22.1" cy="19.9" r="1.7" fill="#f2a3c0"/><circle cx="17.1" cy="23.5" r="1.7" fill="#f2a3c0"/><circle cx="10.9" cy="23.5" r="1.7" fill="#f2a3c0"/><circle cx="5.9" cy="19.9" r="1.7" fill="#f2a3c0"/><circle cx="4.0" cy="14.0" r="1.7" fill="#f2a3c0"/><circle cx="5.9" cy="8.1" r="1.7" fill="#f2a3c0"/><circle cx="10.9" cy="4.5" r="1.7" fill="#f2a3c0"/><circle cx="17.1" cy="4.5" r="1.7" fill="#f2a3c0"/><circle cx="22.1" cy="8.1" r="1.7" fill="#f2a3c0"/><circle cx="14" cy="14" r="6.5" fill="#f7b8cc" stroke="#d977a0" stroke-width="1.2"/><circle cx="14" cy="14" r="2.4" fill="#9c3d7c"/></svg></i>Egg released</li><li><i><svg viewBox="0 0 28 28"><circle cx="20.5" cy="14.0" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="18.6" cy="18.6" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="14.0" cy="20.5" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="9.4" cy="18.6" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="7.5" cy="14.0" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="9.4" cy="9.4" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="14.0" cy="7.5" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="18.6" cy="9.4" r="5.2" fill="#f7c95a" stroke="#d9a12c" stroke-width=".8"/><circle cx="14" cy="14" r="5.5" fill="#f7c95a"/><circle cx="14" cy="14" r="2.2" fill="#b0731a"/></svg></i>Corpus luteum</li>
@@ -536,29 +536,20 @@
         s+=cl(DX,DY,r,toY,false);if(pale)s+=cl(DX,DY,r,Math.min(1,(v-24)/4),true);
         cap=pg?'The corpus luteum stays big to support the pregnancy.':(v<17?'The empty follicle turns into the yellow corpus luteum.':v<=23?'The corpus luteum makes progesterone.':'Without a pregnancy, the corpus luteum fades.')}
       return [s,cap]}
-    function liningSVG(x){const v=dv(x),d=dayOf(x),pg=preg&&v>=21,men=d<=5&&!pg;
-      let h;if(pg)h=88;else if(v<=5.5)h=72-56*(v-1)/4.5;else if(v<=14)h=16+44*(v-5.5)/8.5;else if(v<=26)h=60+26*(v-14)/12;else h=86-8*(v-26)/2;
-      const base=150,top=base-28-h;let s='<defs><linearGradient id="gEnd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9cdd8"/><stop offset="1" stop-color="#ee9bb0"/></linearGradient><linearGradient id="gMyo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e48aa2"/><stop offset="1" stop-color="#c9667f"/></linearGradient></defs>';
-      s+='<rect x="0" y="'+(base-28)+'" width="300" height="48" fill="url(#gMyo)"/>';
-      let surf='M0 '+(base-28);const n=14;for(let i=0;i<=n;i++){const xx=i/n*300,yy=top+Math.sin(i*1.7+v)*3+(men?Math.sin(i*2.3)*8*(1-(v-1)/4.5):0);surf+=' L'+f1(xx)+' '+f1(yy)}surf+=' L300 '+(base-28)+'Z';
-      s+='<path d="'+surf+'" fill="url(#gEnd)" stroke="#e48aa2" stroke-width="1.5"/>';
-      // glands (straight -> coiled) and spiral arteries
-      const coil=v>14&&!men?Math.min(1,(v-14)/6):0;
-      for(let i=0;i<10;i++){const gx=18+i*29;let g='M'+gx+' '+(base-28);const steps=8;for(let k=1;k<=steps;k++){const yy=base-28-(h-6)*k/steps;g+=' L'+f1(gx+Math.sin(k*1.6)*(1.5+coil*5))+' '+f1(yy)}
-        s+='<path d="'+g+'" fill="none" stroke="#fbe7ec" stroke-width="'+f1(3+coil*1.5)+'" stroke-linecap="round" opacity=".9"/>';
-        const ax=gx+14;let a='M'+ax+' '+(base-28);for(let k=1;k<=10;k++){const yy=base-28-(h-10)*k/10;a+=' L'+f1(ax+Math.sin(k*1.4)*(2+h/22))+' '+f1(yy)}
-        s+='<path d="'+a+'" fill="none" stroke="#c43d5e" stroke-width="1.6" stroke-linecap="round" opacity=".85"/>'}
-      if(men){const k=(v-1)/4.5,cnt=bc==='hiud'?4:12;for(let i=0;i<cnt;i++){const px=40+i*21+(i%3)*4,py=top-6-((v*20+i*17)%34);s+='<ellipse cx="'+f1(px)+'" cy="'+f1(py)+'" rx="'+(3+(i%3))+'" ry="'+(2+(i%2))+'" transform="rotate('+(i*37%60-30)+' '+f1(px)+' '+f1(py)+')" fill="#c2304f" opacity="'+f1(.85-k*.4)+'"/>'}}
-      if(pg)s+='<circle cx="150" cy="'+f1(top+10)+'" r="7" fill="#f7b8cc" stroke="#d977a0" stroke-width="1.4"/><circle cx="150" cy="'+f1(top+10)+'" r="2.6" fill="#9c3d7c"/>';
-      s+='<text x="8" y="'+(base+12)+'" font-size="10.5" fill="#fff" font-family="Geist,sans-serif" font-weight="600">muscle wall</text>';
-      const cap=pg?'An embryo implants and the lining stays.':men?'The lining sheds: this is the period.':v<14?'Estrogen rebuilds and thickens the lining.':v<15?'Thick and ready.':v<26?'Progesterone makes it spongy and ready for an embryo.':'Progesterone falls; the lining is about to shed.';
+    // uterine lining on Alexandra's own uterus drawing (same frame as the overlay coordinates)
+    function liningSVG(x){const v=dv(x),d=dayOf(x),pg=preg&&v>=21,men=d<=5&&!pg,th=liningAt(x);
+      let s='<image href="WebsitePics/WH_Uterus.webp" x="0" y="0" width="380" height="260"/>';
+      s+='<path d="M124 74 L180 168 L238 74" fill="none" stroke="'+(men?'#b3263e':'#c2416b')+'" stroke-opacity="'+(men?.85:.55)+'" stroke-width="'+(th*2.6).toFixed(1)+'" stroke-linecap="round" stroke-linejoin="round"/>';
+      if(men){const n=bc==='hiud'?1:(d<=2?3:d===3?2:1);for(let j=0;j<n;j++)s+='<ellipse class="drop" cx="'+(175+j*6)+'" cy="244" rx="4" ry="5.5" fill="#b3263e" style="animation-delay:'+(j*.45)+'s"/>'}
+      if(pg)s+='<circle cx="182" cy="112" r="8" fill="#f7b8cc" stroke="#d977a0" stroke-width="1.5"/><circle cx="182" cy="112" r="3" fill="#9c3d7c"/>';
+      const cap=pg?'An embryo implants and the lining stays.':men?'The lining sheds and leaves as the period.':v<14?'Estrogen rebuilds and thickens the lining.':v<15?'Thick and ready.':v<26?'Progesterone keeps it thick and ready for an embryo.':'Progesterone falls; the lining is about to shed.';
       return [s,cap]}
     let insetTok=0;
     async function drawInsets(x){const tok=++insetTok,pk=pkey(dayOf(x)),oOwn='WebsitePics/cycle/ovary-'+PHN[pk]+'.png',lOwn='WebsitePics/cycle/uterus-'+PHN[pk]+'.png';
       const [ho,hl]=await Promise.all([tryImg(oOwn),tryImg(lOwn)]);if(tok!==insetTok)return;
       const o=ovarySVG(x),l=liningSVG(x);
       $('ovsvg').innerHTML=ho?'<image href="'+oOwn+'" width="300" height="170"/>':o[0];$('ovcap').textContent=o[1];
-      $('lnsvg').innerHTML=hl?'<image href="'+lOwn+'" width="300" height="170"/>':l[0];$('lncap').textContent=l[1]}
+      $('lnsvg').innerHTML=hl?'<image href="'+lOwn+'" width="380" height="260"/>':l[0];$('lncap').textContent=l[1]}
     function drawBody(x){const d=dayOf(x),v=dv(x),ov=clamp(0.2+0.5*H.E.f(v)+0.5*H.LH.f(v)),men=d<=5&&!(preg&&d>=21),br=clamp(0.25+0.75*Math.max(H.LH.f(v),H.FSH.f(v)));
       $('glows').innerHTML='<circle cx="210.7" cy="91" r="'+(16+br*10).toFixed(1)+'" fill="#b07fb8" opacity="'+(.12+br*.25).toFixed(2)+'"/><circle cx="211" cy="150" r="12" fill="#e9a07f" opacity="'+((preg&&d>=21)?.4:.18)+'"/>'+OV.map(o=>'<circle cx="'+o[0]+'" cy="'+o[1]+'" r="'+(7+ov*7).toFixed(2)+'" fill="#e58fa0" opacity="'+(.2+ov*.4).toFixed(2)+'"/>').join('')
         +'<circle cx="'+UT[0]+'" cy="'+UT[1]+'" r="'+(8+liningAt(x)*1.2).toFixed(2)+'" fill="'+(men?'#b3263e':'#e58fa0')+'" opacity="'+(men?.35:.2)+'"/>';
