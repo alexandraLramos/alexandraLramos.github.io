@@ -113,6 +113,13 @@
     .hbar{width:16px;border-radius:5px 5px 2px 2px;background:var(--hc);transition:height .4s;}
     .hlab{display:flex;gap:6px;font-size:.62rem;color:var(--soft);justify-content:center;margin-top:3px;}
     .hlab span{width:16px;text-align:center;}
+    .duo{margin:0;background:linear-gradient(180deg,#f7f3fd,#fdf7fa);border:1px solid #efeaf7;border-radius:18px;overflow:hidden;}
+    .duo svg{width:100%;height:auto;display:block;}
+    .duo-cap{display:grid;grid-template-columns:1fr 1.4fr 1fr;text-align:center;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-top:-6px;}
+    .duo-txt{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px 16px 14px;margin:0;}
+    .duo-txt dt{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);}
+    .duo-txt dd{margin:2px 0 0;font-size:.96rem;line-height:1.5;color:var(--ink);}
+    @media(max-width:520px){.duo-txt{grid-template-columns:1fr}}
     .feel{margin-top:16px;}
     .feel h3{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:8px;}
     .chips{display:flex;flex-wrap:wrap;gap:8px;}
@@ -244,8 +251,11 @@
             <h2 class="phase-h" id="phaseH"></h2>
             <p class="phase-p" id="phaseP"></p>
             <div class="rows">
-              <div class="row"><div class="pic" id="picOvary"></div><div><h3>Ovary</h3><p id="txtOvary"></p></div></div>
-              <div class="row"><div class="pic" id="picUterus"></div><div><h3>Uterus</h3><p id="txtUterus"></p></div></div>
+              <figure class="duo">
+                <svg id="duoSvg" viewBox="0 0 380 260" role="img" aria-label="Alexandra's drawing of the uterus and ovaries, changing with the day"></svg>
+                <figcaption class="duo-cap" aria-hidden="true"><span>Ovary</span><span>Uterus</span><span>Ovary</span></figcaption>
+                <dl class="duo-txt"><div><dt>Ovary</dt><dd id="txtOvary"></dd></div><div><dt>Uterus</dt><dd id="txtUterus"></dd></div></dl>
+              </figure>
               <div class="row"><div class="pic"><div><div class="hormone-pic" id="hbars"></div><div class="hlab"><span>E</span><span>P</span><span>LH</span><span>FSH</span></div></div></div><div><h3>Hormones</h3><p id="txtHorm"></p></div></div>
             </div>
             <div class="feel"><h3>You might notice</h3><div class="chips" id="chips"></div></div>
@@ -415,11 +425,52 @@
       const cap=pg?'An embryo implants and the lining stays.':men?'The lining sheds and leaves as the period.':v<14?'Estrogen rebuilds and thickens the lining.':v<15?'Thick and ready.':v<26?'Progesterone keeps it thick and ready for an embryo.':'Progesterone falls; the lining is about to shed.';
       return [s,cap]}
 
+    // ── uterus + ovaries: Alexandra's drawing with the lining, follicles and egg animated on top ──
+    const P=(x,y)=>[x.toFixed(1),y.toFixed(1)];
+    const DUO_DEFS='<defs><radialGradient id="gFol" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f6ecfc"/><stop offset="1" stop-color="#d4bdf0"/></radialGradient><radialGradient id="gEgg" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff7f9"/><stop offset="1" stop-color="#f4a6bd"/></radialGradient><radialGradient id="dCL" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#f2b93b"/></radialGradient><radialGradient id="dAlb" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#e8dfca"/></radialGradient></defs>';
+    function closeOverlay(x){const d=dayOf(x),v=dv(x),men=d<=5&&!(preg&&d>=21),th=liningAt(x);let s='';
+      const a=P(127,78),b=P(180,168),c=P(236,78);
+      s+='<path d="M'+a+' L'+b+' L'+c+'" fill="none" stroke="'+(men?'#b3263e':'#c2416b')+'" stroke-opacity="'+(men?.8:.45)+'" stroke-width="'+(th*1.6).toFixed(1)+'" stroke-linecap="round" stroke-linejoin="round"/>';
+      if(men){const n=bc==='hiud'?1:(d<=2?3:d===3?2:1);for(let j=0;j<n;j++){const q=P(176+j*5,232);s+='<ellipse class="drop" cx="'+q[0]+'" cy="'+q[1]+'" rx="3" ry="4" fill="#b3263e" style="animation-delay:'+(j*.45)+'s"/>'}}
+      // ovaries: follicle development (the right ovary releases the egg this cycle)
+      const RO=[287,160],LO=[84,160];
+      const fol=(x,y,r,op)=>'<g opacity="'+(op==null?1:op).toFixed(2)+'"><circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="url(#gFol)" stroke="#d76d8e" stroke-width="1.3"/><circle cx="'+(x-r*.35).toFixed(1)+'" cy="'+(y-r*.38).toFixed(1)+'" r="'+Math.max(.8,r*.22).toFixed(1)+'" fill="#fff" opacity=".9"/></g>';
+      const egg=(x,y,r)=>'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="url(#gEgg)" stroke="#c2416b" stroke-width="1.2"/><circle cx="'+(x+r*.15).toFixed(1)+'" cy="'+(y+r*.1).toFixed(1)+'" r="'+(r*.35).toFixed(1)+'" fill="#c2416b" opacity=".7"/>';
+      const small=[[-15,-6],[11,-12],[-6,13],[15,7],[2,-2]];
+      // left ovary: resting follicles, always quiet
+      [[-8,-6],[7,4],[-3,9]].forEach(o=>s+=fol(LO[0]+o[0],LO[1]+o[1],3,0.75));
+      const mark=s.length;
+      if(v<5.5){const k=(v-1)/4.5;small.forEach((o,j)=>s+=fol(RO[0]+o[0],RO[1]+o[1],3+k*2.6+(j===4?k*1.2:0)))}
+      else if(v<13.5){const k=(v-5.5)/8,r=8+k*12;
+        small.slice(0,4).forEach(o=>s+=fol(RO[0]+o[0]*1.15,RO[1]+o[1]*1.15,Math.max(1.6,5.4-k*3.6),1-k*.65));
+        s+=fol(RO[0],RO[1],r)+egg(RO[0]+r*.32,RO[1]-r*.3,2.6+k*1.6)}
+      else if(v<14.6){const k=(v-13.5)/1.1,r=20;
+        s+='<path d="M'+(RO[0]+r*Math.cos(-0.5)).toFixed(1)+' '+(RO[1]+r*Math.sin(-0.5)).toFixed(1)+' A'+r+' '+r+' 0 1 1 '+(RO[0]+r*Math.cos(-1.3)).toFixed(1)+' '+(RO[1]+r*Math.sin(-1.3)).toFixed(1)+'" fill="url(#gFol)" stroke="#d76d8e" stroke-width="1.6"/>';
+        [[24,-24],[30,-8],[12,-30]].forEach((o,j)=>{const sx=RO[0]+o[0],sy=RO[1]+o[1],sz=3+2*Math.sin((k+j*.3)*Math.PI);s+='<path d="M'+sx+' '+(sy-sz)+' L'+sx+' '+(sy+sz)+' M'+(sx-sz)+' '+sy+' L'+(sx+sz)+' '+sy+'" stroke="#f0a92e" stroke-width="1.8" stroke-linecap="round"/>'});
+        s+=egg(RO[0]+8+k*26,RO[1]-12-k*20,4.4)}
+      else{const pg=preg&&v>=21;
+        // the same follicle collapses and turns into the corpus luteum (pink -> yellow), grows to ~day 21, then fades without pregnancy
+        const r=v<=21?12+5*(v-14.6)/6.4:(pg?17:17-10*(v-21)/7);
+        const toY=Math.min(1,(v-14.6)/2.4),toW=pg?0:Math.max(0,Math.min(1,(v-23)/5));
+        s+='<circle cx="'+RO[0]+'" cy="'+RO[1]+'" r="'+r.toFixed(1)+'" fill="url(#gFol)" stroke="#d76d8e" stroke-width="1.4" opacity="'+(1-toY).toFixed(2)+'"/>';
+        s+='<circle cx="'+RO[0]+'" cy="'+RO[1]+'" r="'+r.toFixed(1)+'" fill="url(#dCL)" stroke="#c9921c" stroke-width="1.5" opacity="'+(toY*(1-toW)).toFixed(2)+'"/>';
+        s+='<circle cx="'+RO[0]+'" cy="'+RO[1]+'" r="'+r.toFixed(1)+'" fill="url(#dAlb)" stroke="#c9b99a" stroke-width="1.4" opacity="'+toW.toFixed(2)+'"/>';
+        s+='<circle cx="'+(RO[0]-r*.35).toFixed(1)+'" cy="'+(RO[1]-r*.38).toFixed(1)+'" r="'+(r*.2).toFixed(1)+'" fill="#fff" opacity=".8"/>';
+        if(v<15.6)s+='<path d="M'+(RO[0]+r*.55).toFixed(1)+' '+(RO[1]-r*.75).toFixed(1)+' l4 -4" stroke="#d76d8e" stroke-width="1.6" stroke-linecap="round" opacity="'+(1-(v-14.6)).toFixed(2)+'"/>';
+        // the egg travels along the tube; without fertilization it dissolves within about a day
+        const tube=[[318,128],[300,96],[262,90],[214,96]],seg=f=>{const n=tube.length-1,i=Math.min(n-1,Math.floor(f*n)),u=f*n-i;return [tube[i][0]+(tube[i+1][0]-tube[i][0])*u,tube[i][1]+(tube[i+1][1]-tube[i][1])*u]};
+        if(pg){if(v<21){const q=seg(Math.min(1,(v-14.6)/5.4));s+=egg(q[0],q[1],4.4)}else s+='<circle cx="196" cy="104" r="5" fill="#f4a6bd" stroke="#c2416b" stroke-width="1.2"/>'}
+        else if(v<17){const f=Math.min(1,(v-14.6)/2.4)*.45,q=seg(f);s+='<g opacity="'+Math.max(0,1-(v-15.8)/1.2).toFixed(2)+'">'+egg(q[0],q[1],4.4)+'</g>'}
+        if(!pg&&v>25.5){const k=(v-25.5)/2.5;small.slice(0,3).forEach(o=>s+=fol(RO[0]+o[0]*1.25,RO[1]+o[1]*1.25,1.5+k*1.8,.35+k*.5))}}
+      return s}
+    function duoSVG(x){return DUO_DEFS+'<image href="WebsitePics/WH_Uterus.webp" x="0" y="0" width="380" height="260"/>'+closeOverlay(x)}
     // ── ring ──
     const C=160,R=144,DEG=360/28,pol=(a,r)=>[C+r*Math.sin(a*Math.PI/180),C-r*Math.cos(a*Math.PI/180)];
     const arc=(a0,a1)=>{const s=pol(a0,R),e=pol(a1,R);return 'M'+s[0].toFixed(1)+' '+s[1].toFixed(1)+' A'+R+' '+R+' 0 '+(a1-a0>180?1:0)+' 1 '+e[0].toFixed(1)+' '+e[1].toFixed(1)};
-    $('ringArcs').innerHTML='<circle cx="160" cy="160" r="'+R+'" fill="none" stroke="#eeebf5" stroke-width="14"/>'+PH.map((p,i)=>'<path data-i="'+i+'" d="'+arc((p.days[0]-1)*DEG+1,p.days[1]*DEG-1)+'" stroke="'+p.color+'" stroke-width="14" fill="none"/>').join('');
+    $('ringArcs').innerHTML='<circle cx="160" cy="160" r="'+(R+11)+'" fill="none" stroke="#8f86b8" stroke-width="1.6"/><path id="prog" fill="none" stroke-width="3.5" stroke-linecap="round"/><circle cx="160" cy="160" r="'+R+'" fill="none" stroke="#eeebf5" stroke-width="14"/>'+PH.map((p,i)=>'<path data-i="'+i+'" d="'+arc((p.days[0]-1)*DEG+1,p.days[1]*DEG-1)+'" stroke="'+p.color+'" stroke-width="14" fill="none"/>').join('');
 
+    function drawProg(a,col){if(a==null)return;const r=R+11,e=[C+r*Math.sin(a*Math.PI/180),C-r*Math.cos(a*Math.PI/180)];
+      $('prog').setAttribute('d',a<1?'':'M'+C+' '+(C-r)+' A'+r+' '+r+' 0 '+(a>180?1:0)+' 1 '+e[0].toFixed(1)+' '+e[1].toFixed(1));$('prog').setAttribute('stroke',col)}
     // ── timeline ──
     $('segs').innerHTML=PH.map(p=>'<i style="flex:'+(p.days[1]-p.days[0]+1)+';background:'+p.color+'"></i>').join('');
     $('segLabels').innerHTML=PH.map((p,i)=>'<button style="left:'+(((p.days[0]-1+p.days[1])/2)/28*100).toFixed(2)+'%;--tc:'+p.tc+'" data-i="'+i+'" aria-pressed="false"><b>'+p.name+'</b>'+(p.days[0]===p.days[1]?'Day '+p.days[0]:p.days[0]+'–'+p.days[1])+'</button>').join('');
@@ -442,9 +493,7 @@
       $('pill').style.setProperty('--pc',pr?'#2f7a55':p.color);
       $('phaseH').textContent=pr?PREG.name:p.name+' phase';
       $('phaseP').textContent=pr?PREG.text:p.text;
-      const o=ovarySVG(x),u=liningSVG(x);
-      $('picOvary').innerHTML='<svg viewBox="0 0 300 170" aria-hidden="true">'+o[0]+'</svg>';$('txtOvary').textContent=o[1];
-      $('picUterus').innerHTML='<svg viewBox="0 0 380 260" aria-hidden="true">'+u[0]+'</svg>';$('txtUterus').textContent=u[1];
+      $('duoSvg').innerHTML=duoSVG(x);$('txtOvary').textContent=ovarySVG(x)[1];$('txtUterus').textContent=liningSVG(x)[1];
       $('hbars').innerHTML=['E','P','LH','FSH'].map(k=>'<i class="hbar" style="--hc:'+H[k].c+';height:'+Math.round(6+40*clamp(H[k].f(day)))+'px"></i>').join('');
       $('txtHorm').textContent=pr?PREG.horm:p.horm;
       const feel=pr?PREG.feel:p.feel.filter(f=>!(bc==='hiud'&&f==='Bleeding'));
@@ -453,7 +502,7 @@
       if(i===0&&!pr)notes+='<p class="note blood"><b>Bleeding today: '+(bc==='hiud'?'light or none':(day<=2?'heavier':day===3?'medium':'lighter'))+'.</b> A whole period is usually about 30 to 40 mL, 2 to 3 tablespoons.<sup>1</sup></p>';
       if(bc==='hiud')notes+='<p class="note"><b>Hormonal IUD:</b> '+IUD.note[i]+'</p>';
       $('notes').innerHTML=notes;
-      if(!dragging)$('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('ringDay').innerHTML='<b>Day '+day+'</b> · '+(pr?'Early pregnancy':p.name);$('dotRot').setAttribute('aria-valuenow',day);$('dotRot').setAttribute('aria-valuetext','Day '+day+', '+(pr?'early pregnancy':p.name+' phase'));$('ringDot').setAttribute('stroke',p.color);
+      drawProg(dragging?null:(day-.5)*DEG,pr?'#1f5c3f':p.tc);if(!dragging)$('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('ringDay').innerHTML='<b>Day '+day+'</b> · '+(pr?'Early pregnancy':p.name);$('dotRot').setAttribute('aria-valuenow',day);$('dotRot').setAttribute('aria-valuetext','Day '+day+', '+(pr?'early pregnancy':p.name+' phase'));$('ringDot').setAttribute('stroke',p.color);
       document.querySelectorAll('#ringArcs path').forEach((a,j)=>a.setAttribute('opacity',j===i?1:.35));
       document.querySelectorAll('#segs i').forEach((s,j)=>s.classList.toggle('on',j===i));
       document.querySelectorAll('#segLabels button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
@@ -467,7 +516,7 @@
     // ring: drag the dot or tap anywhere on the ring
     const rsvg=$('ringSvg');
     function angle(ev){const pt=rsvg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;const q=pt.matrixTransform(rsvg.getScreenCTM().inverse());return (Math.atan2(q.x-C,-(q.y-C))*180/Math.PI+360)%360}
-    function follow(ev){const a=angle(ev);$('dotRot').style.transform='rotate('+a.toFixed(1)+'deg)';const d=Math.min(28,Math.floor(a/DEG)+1);if(d!==day){day=d;render()}}
+    function follow(ev){const a=angle(ev);$('dotRot').style.transform='rotate('+a.toFixed(1)+'deg)';drawProg(a,$('prog').getAttribute('stroke')||'#2f58b0');const d=Math.min(28,Math.floor(a/DEG)+1);if(d!==day){day=d;render()}}
     function begin(ev){stop();dragging=true;$('dotRot').classList.add('dragging');rsvg.setPointerCapture(ev.pointerId);follow(ev);ev.preventDefault()}
     $('dotRot').addEventListener('pointerdown',begin);$('ringHit').addEventListener('pointerdown',begin);
     rsvg.addEventListener('pointermove',ev=>{if(dragging)follow(ev)});
