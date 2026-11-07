@@ -62,6 +62,42 @@
 
     
     
+
+    /* ── Cycle wheel (from Alexandra's sketch) ── */
+    .wheel{display:grid;grid-template-columns:1fr minmax(280px,380px) 1fr;grid-template-rows:auto auto;gap:18px 22px;align-items:stretch;}
+    .wh-c{grid-column:2;grid-row:1/3;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    .wh-c svg{width:100%;height:auto;overflow:visible;}
+    .wh-c .arc{cursor:pointer;transition:stroke-width .2s,opacity .2s;}
+    .wh-c .arc:hover{opacity:1!important;}
+    .wh-dayl{margin-top:6px;font-size:.85rem;color:var(--muted);text-align:center;}
+    .wh-dayl b{color:var(--text);font-weight:600;}
+    .pbox{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;display:flex;flex-direction:column;}
+    .pbox:hover{transform:translateY(-2px);}
+    .pbox.on{border-color:var(--pc);box-shadow:0 8px 28px -12px var(--pc);}
+    .pb-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:10px;}
+    .pb-n{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pt);}
+    .pb-t{font-size:1.05rem;font-weight:600;letter-spacing:-.01em;}
+    .pb-d{font-size:.72rem;color:var(--muted);white-space:nowrap;}
+    .pb-k{font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2px 0 4px;}
+    .met{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;}
+    .met svg{width:100%;height:28px;display:block;}
+    .met span{font-size:.74rem;color:var(--text);font-weight:500;min-width:74px;}
+    .met span small{display:block;color:var(--muted);font-weight:400;font-size:.68rem;}
+    .pb-h{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);font-size:.8rem;line-height:1.55;color:var(--muted);}
+    .pb-h b{color:var(--text);font-weight:600;}
+    .p1{grid-column:3;grid-row:1}.p2{grid-column:3;grid-row:2}.p3{grid-column:1;grid-row:2}.p4{grid-column:1;grid-row:1}
+    .bc-bar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:8px;}
+    .bc-bar .cy-switch{font-weight:500;}
+    .bc-bar .cy-switch input:checked+.tr{background:var(--accent);}
+    .bc-bar select{font:inherit;font-size:.86rem;padding:8px 34px 8px 14px;border-radius:999px;border:1.5px solid #c4b8ef;background:var(--accent-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235b4fb8' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;-webkit-appearance:none;appearance:none;color:var(--accent-dark);font-weight:500;cursor:pointer;}
+    .bc-msg{display:none;margin:0 0 14px auto;max-width:560px;text-align:right;font-size:.84rem;color:var(--muted);line-height:1.55;}
+    .bc-msg.show{display:block;}
+    .pbox.flat .met svg path{stroke-dasharray:4 4;}
+    @media(max-width:560px){.bc-bar{justify-content:flex-start;flex-wrap:wrap}.bc-msg{text-align:left;margin-left:0}}
+    .wheel-note{font-size:.76rem;color:var(--muted);margin-top:14px;text-align:center;}
+    .wheel-note a{color:var(--accent);}
+    @media(max-width:960px){.wheel{grid-template-columns:1fr 1fr;}.wh-c{grid-column:1/3;grid-row:1;max-width:340px;margin:0 auto;}.p1{grid-column:1;grid-row:2}.p2{grid-column:2;grid-row:2}.p3{grid-column:1;grid-row:3}.p4{grid-column:2;grid-row:3}}
+    @media(max-width:560px){.wheel{grid-template-columns:1fr;}.wh-c{grid-column:1}.p1,.p2,.p3,.p4{grid-column:1;grid-row:auto}}
     /* ── Cycle explorer ── */
     .cy-hero{padding-top:calc(var(--nav-h) + 56px);padding-bottom:28px;}
     .cy-back{font-size:.82rem;color:var(--muted);display:inline-flex;gap:6px;margin-bottom:22px;}
@@ -111,7 +147,7 @@
     .cy-row{display:flex;align-items:center;gap:14px;}
     .cy-play{flex-shrink:0;width:42px;height:42px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
     .cy-play:hover{background:var(--accent-dark);}
-    input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:999px;background:linear-gradient(90deg,#e58fa0 0 16%,#b7a9ec 16% 48%,#e9a07f 48% 52%,#9e8fe0 52% 100%);outline:none;}
+    input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:999px;background:linear-gradient(90deg,#5f86d9 0 16%,#9e8fe0 16% 48%,#e07a93 48% 52%,#d9a93a 52% 100%);outline:none;}
     input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 2px 8px rgba(91,79,184,.3);cursor:grab;}
     input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--accent);cursor:grab;}
     .cy-chart{margin-top:18px;}
@@ -131,7 +167,10 @@
     .flag{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:.88rem;color:var(--muted);line-height:1.55;}
     .flag b{display:block;color:var(--text);font-weight:600;margin-bottom:4px;font-size:.92rem;}
     .cy-src{font-size:.78rem;color:var(--muted);line-height:1.7;margin-top:28px;}
-    .cy-src a{color:var(--accent);}
+    .cy-src a{color:var(--accent);word-break:break-word;}
+    .ref-h{margin-top:14px;font-size:.7rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--accent);}
+    .refs{margin:6px 0 0 18px;display:flex;flex-direction:column;gap:6px;}
+    .refs li{padding-left:4px;}
     @media(max-width:860px){.cy-app{grid-template-columns:1fr;}.cy-body{max-width:320px;}.flags{grid-template-columns:1fr;}}
     @media(max-width:768px){.wh-card{grid-template-columns:1fr;}.wh-art{min-height:150px;}.wh-body{padding:22px 20px;}.wh-stats{gap:24px;}}
     @media(max-width:768px){
@@ -184,6 +223,30 @@
     </div>
   </section>
 
+
+  <section style="padding-top:8px;border-top:none">
+    <div class="wrap">
+      <div class="bc-bar"><label class="cy-switch"><input type="checkbox" id="bc"><span class="tr"></span>Hormonal IUD</label></div>
+      <p class="bc-msg" id="bcMsg"></p>
+      <div class="wheel" id="wheel">
+        <div class="wh-c">
+          <svg viewBox="0 0 400 400" id="wsvg" role="img" aria-label="The four phases of the cycle arranged in a ring">
+            <defs><clipPath id="wclip"><circle cx="200" cy="200" r="150"/></clipPath></defs>
+            <circle cx="200" cy="200" r="150" fill="#f4f1fc"/>
+            <image href="WebsitePics/WH_Body.webp" id="wimg" preserveAspectRatio="xMidYMid meet" x="80" y="58" width="240" height="292" clip-path="url(#wclip)"/>
+            <g id="warcs"></g>
+            <circle id="wdot" r="10" fill="#fff" stroke-width="4"/>
+          </svg>
+          <div class="wh-dayl" id="wdayl"></div>
+        </div>
+        <div class="pbox p1" data-p="0"></div>
+        <div class="pbox p2" data-p="1"></div>
+        <div class="pbox p3" data-p="2"></div>
+        <div class="pbox p4" data-p="3"></div>
+      </div>
+      <p class="wheel-note">Tap a phase or drag the day slider below. Patterns are what many people report; everyone is different, and research is still mixed. Exercise performance<sup>2</sup>; ACL injury and ligament laxity<sup>3</sup>; hormonal IUD<sup>4</sup>.</p>
+    </div>
+  </section>
   <section style="padding-top:12px">
     <div class="wrap">
       <div class="cy-app">
@@ -239,8 +302,18 @@
         <div class="flag"><b>Mood changes that feel severe</b>Depression, anxiety or rage that arrives before each period and lifts after it may be PMDD, which is treatable.</div>
         <div class="flag"><b>Bleeding between periods or after sex</b>Usually harmless, but worth checking, especially if it keeps happening.</div>
       </div>
-      <p class="cy-src">Educational only, not medical advice. Hormone curves are relative and show a textbook 28-day cycle; real cycles vary from person to person and month to month.<br>
-      Sources: Reed BG, Carr BR. <a href="https://www.ncbi.nlm.nih.gov/books/NBK279054/" target="_blank">The Normal Menstrual Cycle and the Control of Ovulation</a>. Endotext, NCBI Bookshelf. · ACOG, <a href="https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding" target="_blank">Heavy Menstrual Bleeding</a> · ACOG, <a href="https://www.acog.org/womens-health/faqs/endometriosis" target="_blank">Endometriosis</a>.<br>Illustration by Alexandra L. Ramos Figueroa.</p>
+      <div class="cy-src">
+        <p>Educational only, not medical advice. Hormone curves are relative and show a textbook 28-day cycle; real cycles vary from person to person and month to month. Illustrations by Alexandra L. Ramos Figueroa.</p>
+        <p class="ref-h">References</p>
+        <ol class="refs">
+          <li>Reed, B. G.; Carr, B. R. The Normal Menstrual Cycle and the Control of Ovulation. In <i>Endotext</i>; Feingold, K. R., et al., Eds.; MDText.com, Inc.: South Dartmouth, MA, 2018. <a href="https://www.ncbi.nlm.nih.gov/books/NBK279054/" target="_blank">https://www.ncbi.nlm.nih.gov/books/NBK279054/</a> (accessed 2026-11-06).</li>
+          <li>McNulty, K. L.; Elliott-Sale, K. J.; Dolan, E.; Swinton, P. A.; Ansdell, P.; Goodall, S.; Thomas, K.; Hicks, K. M. The Effects of Menstrual Cycle Phase on Exercise Performance in Eumenorrheic Women: A Systematic Review and Meta-Analysis. <i>Sports Med.</i> <b>2020</b>, <i>50</i> (10), 1813–1827. DOI: <a href="https://doi.org/10.1007/s40279-020-01319-3" target="_blank">10.1007/s40279-020-01319-3</a>.</li>
+          <li>Herzberg, S. D.; Motu’apuaka, M. L.; Lambert, W.; Fu, R.; Brady, J.; Guise, J.-M. The Effect of Menstrual Cycle and Contraceptives on ACL Injuries and Laxity: A Systematic Review and Meta-analysis. <i>Orthop. J. Sports Med.</i> <b>2017</b>, <i>5</i> (7), 2325967117718781. DOI: <a href="https://doi.org/10.1177/2325967117718781" target="_blank">10.1177/2325967117718781</a>.</li>
+          <li>American College of Obstetricians and Gynecologists. Long-Acting Reversible Contraception (LARC): Intrauterine Device and Implant. <a href="https://www.acog.org/womens-health/faqs/long-acting-reversible-contraception-iud-and-implant" target="_blank">https://www.acog.org/womens-health/faqs/long-acting-reversible-contraception-iud-and-implant</a> (accessed 2026-11-06).</li>
+          <li>American College of Obstetricians and Gynecologists. Heavy Menstrual Bleeding. <a href="https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding" target="_blank">https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding</a> (accessed 2026-11-06).</li>
+          <li>American College of Obstetricians and Gynecologists. Endometriosis. <a href="https://www.acog.org/womens-health/faqs/endometriosis" target="_blank">https://www.acog.org/womens-health/faqs/endometriosis</a> (accessed 2026-11-06).</li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -258,14 +331,15 @@
       P:{n:'Progesterone',c:'#e58fa0',f:d=>preg&&d>21.5?0.96:0.04+0.92*g(d,21.5,3.3)},
       LH:{n:'LH',c:'#e9a07f',f:d=>0.07+0.9*g(d,14,0.75)},
       FSH:{n:'FSH',c:'#8fb0d6',f:d=>0.16+0.24*g(d,3,2.2)+0.36*g(d,14,0.8)+(preg?0:0.16*g(d,28.6,1.8))},
-      hCG:{n:'hCG',c:'#4f9d7a',f:d=>preg&&d>20.5?clamp(0.03*Math.exp((d-21)*0.5)):0}
+      hCG:{n:'hCG',c:'#4f9d7a',f:d=>preg&&d>20.5?clamp(0.03*Math.exp((d-21)*0.5)):0},
+      LNG:{n:'IUD levonorgestrel',c:'#2e8f98',f:d=>0.1}
     };
     function phase(d){
       if(preg&&d>=21)return{k:'preg',n:'Early pregnancy',c:'#4f9d7a',t:'About 6 to 10 days after ovulation, the embryo implants in the thick uterine lining and starts making hCG, the hormone pregnancy tests detect. hCG keeps progesterone high, so the lining stays and no period comes. A test is usually reliable from the day a period would have been due.'};
-      if(d<=5)return{k:'men',n:'Menstrual',c:'#e58fa0',t:'Day 1 is the first day of bleeding. Estrogen and progesterone are at their lowest, so the uterine lining sheds. Meanwhile the brain is already raising FSH to start the next cycle.'};
+      if(d<=5)return{k:'men',n:'Menstrual',c:'#5f86d9',t:'Day 1 is the first day of bleeding. Estrogen and progesterone are at their lowest, so the uterine lining sheds. Meanwhile the brain is already raising FSH to start the next cycle.'};
       if(d<=13)return{k:'fol',n:'Follicular',c:'#9e8fe0',t:'FSH wakes a group of follicles in the ovaries. One becomes dominant and pumps out estrogen, which rebuilds the uterine lining. Energy and mood often rise.'};
-      if(d===14)return{k:'ovu',n:'Ovulation',c:'#e9a07f',t:'High estrogen triggers a surge of LH from the pituitary. About 24 to 36 hours later the dominant follicle releases an egg, which can be fertilised for roughly 12 to 24 hours.'};
-      return{k:'lut',n:'Luteal',c:'#7c6fcd',t:'The empty follicle becomes the corpus luteum and makes progesterone, preparing the lining for a possible pregnancy and raising body temperature slightly. Without pregnancy it breaks down after about 12 to 14 days, hormones fall, and the next period starts.'};
+      if(d===14)return{k:'ovu',n:'Ovulation',c:'#e07a93',t:'High estrogen triggers a surge of LH from the pituitary. About 24 to 36 hours later the dominant follicle releases an egg, which can be fertilised for roughly 12 to 24 hours.'};
+      return{k:'lut',n:'Luteal',c:'#d9a93a',t:'The empty follicle becomes the corpus luteum and makes progesterone, preparing the lining for a possible pregnancy and raising body temperature slightly. Without pregnancy it breaks down after about 12 to 14 days, hormones fall, and the next period starts.'};
     }
     const O={
       brain:{n:'Brain',sub:'Hypothalamus & pituitary',c:'#b07fb8',pos:[[50.3,13]],s:'30%',
@@ -334,15 +408,15 @@
     const X=d=>L+(d-1)/27*cw,Y=v=>T+ch-(v*ch);
     function path(f){let s='';for(let d=1;d<=28;d+=0.25){s+=(s?'L':'M')+X(d).toFixed(1)+' '+Y(clamp(f(d))).toFixed(1)}return s}
     function drawChart(){
-      const bands=[[1,5.5,'Menstrual','#e58fa0'],[5.5,13.5,'Follicular','#9e8fe0'],[13.5,14.5,'Ovul.','#e9a07f'],[14.5,28,preg?'Luteal → pregnancy':'Luteal',preg?'#4f9d7a':'#7c6fcd']];
+      const bands=[[1,5.5,'Menstrual','#5f86d9'],[5.5,13.5,'Follicular','#9e8fe0'],[13.5,14.5,'Ovul.','#e07a93'],[14.5,28,preg?'Luteal → pregnancy':'Luteal',preg?'#4f9d7a':'#c99a2e']];
       let s='';
       bands.forEach(b=>{s+='<rect x="'+X(b[0])+'" y="'+(T-24)+'" width="'+(X(b[1])-X(b[0]))+'" height="'+(ch+24)+'" fill="'+b[3]+'" opacity=".06"/><text x="'+((X(b[0])+X(b[1]))/2)+'" y="'+(T-10)+'" text-anchor="middle" font-size="11" font-weight="600" fill="'+b[3]+'" letter-spacing=".5">'+b[2]+'</text>'});
       s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ch)+'" y2="'+(T+ch)+'" stroke="#e5e7eb"/>';
       [1,7,14,21,28].forEach(d=>s+='<text x="'+X(d)+'" y="'+(Ht-6)+'" text-anchor="middle" font-size="11" fill="#6b7280">Day '+d+'</text>');
-      Object.keys(H).forEach(k=>{if(k==='hCG'&&!preg)return;s+='<path d="'+path(H[k].f)+'" fill="none" stroke="'+H[k].c+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'});
+      Object.keys(H).forEach(k=>{if(k==='hCG'&&!preg)return;if(k==='LNG'&&bc!=='hiud')return;s+='<path d="'+path(H[k].f)+'" fill="none" stroke="'+H[k].c+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'});
       s+='<g id="cursor"><line id="cl" y1="'+(T-2)+'" y2="'+(T+ch)+'" stroke="#111827" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>'+Object.keys(H).map(k=>'<circle id="cd-'+k+'" r="4.5" fill="#fff" stroke="'+H[k].c+'" stroke-width="2.5"/>').join('')+'</g>';
       $('chart').innerHTML=s;
-      $('legend').innerHTML=Object.keys(H).filter(k=>k!=='hCG'||preg).map(k=>'<span style="--c:'+H[k].c+'"><i></i>'+H[k].n+'</span>').join('');
+      $('legend').innerHTML=Object.keys(H).filter(k=>(k!=='hCG'||preg)&&(k!=='LNG'||bc==='hiud')).map(k=>'<span style="--c:'+H[k].c+'"><i></i>'+H[k].n+'</span>').join('');
     }
     function render(){
       const p=phase(day);
@@ -355,7 +429,7 @@
       $('orgK').textContent=o.sub;
       $('orgText').textContent=o[p.k];showArt(sel,p.k);$('orgKnow').innerHTML=o.know;
       $('cl').setAttribute('x1',X(day));$('cl').setAttribute('x2',X(day));
-      Object.keys(H).forEach(k=>{const c=$('cd-'+k);if(!c)return;const v=H[k].f(day);c.setAttribute('cx',X(day));c.setAttribute('cy',Y(clamp(v)));c.style.display=(k==='hCG'&&(!preg||v<0.01))?'none':''});
+      Object.keys(H).forEach(k=>{const c=$('cd-'+k);if(!c)return;const v=H[k].f(day);c.setAttribute('cx',X(day));c.setAttribute('cy',Y(clamp(v)));c.style.display=((k==='hCG'&&(!preg||v<0.01))||(k==='LNG'&&bc!=='hiud'))?'none':''});
       $('day').value=day;
     }
     $('day').oninput=e=>{day=+e.target.value;render()};
@@ -365,6 +439,73 @@
       $('playIcon').innerHTML='<path d="M3 1.5h3v11H3zM8 1.5h3v11H8z"/>';if(day>=28)day=0;
       timer=setInterval(()=>{day++;if(day>28){clearInterval(timer);timer=null;day=28;$('playIcon').innerHTML='<path d="M3 1.5v11l9.5-5.5z"/>'}render()},650)};
     document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'){day=Math.min(28,day+1);render()}if(e.key==='ArrowLeft'){day=Math.max(1,day-1);render()}});
+
+    // ── Cycle wheel ──
+    const PHS=[
+      {n:'Phase 1',t:'Menstrual',d:'Days 1–5',c:'#5f86d9',tc:'#3f68c2',start:1,a0:0,a1:90,
+       m:[['Energy','',[.35,.3,.45]],['Gym','strength, endurance',[.4,.4,.55]],['Mental load','',[.75,.6,.45]],['ACL injury risk','',[.5,.5,.55]]],
+       good:'Cramps and bloating usually ease after day 2 or 3, and energy starts climbing.',
+       watch:'Iron loss with heavy periods can cause fatigue; skin can feel drier and more sensitive.'},
+      {n:'Phase 2',t:'Follicular',d:'Days 6–13',c:'#9e8fe0',tc:'#6f5fc4',start:6,a0:90,a1:180,
+       m:[['Energy','',[.5,.7,.85]],['Gym','strength, endurance',[.55,.7,.85]],['Mental load','',[.4,.3,.25]],['ACL injury risk','',[.55,.65,.75]]],
+       good:'Rising estrogen: many people notice clearer skin, better mood, focus and recovery.',
+       watch:'Easy to overcommit now; plan for the drop in the second half of the cycle.'},
+      {n:'Phase 3',t:'Ovulation',d:'Day 14',c:'#e07a93',tc:'#c4506d',start:14,a0:180,a1:270,
+       m:[['Energy','',[.85,.95,.85]],['Gym','strength, endurance',[.85,.9,.8]],['Mental load','',[.25,.2,.3]],['ACL injury risk','',[.8,.85,.7]]],
+       good:'Peak energy and confidence for many; this is the fertile window.',
+       watch:'Ligaments are loosest around ovulation, and ACL injuries cluster before ovulation. Warm up and train landing technique.'},
+      {n:'Phase 4',t:'Luteal',d:'Days 15–28',c:'#d9a93a',tc:'#a87a12',start:15,a0:270,a1:360,
+       m:[['Energy','',[.7,.55,.3]],['Gym','strength, endurance',[.7,.55,.4]],['Mental load','',[.35,.55,.85]],['ACL injury risk','',[.45,.3,.3]]],
+       good:'Progesterone is calming and sleep-promoting early on. If pregnancy begins, this is when it shows.',
+       watch:'Higher body temperature makes heat and endurance feel harder; oilier skin and breakouts, cravings and PMS mood late in the phase.'}];
+    const WC=200,WR=176;
+    const pol=(a,r)=>[WC+r*Math.sin(a*Math.PI/180),WC-r*Math.cos(a*Math.PI/180)];
+    function arcD(a0,a1,r){const s=pol(a0+2,r),e=pol(a1-2,r);return 'M'+s[0].toFixed(1)+' '+s[1].toFixed(1)+' A'+r+' '+r+' 0 0 1 '+e[0].toFixed(1)+' '+e[1].toFixed(1)}
+    function wave(v){const y=v.map(q=>26-q*22);
+      return '<svg viewBox="0 0 200 30" preserveAspectRatio="none"><path d="M0 '+y[0].toFixed(1)+' C50 '+y[0].toFixed(1)+',50 '+y[1].toFixed(1)+',100 '+y[1].toFixed(1)+' S150 '+y[2].toFixed(1)+',200 '+y[2].toFixed(1)+'" fill="none" stroke="var(--pc)" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>'}
+    const lvl=v=>v>.66?'high':v>.4?'medium':'low';
+    $('warcs').innerHTML=PHS.map((p,i)=>{const mid=pol((p.a0+p.a1)/2,WR+0),lab=pol((p.a0+p.a1)/2,WR-26);
+      return '<path class="arc" data-p="'+i+'" d="'+arcD(p.a0,p.a1,WR)+'" fill="none" stroke="'+p.c+'" stroke-width="16" stroke-linecap="round"/>'}).join('')
+      +PHS.map((p,i)=>{const q=pol(p.a0,WR);return '<line x1="'+q[0]+'" y1="'+q[1]+'" x2="'+pol(p.a0,WR+16)[0]+'" y2="'+pol(p.a0,WR+16)[1]+'" stroke="#d1d5db" stroke-width="2"/>'}).join('');
+    document.querySelectorAll('.pbox').forEach(b=>{const p=PHS[+b.dataset.p];b.style.setProperty('--pc',p.c);b.style.setProperty('--pt',p.tc);
+      b.innerHTML='<div class="pb-top"><div><div class="pb-n">'+p.n+'</div><div class="pb-t">'+p.t+'</div></div><span class="pb-d">'+p.d+'</span></div>'
+       +'<div class="pb-k">Possible effects</div>'+p.m.map(m=>'<div class="met">'+wave(m[2])+'<span>'+m[0]+'<small>'+lvl(m[2][1])+'</small></span></div>').join('')
+       +'<div class="pb-h"><b>Good:</b> '+p.good+'<br><b>Watch for:</b> '+p.watch+'</div>';
+      b.onclick=()=>{day=p.start;render()}});
+    document.querySelectorAll('#warcs .arc').forEach(a=>a.onclick=()=>{day=PHS[+a.dataset.p].start;render()});
+    function phIdx(d){return d<=5?0:d<=13?1:d===14?2:3}
+    function dayAngle(d){const i=phIdx(d),p=PHS[i];if(i===2)return 225;const r=[[1,5],[6,13],null,[15,28]][i];return p.a0+8+(d-r[0])/(r[1]-r[0])*(p.a1-p.a0-16)}
+    function wheel(){const i=phIdx(day),p=PHS[i],pt=pol(dayAngle(day),WR);
+      $('wdot').setAttribute('cx',pt[0]);$('wdot').setAttribute('cy',pt[1]);$('wdot').setAttribute('stroke',p.c);
+      document.querySelectorAll('#warcs .arc').forEach((a,j)=>{a.style.opacity=j===i?1:.35;a.setAttribute('stroke-width',j===i?20:14)});
+      document.querySelectorAll('.pbox').forEach((b,j)=>b.classList.toggle('on',j===i));
+      $('wdayl').innerHTML='<b>Day '+day+'</b> · '+p.n+': '+p.t+(preg&&day>=21?' → early pregnancy':'');}
+
+    // ── Birth control ──
+    let bc='none';
+    const SUPPRESS={combined:1,implant:1};
+    const BC={
+      none:{msg:''},
+      hiud:{msg:'A hormonal IUD (e.g. Kyleena, Mirena) releases a small, steady dose of levonorgestrel that acts mostly inside the uterus. Most users keep ovulating, so the four phases continue, but bleeding changes.',
+        note:['Periods usually get much lighter and less crampy; some people stop bleeding altogether.','Estrogen still rises because most users keep ovulating, especially on lower-dose IUDs like Kyleena.','Ovulation usually still happens, but thickened cervical mucus and a thin lining make pregnancy very unlikely. Small ovarian cysts are more common and usually go away on their own.','Your own corpus luteum still makes progesterone, so PMS, breast tenderness and mood changes can continue.']}
+    };
+    const suppressed=()=>!!SUPPRESS[bc];
+    // hormone chart: flatten natural hormones when ovulation is suppressed
+    ['E','P','LH','FSH'].forEach(k=>{const f0=H[k].f,flat={E:.16,P:.05,LH:.1,FSH:.14}[k];H[k].f=d=>suppressed()?flat:f0(d)});
+    function bcBoxes(){const B=BC[bc];
+      $('bcMsg').textContent=B.msg;$('bcMsg').classList.toggle('show',!!B.msg);
+      document.querySelectorAll('.pbox').forEach(b=>{const i=+b.dataset.p,p=PHS[i];
+        const m=suppressed()?p.m.map(x=>[x[0],x[1],x[0]==='ACL injury risk'?[B.acl,B.acl,B.acl]:[.45,.45,.45]]):p.m;
+        const good=suppressed()?B.box[i]:p.good,watch=suppressed()?'':(bc==='hiud'&&i===0?'Irregular spotting is common in the first 3 to 6 months after insertion.':p.watch);
+        b.classList.toggle('flat',suppressed());
+        b.innerHTML='<div class="pb-top"><div><div class="pb-n">'+p.n+'</div><div class="pb-t">'+p.t+'</div></div><span class="pb-d">'+p.d+'</span></div>'
+         +'<div class="pb-k">Possible effects'+(suppressed()?' · steady on this method':'')+'</div>'+m.map(x=>'<div class="met">'+wave(x[2])+'<span>'+x[0]+'<small>'+(x[0]==='ACL injury risk'&&suppressed()?'may be lower*':lvl(x[2][1]))+'</small></span></div>').join('')
+         +'<div class="pb-h">'+(B.note?'<b>With a hormonal IUD:</b> '+B.note[i]+'<br>':'')+(suppressed()?'<b>On this method:</b> '+good+'<br><small>*Some studies suggest hormonal birth control may lower ACL injury risk; the evidence is low quality.</small>':'<b>Good:</b> '+good+'<br><b>Watch for:</b> '+watch)+'</div>'});}
+    $('bc').onchange=e=>{bc=e.target.checked?'hiud':'none';drawChart();bcBoxes();render()};
+    bcBoxes();
+    const _render=render;render=function(){_render();wheel()};
+    // center image: Alexandra's own wheel drawing if present
+    tryImg('WebsitePics/cycle/wheel-center.png').then(ok=>{if(ok){const im=$('wimg');im.setAttribute('href','WebsitePics/cycle/wheel-center.png');im.setAttribute('x',50);im.setAttribute('y',50);im.setAttribute('width',300);im.setAttribute('height',300);im.setAttribute('preserveAspectRatio','xMidYMid meet')}});
     drawChart();render();
   </script>
 </body>
