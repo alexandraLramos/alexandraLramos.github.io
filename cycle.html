@@ -111,6 +111,13 @@
     .mini p{font-size:.84rem;line-height:1.4;color:#374151;}
     .mini b{display:block;font-size:.86rem;color:var(--text);}
     @media(max-width:420px){.minis{grid-template-columns:1fr}}
+    .steps{list-style:none;margin:0;padding:8px 8px 10px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;counter-reset:s;border-top:1px solid #dcd6f3;}
+    .steps li{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:.76rem;line-height:1.25;color:#4b5563;position:relative;}
+    .steps li:not(:last-child)::after{content:"";position:absolute;top:12px;left:calc(50% + 15px);right:calc(-50% + 15px);height:2px;background:#d6d0f0;}
+    .steps i{font-style:normal;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;background:#fff;border:2px solid #d6d0f0;color:#6b7280;}
+    .steps li.done i{background:var(--pc);border-color:var(--pc);color:#fff;opacity:.55;}
+    .steps li[aria-current="step"]{color:var(--text);font-weight:600;}
+    .steps li[aria-current="step"] i{background:var(--pc);border-color:var(--pc);color:#fff;box-shadow:0 0 0 4px color-mix(in srgb,var(--pc) 22%,transparent);}
     #pbody.pop{animation:pop .35s cubic-bezier(.2,.8,.2,1);}
     .whelp{font-size:.88rem;color:#4b5563;text-align:center;margin-top:4px;}
     @keyframes drip{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(26px);opacity:0}}
@@ -274,6 +281,9 @@
             <figure class="closeup">
               <svg id="csvg" viewBox="0 0 380 260" role="img" aria-label="Close-up of the uterus, its lining and the ovaries, drawn by Alexandra"></svg>
               <figcaption class="cl-cap" aria-hidden="true"><span>Ovary</span><span>Uterus lining</span><span>Ovary</span></figcaption>
+              <ol class="steps" id="steps" aria-label="What the ovary is doing">
+                <li><i>1</i>Follicles wake up</li><li><i>2</i>One takes the lead</li><li><i>3</i>Egg released</li><li><i>4</i>Follicle turns into corpus luteum</li>
+              </ol>
             </figure>
             <div class="minis">
               <div class="mini"><img src="WebsitePics/WH_Brain.webp" alt=""><p><b>Brain</b><span id="miniBrain"></span></p></div>
@@ -368,11 +378,11 @@
        m:[['Energy',[.5,.7,.85]],['Gym',[.55,.7,.85]],['Mental load',[.4,.3,.25]],['ACL injury risk',[.55,.65,.75]]],
        risks:[['ACL injury','risk rises toward ovulation as estrogen climbs.<sup>3</sup>'],['Lowest symptom load','for most people, and a good window for hard training.<sup>2</sup>']]},
       {k:'ovu',n:'Phase 3',t:'Ovulation',days:[14,14],d:'Day 14',c:'var(--c3)',hex:'#d1587a',tc:'var(--t3)',
-       sum:'High estrogen triggers a surge of LH from the pituitary. About 24 to 36 hours later the follicle bursts and releases an egg into the fallopian tube, where it can be fertilized for about 12 to 24 hours.',
+       sum:'High estrogen triggers a surge of LH from the pituitary. About 24 to 36 hours later the follicle bursts and releases an egg into the fallopian tube, where it can be fertilized for about 12 to 24 hours. The burst follicle stays behind in the ovary.',
        m:[['Energy',[.85,.95,.85]],['Gym',[.85,.9,.8]],['Mental load',[.25,.2,.3]],['ACL injury risk',[.8,.85,.7]]],
        risks:[['Ligament laxity','is highest around ovulation; warm up and train landing technique.<sup>3</sup>'],['Seizures','a periovulatory pattern is linked to the estrogen surge.<sup>6</sup>'],['Mid-cycle pain','(mittelschmerz) on one side as the follicle ruptures.<sup>1</sup>']]},
       {k:'lut',n:'Phase 4',t:'Luteal',days:[15,28],d:'Days 15–28',c:'var(--c4)',hex:'#c08a1e',tc:'var(--t4)',
-       sum:'The empty follicle becomes the corpus luteum and makes progesterone, which keeps the lining ready for an embryo and raises body temperature slightly. Without a pregnancy it breaks down after about 12 to 14 days, hormones fall, and the next period starts.',
+       sum:'The follicle that released the egg collapses and turns yellow: this is the corpus luteum. It makes progesterone, which keeps the lining ready for an embryo and raises body temperature slightly. Without a pregnancy it breaks down after about 12 to 14 days, hormones fall, and the next period starts.',
        m:[['Energy',[.7,.55,.3]],['Gym',[.7,.55,.4]],['Mental load',[.35,.55,.85]],['ACL injury risk',[.45,.3,.3]]],
        risks:[['Blood sugar','some people with type 1 diabetes need more insulin in this phase.<sup>8</sup>'],['Premenstrual asthma','often begins in the days before the period.<sup>7</sup>'],['PMS and PMDD','mood symptoms peak in the last week.<sup>1</sup>'],['Heat strain','higher body temperature makes hot workouts harder.<sup>1</sup>']]}];
     const PREG_SUM='About 6 to 10 days after ovulation the embryo implants in the thick lining and starts making hCG, the hormone pregnancy tests detect. hCG keeps the corpus luteum making progesterone, so the lining stays and no period comes.';
@@ -449,12 +459,41 @@
       const a=P(127,78),b=P(180,168),c=P(236,78);
       s+='<path d="M'+a+' L'+b+' L'+c+'" fill="none" stroke="'+(men?'#b3263e':'#c2416b')+'" stroke-opacity="'+(men?.8:.45)+'" stroke-width="'+(th*1.6).toFixed(1)+'" stroke-linecap="round" stroke-linejoin="round"/>';
       if(men){const n=bc==='hiud'?1:(d<=2?3:d===3?2:1);for(let j=0;j<n;j++){const q=P(176+j*5,232);s+='<ellipse class="drop" cx="'+q[0]+'" cy="'+q[1]+'" rx="3" ry="4" fill="#b3263e" style="animation-delay:'+(j*.45)+'s"/>'}}
-      const R_=P(287,160),L_=P(82,160);
-      if(v<5.5){[[-14,-6],[8,-10],[-4,10],[13,6]].forEach((o,j)=>{s+='<circle cx="'+(+R_[0]+o[0])+'" cy="'+(+R_[1]+o[1])+'" r="'+(2.6+v*.35).toFixed(1)+'" fill="#fff" stroke="#c2416b" stroke-width="1.3"/><circle cx="'+(+L_[0]-o[0])+'" cy="'+(+L_[1]+o[1])+'" r="'+(2.4+v*.3).toFixed(1)+'" fill="#fff" stroke="#c2416b" stroke-width="1.2"/>'})}
-      else if(v<13.5){const k=(v-5.5)/8;s+='<circle cx="'+R_[0]+'" cy="'+R_[1]+'" r="'+(5+k*12).toFixed(1)+'" fill="#fff" fill-opacity=".85" stroke="#c2416b" stroke-width="2"/><circle cx="'+(+R_[0]+3)+'" cy="'+(+R_[1]-3)+'" r="2.8" fill="#c2416b"/>';
-        [[-8,10],[10,8]].forEach(o=>s+='<circle cx="'+(+L_[0]+o[0])+'" cy="'+(+L_[1]+o[1])+'" r="'+Math.max(1.5,3.5-k*2).toFixed(1)+'" fill="#fff" stroke="#e58fa0" stroke-width="1.1"/>')}
-      else if(v<14.6){const k=(v-13.5)/1.1,e0=P(300,150),e1=P(345,140);s+='<circle cx="'+R_[0]+'" cy="'+R_[1]+'" r="15" fill="none" stroke="#c2416b" stroke-width="2" stroke-dasharray="20 8"/><circle cx="'+(+e0[0]+(e1[0]-e0[0])*k).toFixed(1)+'" cy="'+(+e0[1]+(e1[1]-e0[1])*k).toFixed(1)+'" r="4.2" fill="#c2416b" stroke="#fff" stroke-width="1.5"/>'}
-      else{const pk=preg&&v>=21?1:Math.max(.2,1-Math.abs(v-21)/8);s+='<circle cx="'+R_[0]+'" cy="'+R_[1]+'" r="'+(6+pk*10).toFixed(1)+'" fill="#f1cf6b" fill-opacity="'+(.45+pk*.5).toFixed(2)+'" stroke="#a87a12" stroke-width="1.6"/>'}
+      // ovaries: follicle development (the right ovary releases the egg this cycle)
+      const RO=[287,160],LO=[84,160];
+      const fol=(x,y,r,op)=>'<g opacity="'+(op==null?1:op).toFixed(2)+'"><circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="url(#gFol)" stroke="#d76d8e" stroke-width="1.3"/><circle cx="'+(x-r*.35).toFixed(1)+'" cy="'+(y-r*.38).toFixed(1)+'" r="'+Math.max(.8,r*.22).toFixed(1)+'" fill="#fff" opacity=".9"/></g>';
+      const egg=(x,y,r)=>'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="url(#gEgg)" stroke="#c2416b" stroke-width="1.2"/><circle cx="'+(x+r*.15).toFixed(1)+'" cy="'+(y+r*.1).toFixed(1)+'" r="'+(r*.35).toFixed(1)+'" fill="#c2416b" opacity=".7"/>';
+      const small=[[-15,-6],[11,-12],[-6,13],[15,7],[2,-2]];
+      // left ovary: resting follicles, always quiet
+      [[-8,-6],[7,4],[-3,9]].forEach(o=>s+=fol(LO[0]+o[0],LO[1]+o[1],3,0.75));
+      const mark=s.length;
+      if(v<5.5){const k=(v-1)/4.5;small.forEach((o,j)=>s+=fol(RO[0]+o[0],RO[1]+o[1],3+k*2.6+(j===4?k*1.2:0)))}
+      else if(v<13.5){const k=(v-5.5)/8,r=8+k*12;
+        small.slice(0,4).forEach(o=>s+=fol(RO[0]+o[0]*1.15,RO[1]+o[1]*1.15,Math.max(1.6,5.4-k*3.6),1-k*.65));
+        s+=fol(RO[0],RO[1],r)+egg(RO[0]+r*.32,RO[1]-r*.3,2.6+k*1.6)}
+      else if(v<14.6){const k=(v-13.5)/1.1,r=20;
+        s+='<path d="M'+(RO[0]+r*Math.cos(-0.5)).toFixed(1)+' '+(RO[1]+r*Math.sin(-0.5)).toFixed(1)+' A'+r+' '+r+' 0 1 1 '+(RO[0]+r*Math.cos(-1.3)).toFixed(1)+' '+(RO[1]+r*Math.sin(-1.3)).toFixed(1)+'" fill="url(#gFol)" stroke="#d76d8e" stroke-width="1.6"/>';
+        [[24,-24],[30,-8],[12,-30]].forEach((o,j)=>{const sx=RO[0]+o[0],sy=RO[1]+o[1],sz=3+2*Math.sin((k+j*.3)*Math.PI);s+='<path d="M'+sx+' '+(sy-sz)+' L'+sx+' '+(sy+sz)+' M'+(sx-sz)+' '+sy+' L'+(sx+sz)+' '+sy+'" stroke="#f0a92e" stroke-width="1.8" stroke-linecap="round"/>'});
+        s+=egg(RO[0]+8+k*26,RO[1]-12-k*20,4.4)}
+      else{const pg=preg&&v>=21;
+        // the same follicle collapses and turns into the corpus luteum (pink -> yellow), grows to ~day 21, then fades without pregnancy
+        const r=v<=21?12+5*(v-14.6)/6.4:(pg?17:17-10*(v-21)/7);
+        const toY=Math.min(1,(v-14.6)/2.4),toW=pg?0:Math.max(0,Math.min(1,(v-23)/5));
+        s+='<circle cx="'+RO[0]+'" cy="'+RO[1]+'" r="'+r.toFixed(1)+'" fill="url(#gFol)" stroke="#d76d8e" stroke-width="1.4" opacity="'+(1-toY).toFixed(2)+'"/>';
+        s+='<circle cx="'+RO[0]+'" cy="'+RO[1]+'" r="'+r.toFixed(1)+'" fill="url(#gCL)" stroke="#c9921c" stroke-width="1.5" opacity="'+(toY*(1-toW)).toFixed(2)+'"/>';
+        s+='<circle cx="'+RO[0]+'" cy="'+RO[1]+'" r="'+r.toFixed(1)+'" fill="url(#gAlb)" stroke="#c9b99a" stroke-width="1.4" opacity="'+toW.toFixed(2)+'"/>';
+        s+='<circle cx="'+(RO[0]-r*.35).toFixed(1)+'" cy="'+(RO[1]-r*.38).toFixed(1)+'" r="'+(r*.2).toFixed(1)+'" fill="#fff" opacity=".8"/>';
+        if(v<15.6)s+='<path d="M'+(RO[0]+r*.55).toFixed(1)+' '+(RO[1]-r*.75).toFixed(1)+' l4 -4" stroke="#d76d8e" stroke-width="1.6" stroke-linecap="round" opacity="'+(1-(v-14.6)).toFixed(2)+'"/>';
+        // the egg travels along the tube; without fertilization it dissolves within about a day
+        const tube=[[318,128],[300,96],[262,90],[214,96]],seg=f=>{const n=tube.length-1,i=Math.min(n-1,Math.floor(f*n)),u=f*n-i;return [tube[i][0]+(tube[i+1][0]-tube[i][0])*u,tube[i][1]+(tube[i+1][1]-tube[i][1])*u]};
+        if(pg){if(v<21){const q=seg(Math.min(1,(v-14.6)/5.4));s+=egg(q[0],q[1],4.4)}else s+='<circle cx="196" cy="104" r="5" fill="#f4a6bd" stroke="#c2416b" stroke-width="1.2"/>'}
+        else if(v<17){const f=Math.min(1,(v-14.6)/2.4)*.45,q=seg(f);s+='<g opacity="'+Math.max(0,1-(v-15.8)/1.2).toFixed(2)+'">'+egg(q[0],q[1],4.4)+'</g>'}
+        if(!pg&&v>25.5){const k=(v-25.5)/2.5;small.slice(0,3).forEach(o=>s+=fol(RO[0]+o[0]*1.25,RO[1]+o[1]*1.25,1.5+k*1.8,.35+k*.5))}}
+      // magnifier: the right ovary, enlarged, in the empty corner
+      const rs=s.slice(mark),M=[330,206],MR=44,Z=1.35;
+      s+='<path d="M'+RO[0]+' '+(RO[1]+18)+' Q'+(RO[0]+6)+' '+(M[1]-MR-10)+' '+(M[0]-8)+' '+(M[1]-MR)+'" fill="none" stroke="#a99be6" stroke-width="1.5" stroke-dasharray="3 3"/>';
+      s+='<g clip-path="url(#magclip)"><circle cx="'+M[0]+'" cy="'+M[1]+'" r="'+MR+'" fill="#fff"/><g transform="translate('+M[0]+' '+M[1]+') scale('+Z+') translate('+(-RO[0])+' '+(-RO[1])+')"><ellipse cx="'+RO[0]+'" cy="'+RO[1]+'" rx="27" ry="21" fill="#fbe1e9" stroke="#e7a3b4" stroke-width="1"/>'+rs+'</g></g>';
+      s+='<circle cx="'+M[0]+'" cy="'+M[1]+'" r="'+MR+'" fill="none" stroke="#8a79d6" stroke-width="2.5"/>';
       return s}
     function labels(){const l=(x,y,txt,anc)=>'<text x="'+P(x,y)[0]+'" y="'+P(x,y)[1]+'" text-anchor="'+(anc||'middle')+'" font-size="12" font-weight="600" fill="#374151" paint-order="stroke" stroke="#fff" stroke-width="3">'+txt+'</text>';
       return l(180,14,'Uterus lining')+l(287,208,'Ovary')+l(82,208,'Ovary')+l(228,248,'Cervix','start')}
@@ -464,7 +503,7 @@
     async function drawInsets(x){const tok=++insetTok,pk=pkey(dayOf(x)),own='WebsitePics/cycle/closeup-'+PHN[pk]+'.png';
       const has=await tryImg(own);if(tok!==insetTok)return;
       $('csvg').innerHTML=has?'<image href="'+own+'" x="0" y="0" width="380" height="260" preserveAspectRatio="xMidYMid meet"/>'
-        :'<image href="WebsitePics/WH_Uterus.webp" x="0" y="0" width="380" height="260" preserveAspectRatio="xMidYMid slice"/>'+closeOverlay(x)}
+        :'<defs><clipPath id="magclip"><circle cx="330" cy="206" r="44"/></clipPath><radialGradient id="gFol" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#ffe6ee"/><stop offset="1" stop-color="#f7b9cb"/></radialGradient><radialGradient id="gEgg" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff7f9"/><stop offset="1" stop-color="#f4a6bd"/></radialGradient><radialGradient id="gCL" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#f2c44f"/></radialGradient><radialGradient id="gAlb" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fffdf7"/><stop offset="1" stop-color="#e9e1cf"/></radialGradient></defs><image href="WebsitePics/WH_Uterus.webp" x="0" y="0" width="380" height="260" preserveAspectRatio="xMidYMid slice"/>'+closeOverlay(x)}
     function drawBody(x){const d=dayOf(x),v=dv(x),ov=clamp(0.2+0.5*H.E.f(v)+0.5*H.LH.f(v)),men=d<=5&&!(preg&&d>=21),br=clamp(0.25+0.75*Math.max(H.LH.f(v),H.FSH.f(v)));
       $('glows').innerHTML='<circle cx="210.7" cy="91" r="'+(16+br*10).toFixed(1)+'" fill="#b07fb8" opacity="'+(.12+br*.25).toFixed(2)+'"/><circle cx="211" cy="150" r="12" fill="#e9a07f" opacity="'+((preg&&d>=21)?.4:.18)+'"/>'+OV.map(o=>'<circle cx="'+o[0]+'" cy="'+o[1]+'" r="'+(7+ov*7).toFixed(2)+'" fill="#e58fa0" opacity="'+(.2+ov*.4).toFixed(2)+'"/>').join('')
         +'<circle cx="'+UT[0]+'" cy="'+UT[1]+'" r="'+(8+liningAt(x)*1.2).toFixed(2)+'" fill="'+(men?'#b3263e':'#e58fa0')+'" opacity="'+(men?.35:.2)+'"/>';
@@ -522,6 +561,7 @@
         $('knob').setAttribute('aria-valuenow',d);$('knob').setAttribute('aria-valuetext','Day '+d+', '+name);
         $('wday').innerHTML='<b>Day '+d+'</b> of 28 · '+(pk==='preg'?'Early pregnancy':p.n+': '+p.t);
         $('day').value=d;$('day').setAttribute('aria-valuetext','Day '+d+', '+name);
+        document.querySelectorAll('#steps li').forEach((li,j)=>{li.classList.toggle('done',j<i);if(j===i)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current')});
         $('miniBrain').textContent=MINI.brain[pk];$('miniThy').textContent=MINI.thyroid[pk];
         const newPhase=pk;card(newPhase!==lastPhase);document.querySelectorAll('.plg').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
         if(newPhase!==lastPhase)$('live').textContent=(pk==='preg'?'Early pregnancy':p.n+', '+p.t)+'. '+p.d+'.';
