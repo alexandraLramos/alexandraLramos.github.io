@@ -241,7 +241,7 @@
               <image href="WebsitePics/WH_Body.webp" x="62" y="22" width="196" height="270" clip-path="url(#bclip)" preserveAspectRatio="xMidYMid meet"/>
               <g id="ringArcs"></g>
               <circle cx="160" cy="160" r="144" fill="none" stroke="transparent" stroke-width="40" id="ringHit" style="cursor:pointer"/>
-              <g id="dotRot" role="slider" tabindex="0" aria-label="Cycle day on the ring" aria-valuemin="1" aria-valuemax="28" aria-valuenow="1" style="cursor:grab;outline:none"><circle cx="160" cy="16" r="22" fill="transparent"/><circle cx="160" cy="16" r="13" fill="#fff" stroke-width="6" id="ringDot"/></g>
+              <g id="dotRot" role="slider" tabindex="0" aria-label="Cycle day on the ring" aria-valuemin="1" aria-valuemax="28" aria-valuenow="1" style="cursor:grab;outline:none"><circle cx="160" cy="16" r="22" fill="transparent"/><circle cx="160" cy="18" r="16" fill="#1f2433" opacity=".18"/><circle cx="160" cy="16" r="13" fill="#fff" stroke-width="6" id="ringDot"/><circle cx="160" cy="16" r="16.2" fill="none" stroke-width="1.6" id="ringDotEdge"/></g>
             </svg>
             <p class="ring-day" id="ringDay"></p>
             <p class="ring-help">Drag the dot or tap the ring</p>
@@ -467,10 +467,8 @@
     // ── ring ──
     const C=160,R=144,DEG=360/28,pol=(a,r)=>[C+r*Math.sin(a*Math.PI/180),C-r*Math.cos(a*Math.PI/180)];
     const arc=(a0,a1)=>{const s=pol(a0,R),e=pol(a1,R);return 'M'+s[0].toFixed(1)+' '+s[1].toFixed(1)+' A'+R+' '+R+' 0 '+(a1-a0>180?1:0)+' 1 '+e[0].toFixed(1)+' '+e[1].toFixed(1)};
-    $('ringArcs').innerHTML='<circle cx="160" cy="160" r="'+(R+11)+'" fill="none" stroke="#8f86b8" stroke-width="1.6"/><path id="prog" fill="none" stroke-width="3.5" stroke-linecap="round"/><circle cx="160" cy="160" r="'+R+'" fill="none" stroke="#eeebf5" stroke-width="14"/>'+PH.map((p,i)=>'<path data-i="'+i+'" d="'+arc((p.days[0]-1)*DEG+1,p.days[1]*DEG-1)+'" stroke="'+p.color+'" stroke-width="14" fill="none"/>').join('');
+    $('ringArcs').innerHTML='<circle cx="160" cy="160" r="'+R+'" fill="none" stroke="#eeebf5" stroke-width="14"/>'+PH.map((p,i)=>'<path data-i="'+i+'" d="'+arc((p.days[0]-1)*DEG+1,p.days[1]*DEG-1)+'" stroke="'+p.color+'" stroke-width="14" fill="none"/>').join('');
 
-    function drawProg(a,col){if(a==null)return;const r=R+11,e=[C+r*Math.sin(a*Math.PI/180),C-r*Math.cos(a*Math.PI/180)];
-      $('prog').setAttribute('d',a<1?'':'M'+C+' '+(C-r)+' A'+r+' '+r+' 0 '+(a>180?1:0)+' 1 '+e[0].toFixed(1)+' '+e[1].toFixed(1));$('prog').setAttribute('stroke',col)}
     // ── timeline ──
     $('segs').innerHTML=PH.map(p=>'<i style="flex:'+(p.days[1]-p.days[0]+1)+';background:'+p.color+'"></i>').join('');
     $('segLabels').innerHTML=PH.map((p,i)=>'<button style="left:'+(((p.days[0]-1+p.days[1])/2)/28*100).toFixed(2)+'%;--tc:'+p.tc+'" data-i="'+i+'" aria-pressed="false"><b>'+p.name+'</b>'+(p.days[0]===p.days[1]?'Day '+p.days[0]:p.days[0]+'–'+p.days[1])+'</button>').join('');
@@ -502,7 +500,7 @@
       if(i===0&&!pr)notes+='<p class="note blood"><b>Bleeding today: '+(bc==='hiud'?'light or none':(day<=2?'heavier':day===3?'medium':'lighter'))+'.</b> A whole period is usually about 30 to 40 mL, 2 to 3 tablespoons.<sup>1</sup></p>';
       if(bc==='hiud')notes+='<p class="note"><b>Hormonal IUD:</b> '+IUD.note[i]+'</p>';
       $('notes').innerHTML=notes;
-      drawProg(dragging?null:(day-.5)*DEG,pr?'#1f5c3f':p.tc);if(!dragging)$('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('ringDay').innerHTML='<b>Day '+day+'</b> · '+(pr?'Early pregnancy':p.name);$('dotRot').setAttribute('aria-valuenow',day);$('dotRot').setAttribute('aria-valuetext','Day '+day+', '+(pr?'early pregnancy':p.name+' phase'));$('ringDot').setAttribute('stroke',p.color);
+      if(!dragging)$('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('ringDay').innerHTML='<b>Day '+day+'</b> · '+(pr?'Early pregnancy':p.name);$('dotRot').setAttribute('aria-valuenow',day);$('dotRot').setAttribute('aria-valuetext','Day '+day+', '+(pr?'early pregnancy':p.name+' phase'));$('ringDot').setAttribute('stroke',p.color);$('ringDotEdge').setAttribute('stroke',pr?'#1f5c3f':p.tc);
       document.querySelectorAll('#ringArcs path').forEach((a,j)=>a.setAttribute('opacity',j===i?1:.35));
       document.querySelectorAll('#segs i').forEach((s,j)=>s.classList.toggle('on',j===i));
       document.querySelectorAll('#segLabels button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
@@ -516,7 +514,7 @@
     // ring: drag the dot or tap anywhere on the ring
     const rsvg=$('ringSvg');
     function angle(ev){const pt=rsvg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;const q=pt.matrixTransform(rsvg.getScreenCTM().inverse());return (Math.atan2(q.x-C,-(q.y-C))*180/Math.PI+360)%360}
-    function follow(ev){const a=angle(ev);$('dotRot').style.transform='rotate('+a.toFixed(1)+'deg)';drawProg(a,$('prog').getAttribute('stroke')||'#2f58b0');const d=Math.min(28,Math.floor(a/DEG)+1);if(d!==day){day=d;render()}}
+    function follow(ev){const a=angle(ev);$('dotRot').style.transform='rotate('+a.toFixed(1)+'deg)';const d=Math.min(28,Math.floor(a/DEG)+1);if(d!==day){day=d;render()}}
     function begin(ev){stop();dragging=true;$('dotRot').classList.add('dragging');rsvg.setPointerCapture(ev.pointerId);follow(ev);ev.preventDefault()}
     $('dotRot').addEventListener('pointerdown',begin);$('ringHit').addEventListener('pointerdown',begin);
     rsvg.addEventListener('pointermove',ev=>{if(dragging)follow(ev)});
