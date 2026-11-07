@@ -87,9 +87,9 @@
     .ctl-msg{display:none;margin:0 0 12px auto;max-width:600px;text-align:right;font-size:.92rem;color:#4b5563;line-height:1.6;}
     .ctl-msg.show{display:block;}
     /* wheel layout */
-    .wheel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start;}
+    .wheel{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start;}
     .wfig{display:flex;flex-direction:column;align-items:center;}
-    .wfig svg{width:100%;max-width:470px;height:auto;overflow:visible;touch-action:none;user-select:none;-webkit-user-select:none;}
+    .wfig svg{width:100%;max-width:600px;height:auto;overflow:visible;touch-action:none;user-select:none;-webkit-user-select:none;}
     .ring-hit{cursor:pointer;}
     #knob{cursor:grab;outline:none;}
     #knob:focus-visible .knob-ring{stroke:var(--text);stroke-width:3;}
@@ -217,7 +217,7 @@
       <a href="womens-health.html" class="cy-back">← Women's Health</a>
       <p class="sec-label">Interactive · Project 03</p>
       <h1 class="cy-title">Inside <em>the cycle</em>.</h1>
-      <p class="cy-lede">Most of us have one, yet I had no idea what actually happens day to day. Menstruation is rare among mammals: only humans and some other primates, a few bats, elephant shrews and the spiny mouse are known to menstruate.<sup>11,12</sup> The mice and rats used in most preclinical studies do not. Understanding this cycle is essential if we want to design the next generation of drugs and materials for women.</p>
+      <p class="cy-lede">Most of us have one, yet I had no idea what actually happens day to day. Menstruation is rare among mammals: only humans and some other primates, a few bats, elephant shrews and the spiny mouse are known to menstruate.<sup>10,11</sup> The mice and rats used in most preclinical studies do not. Understanding this cycle is essential if we want to design the next generation of drugs and materials for women.</p>
     </div>
   </section>
 
@@ -231,11 +231,11 @@
       <p class="ctl-msg" id="ctlMsg"></p>
       <div class="wheel">
         <figure class="wfig">
-          <svg viewBox="0 0 420 500" id="wsvg" aria-labelledby="wsvg-t" role="group">
-            <title id="wsvg-t">Cycle wheel: four phases sized by days, with the body in the middle and close-ups of the uterus and ovary below</title>
+          <svg viewBox="0 0 420 660" id="wsvg" aria-labelledby="wsvg-t" role="group">
+            <title id="wsvg-t">Cycle wheel: four phases sized by days, with the body in the middle and a close-up of the uterus and ovaries below</title>
             <defs><clipPath id="wclip"><circle cx="210" cy="200" r="128"/></clipPath></defs>
             <circle cx="210" cy="200" r="128" fill="#f4f1fc"/>
-            <image id="wimg" href="WebsitePics/WH_Body.webp" x="119" y="80" width="182" height="250" clip-path="url(#wclip)" preserveAspectRatio="xMidYMid meet"/>
+            <image id="wimg" href="WebsitePics/WH_Body.webp" x="112" y="76" width="197" height="270" clip-path="url(#wclip)" preserveAspectRatio="xMidYMid meet"/>
             <g id="glows" clip-path="url(#wclip)"></g>
             <g id="drops" clip-path="url(#wclip)"></g>
             <circle cx="210" cy="200" r="150" fill="none" stroke="#eceaf3" stroke-width="20"/>
@@ -282,48 +282,8 @@
     </div>
   </section>
 
-  <section aria-labelledby="basics-h">
+  <section aria-label="References">
     <div class="wrap">
-      <p class="sec-label">The basics</p>
-      <h2 class="sec-title" id="basics-h">Who does what</h2>
-      <p class="intro">The menstrual cycle is a monthly conversation between your brain and your ovaries, carried by hormones in the blood. The uterus listens and responds. Day 1 is the first day of bleeding. A cycle usually lasts 21 to 35 days and a period 2 to 7 days; 28 days is just the textbook average used here.<sup>1</sup></p>
-      <div class="basics">
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/brain.png"><img alt="Hypothalamus and pituitary, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Hypothalamus &amp; pituitary</h3><p class="role">The control center (brain)</p><p>The hypothalamus sends a hormone called GnRH to the pituitary gland just below it. The pituitary answers by releasing FSH and LH into the blood, which tell the ovaries what to do. The ovaries talk back with estrogen and progesterone, so the brain always knows where you are in the cycle.</p></div></article>
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/ovary.png"><img alt="Ovaries, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Ovaries</h3><p class="role">Egg storage and hormone factory</p><p>Two almond-sized organs that hold your eggs, each inside a small sac called a follicle. Every cycle a group of follicles grows, one wins, and it releases its egg at ovulation. Follicles make estrogen; the empty follicle left behind (the corpus luteum) makes progesterone.</p></div></article>
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/tubes.png"><img alt="Fallopian tubes, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Fallopian tubes</h3><p class="role">The bridge</p><p>Two thin tubes connecting the ovaries to the uterus. Finger-like ends sweep up the released egg. If sperm is present, fertilization happens here, and the tube then carries the embryo to the uterus over a few days.</p></div></article>
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/uterus.png"><img alt="Uterus, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Uterus</h3><p class="role">Builds a new lining every month</p><p>A muscular organ about the size of a fist. Its inner lining, the endometrium, thickens under estrogen and gets ready for an embryo under progesterone. When progesterone falls without a pregnancy, the lining sheds. That shedding is the period.</p></div></article>
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/cervix.png"><img alt="Cervix, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Cervix</h3><p class="role">The gatekeeper</p><p>The narrow lower end of the uterus that opens into the vagina. Its mucus changes through the cycle: thick and sticky most of the time, clear and stretchy around ovulation to let sperm through, and it opens slightly to let period blood out.</p></div></article>
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/vagina.png"><img alt="Vagina, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Vagina</h3><p class="role">The way out</p><p>The muscular canal that period blood flows out through. Its discharge changes with your hormones, from dry or sticky after a period, to wet and slippery near ovulation, to thicker before the next period.</p></div></article>
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/breasts.png"><img alt="Breasts, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Breasts</h3><p class="role">Respond to the same hormones</p><p>Estrogen grows the milk ducts in the first half of the cycle and progesterone grows the milk glands in the second half. Extra fluid before a period is why breasts can feel swollen or tender.</p></div></article>
-        <article class="bx"><div class="bx-art" data-src="WebsitePics/cycle/thyroid.png"><img alt="Thyroid, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>Thyroid</h3><p class="role">Sets the pace</p><p>A butterfly-shaped gland in the neck that controls metabolism. It is not part of the cycle itself, but too much or too little thyroid hormone can stop ovulation and make periods irregular, heavy or absent.</p></div></article>
-        <article class="bx blood-card"><div class="bx-art" data-src="WebsitePics/cycle/blood.png"><img alt="Period blood, drawn by Alexandra"><span class="ph" aria-hidden="true">✎</span></div>
-          <div><h3>What a period actually is</h3><p class="role">Blood, lining and mucus</p>
-          <p>Period blood is a mix of blood, the shed uterine lining, mucus and fluid from the cervix and vagina. Bright red to dark brown is normal; darker blood is just older blood. A whole period usually adds up to about 30 to 40 mL, roughly 2 to 3 tablespoons, over 2 to 7 days. More than about 80 mL, soaking a pad or tampon every hour for several hours, or clots bigger than a quarter are signs of heavy bleeding worth checking.<sup>1,5</sup></p></div></article>
-      </div>
-    </div>
-  </section>
-
-  <section aria-labelledby="flags-h">
-    <div class="wrap">
-      <p class="sec-label">Worth knowing</p>
-      <h2 class="sec-title" id="flags-h">When to talk to a doctor</h2>
-      <div class="flags">
-        <div class="flag"><b>Cycles shorter than 21 or longer than 35 days</b>Or cycles that suddenly become irregular. Can point to PCOS, thyroid disease, stress or perimenopause.</div>
-        <div class="flag"><b>Very heavy bleeding</b>Soaking a pad or tampon every hour for several hours, passing large clots, or bleeding more than 7 days. Fibroids, polyps and bleeding disorders are common causes.</div>
-        <div class="flag"><b>Pain that stops your life</b>Cramps that painkillers don't help, pain during sex or bowel movements. Endometriosis takes 7 to 10 years to diagnose on average.</div>
-        <div class="flag"><b>A missed period</b>Take a pregnancy test first. Otherwise it can come from thyroid problems, high prolactin, under-eating, intense exercise or PCOS.</div>
-        <div class="flag"><b>Mood changes that feel severe</b>Depression, anxiety or rage that arrives before each period and lifts after it may be PMDD, which is treatable.</div>
-        <div class="flag"><b>Bleeding between periods or after sex</b>Usually harmless, but worth checking, especially if it keeps happening.</div>
-      </div>
-      
       <div class="src">
         <p>Educational only, not medical advice. Hormone curves are relative and show a textbook 28-day cycle. Effects and risks are patterns reported in research; everyone is different and much of the evidence is still mixed. Illustrations by Alexandra L. Ramos Figueroa.</p>
         <p class="ref-h">References</p>
@@ -333,7 +293,6 @@
           <li>Herzberg, S. D.; Motu’apuaka, M. L.; Lambert, W.; Fu, R.; Brady, J.; Guise, J.-M. The Effect of Menstrual Cycle and Contraceptives on ACL Injuries and Laxity: A Systematic Review and Meta-analysis. <i>Orthop. J. Sports Med.</i> <b>2017</b>, <i>5</i> (7), 2325967117718781. DOI: <a href="https://doi.org/10.1177/2325967117718781" target="_blank">10.1177/2325967117718781</a>.</li>
           <li>American College of Obstetricians and Gynecologists. Long-Acting Reversible Contraception (LARC): Intrauterine Device and Implant. <a href="https://www.acog.org/womens-health/faqs/long-acting-reversible-contraception-iud-and-implant" target="_blank">https://www.acog.org/womens-health/faqs/long-acting-reversible-contraception-iud-and-implant</a> (accessed 2026-11-06).</li>
           <li>American College of Obstetricians and Gynecologists. Heavy Menstrual Bleeding. <a href="https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding" target="_blank">https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding</a> (accessed 2026-11-06).</li>
-          <li>American College of Obstetricians and Gynecologists. Endometriosis. <a href="https://www.acog.org/womens-health/faqs/endometriosis" target="_blank">https://www.acog.org/womens-health/faqs/endometriosis</a> (accessed 2026-11-06).</li>
           <li>Herzog, A. G.; Klein, P.; Ransil, B. J. Three Patterns of Catamenial Epilepsy. <i>Epilepsia</i> <b>1997</b>, <i>38</i> (10), 1082–1088.</li>
           <li>Sánchez-Ramos, J. L.; et al. Risk Factors for Premenstrual Asthma: A Systematic Review and Meta-Analysis. <i>Expert Rev. Respir. Med.</i> <b>2017</b>, <i>11</i> (1), 57–72. DOI: <a href="https://doi.org/10.1080/17476348.2017.1270762" target="_blank">10.1080/17476348.2017.1270762</a>.</li>
           <li>Gamarra, E.; Trimboli, P. Menstrual Cycle, Glucose Control and Insulin Sensitivity in Type 1 Diabetes: A Systematic Review. <i>J. Pers. Med.</i> <b>2023</b>, <i>13</i> (2), 374. DOI: <a href="https://doi.org/10.3390/jpm13020374" target="_blank">10.3390/jpm13020374</a>.</li>
@@ -355,7 +314,7 @@
     const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const g=(d,m,s)=>Math.exp(-((d-m)**2)/(2*s*s));
     const clamp=v=>Math.max(0,Math.min(1,v));
-    let preg=false,bc='none',t=0.5,lastDay=0,lastPhase='',tab='organs';
+    let preg=false,bc='none',t=0.5,lastDay=0,lastPhase='',tab='effects';
     const dayOf=x=>Math.min(28,Math.floor(x)+1);
     const dv=x=>1+x*27/28; // continuous day value for curves
 
@@ -375,7 +334,7 @@
       {k:'men',n:'Phase 1',t:'Menstrual',days:[1,5],d:'Days 1–5',c:'var(--c1)',hex:'#4a74d1',tc:'var(--t1)',
        sum:'Day 1 is the first day of bleeding. Estrogen and progesterone are at their lowest, so the uterus sheds its lining. At the same time the brain raises FSH to start growing new follicles for the next cycle.',
        m:[['Energy',[.35,.3,.45]],['Gym',[.4,.4,.55]],['Mental load',[.75,.6,.45]],['ACL injury risk',[.5,.5,.55]]],
-       risks:[['Menstrual migraine','attacks cluster as estrogen drops just before and during the period.<sup>10</sup>'],['Seizures','in catamenial epilepsy, the perimenstrual pattern is the most common.<sup>7</sup>'],['Asthma','symptoms worsen around the period for many women with asthma.<sup>8</sup>'],['Iron deficiency','with heavy bleeding can cause fatigue.<sup>5</sup>']]},
+       risks:[['Menstrual migraine','attacks cluster as estrogen drops just before and during the period.<sup>9</sup>'],['Seizures','in catamenial epilepsy, the perimenstrual pattern is the most common.<sup>6</sup>'],['Asthma','symptoms worsen around the period for many women with asthma.<sup>7</sup>'],['Iron deficiency','with heavy bleeding can cause fatigue.<sup>5</sup>']]},
       {k:'fol',n:'Phase 2',t:'Follicular',days:[6,13],d:'Days 6–13',c:'var(--c2)',hex:'#8a79d6',tc:'var(--t2)',
        sum:'FSH has woken a group of follicles. One becomes dominant and pumps out estrogen, which rebuilds the uterine lining and makes cervical mucus wetter. Energy and mood often rise.',
        m:[['Energy',[.5,.7,.85]],['Gym',[.55,.7,.85]],['Mental load',[.4,.3,.25]],['ACL injury risk',[.55,.65,.75]]],
@@ -383,11 +342,11 @@
       {k:'ovu',n:'Phase 3',t:'Ovulation',days:[14,14],d:'Day 14',c:'var(--c3)',hex:'#d1587a',tc:'var(--t3)',
        sum:'High estrogen triggers a surge of LH from the pituitary. About 24 to 36 hours later the follicle bursts and releases an egg into the fallopian tube, where it can be fertilized for about 12 to 24 hours.',
        m:[['Energy',[.85,.95,.85]],['Gym',[.85,.9,.8]],['Mental load',[.25,.2,.3]],['ACL injury risk',[.8,.85,.7]]],
-       risks:[['Ligament laxity','is highest around ovulation; warm up and train landing technique.<sup>3</sup>'],['Seizures','a periovulatory pattern is linked to the estrogen surge.<sup>7</sup>'],['Mid-cycle pain','(mittelschmerz) on one side as the follicle ruptures.<sup>1</sup>']]},
+       risks:[['Ligament laxity','is highest around ovulation; warm up and train landing technique.<sup>3</sup>'],['Seizures','a periovulatory pattern is linked to the estrogen surge.<sup>6</sup>'],['Mid-cycle pain','(mittelschmerz) on one side as the follicle ruptures.<sup>1</sup>']]},
       {k:'lut',n:'Phase 4',t:'Luteal',days:[15,28],d:'Days 15–28',c:'var(--c4)',hex:'#c08a1e',tc:'var(--t4)',
        sum:'The empty follicle becomes the corpus luteum and makes progesterone, which keeps the lining ready for an embryo and raises body temperature slightly. Without a pregnancy it breaks down after about 12 to 14 days, hormones fall, and the next period starts.',
        m:[['Energy',[.7,.55,.3]],['Gym',[.7,.55,.4]],['Mental load',[.35,.55,.85]],['ACL injury risk',[.45,.3,.3]]],
-       risks:[['Blood sugar','some people with type 1 diabetes need more insulin in this phase.<sup>9</sup>'],['Premenstrual asthma','often begins in the days before the period.<sup>8</sup>'],['PMS and PMDD','mood symptoms peak in the last week.<sup>1</sup>'],['Heat strain','higher body temperature makes hot workouts harder.<sup>1</sup>']]}];
+       risks:[['Blood sugar','some people with type 1 diabetes need more insulin in this phase.<sup>8</sup>'],['Premenstrual asthma','often begins in the days before the period.<sup>7</sup>'],['PMS and PMDD','mood symptoms peak in the last week.<sup>1</sup>'],['Heat strain','higher body temperature makes hot workouts harder.<sup>1</sup>']]}];
     const PREG_SUM='About 6 to 10 days after ovulation the embryo implants in the thick lining and starts making hCG, the hormone pregnancy tests detect. hCG keeps the corpus luteum making progesterone, so the lining stays and no period comes.';
     const phIdx=d=>d<=5?0:d<=13?1:d===14?2:3;
     const pkey=d=>(preg&&d>=21)?'preg':PHS[phIdx(d)].k;
@@ -450,36 +409,36 @@
       +[1,7,14,21].map(d=>{const a=(d-1)*DEG,q1=pol(a,R-10),q2=pol(a,R+10);return '<line x1="'+q1[0]+'" y1="'+q1[1]+'" x2="'+q2[0]+'" y2="'+q2[1]+'" stroke="#fff" stroke-width="2"/>'}).join('');
 
     // ── body positions (inside the circle) ──
-    const OV=[[180.9,294],[220.9,294]],UT=[201.6,281];
-    // ── insets: uterus lining + ovary ──
-    const IU=[140,440],IO=[280,440],IR=36;
+    const OV=[[189.7,309.6],[233.1,309.6]],UT=[212.1,294.7];
+    // ── close-up of Alexandra's uterus + ovaries drawing, animated ──
+    const BX=50,BY=404,BW=320,BH=219,S=BW/380; // drawing crop is 380x260 (body px)
+    const P=(x,y)=>[(BX+x*S).toFixed(1),(BY+y*S).toFixed(1)];
     function liningAt(x){const d=dv(x);if(preg&&d>=21)return 8;if(d<=5)return 6-4.5*(d-1)/4;if(d<=14)return 1.5+4*(d-5)/9;if(d<=26)return 5.5+2*(d-14)/12;return 7.5-1.5*(d-26)/2}
-    function uterusArt(x){const d=dayOf(x),th=liningAt(x),men=d<=5&&!(preg&&d>=21);const cx=IU[0],cy=IU[1]-4;
-      const outer='M'+(cx-24)+' '+(cy-18)+' Q'+(cx-26)+' '+(cy-26)+' '+(cx-16)+' '+(cy-26)+' L'+(cx+16)+' '+(cy-26)+' Q'+(cx+26)+' '+(cy-26)+' '+(cx+24)+' '+(cy-18)+' L'+(cx+9)+' '+(cy+10)+' Q'+(cx+6)+' '+(cy+16)+' '+(cx+6)+' '+(cy+24)+' L'+(cx-6)+' '+(cy+24)+' Q'+(cx-6)+' '+(cy+16)+' '+(cx-9)+' '+(cy+10)+' Z';
-      const inner='M'+(cx-15)+' '+(cy-17)+' L'+(cx+15)+' '+(cy-17)+' L'+cx+' '+(cy+10)+' Z';
-      let s='<circle cx="'+IU[0]+'" cy="'+IU[1]+'" r="'+IR+'" fill="#fff" stroke="#e7a3b4" stroke-width="2"/>';
-      s+='<path d="'+outer+'" fill="#f6c9d4" stroke="#c2416b" stroke-width="1.6"/>';
-      s+='<path d="'+inner+'" fill="#fff" stroke="'+(men?'#b3263e':'#e58fa0')+'" stroke-width="'+th.toFixed(2)+'" stroke-linejoin="round"/>';
-      if(men){const n=d<=2?3:d===3?2:1;for(let j=0;j<n;j++)s+='<circle class="drop" cx="'+(cx-3+j*3)+'" cy="'+(cy+26)+'" r="2.6" fill="#b3263e" style="animation-delay:'+(j*0.5)+'s"/>'}
-      s+='<text x="'+IU[0]+'" y="'+(IU[1]+IR+18)+'" text-anchor="middle" font-size="12.5" font-weight="600" fill="#374151">Uterus lining</text>';
+    function closeOverlay(x){const d=dayOf(x),v=dv(x),men=d<=5&&!(preg&&d>=21),th=liningAt(x);let s='';
+      const a=P(127,78),b=P(180,168),c=P(236,78);
+      s+='<path d="M'+a+' L'+b+' L'+c+'" fill="none" stroke="'+(men?'#b3263e':'#c2416b')+'" stroke-opacity="'+(men?.8:.45)+'" stroke-width="'+(th*1.6).toFixed(1)+'" stroke-linecap="round" stroke-linejoin="round"/>';
+      if(men){const n=bc==='hiud'?1:(d<=2?3:d===3?2:1);for(let j=0;j<n;j++){const q=P(176+j*5,232);s+='<ellipse class="drop" cx="'+q[0]+'" cy="'+q[1]+'" rx="3" ry="4" fill="#b3263e" style="animation-delay:'+(j*.45)+'s"/>'}}
+      const R_=P(287,160),L_=P(82,160);
+      if(v<5.5){[[-14,-6],[8,-10],[-4,10],[13,6]].forEach((o,j)=>{s+='<circle cx="'+(+R_[0]+o[0])+'" cy="'+(+R_[1]+o[1])+'" r="'+(2.6+v*.35).toFixed(1)+'" fill="#fff" stroke="#c2416b" stroke-width="1.3"/><circle cx="'+(+L_[0]-o[0])+'" cy="'+(+L_[1]+o[1])+'" r="'+(2.4+v*.3).toFixed(1)+'" fill="#fff" stroke="#c2416b" stroke-width="1.2"/>'})}
+      else if(v<13.5){const k=(v-5.5)/8;s+='<circle cx="'+R_[0]+'" cy="'+R_[1]+'" r="'+(5+k*12).toFixed(1)+'" fill="#fff" fill-opacity=".85" stroke="#c2416b" stroke-width="2"/><circle cx="'+(+R_[0]+3)+'" cy="'+(+R_[1]-3)+'" r="2.8" fill="#c2416b"/>';
+        [[-8,10],[10,8]].forEach(o=>s+='<circle cx="'+(+L_[0]+o[0])+'" cy="'+(+L_[1]+o[1])+'" r="'+Math.max(1.5,3.5-k*2).toFixed(1)+'" fill="#fff" stroke="#e58fa0" stroke-width="1.1"/>')}
+      else if(v<14.6){const k=(v-13.5)/1.1,e0=P(300,150),e1=P(345,140);s+='<circle cx="'+R_[0]+'" cy="'+R_[1]+'" r="15" fill="none" stroke="#c2416b" stroke-width="2" stroke-dasharray="20 8"/><circle cx="'+(+e0[0]+(e1[0]-e0[0])*k).toFixed(1)+'" cy="'+(+e0[1]+(e1[1]-e0[1])*k).toFixed(1)+'" r="4.2" fill="#c2416b" stroke="#fff" stroke-width="1.5"/>'}
+      else{const pk=preg&&v>=21?1:Math.max(.2,1-Math.abs(v-21)/8);s+='<circle cx="'+R_[0]+'" cy="'+R_[1]+'" r="'+(6+pk*10).toFixed(1)+'" fill="#f1cf6b" fill-opacity="'+(.45+pk*.5).toFixed(2)+'" stroke="#a87a12" stroke-width="1.6"/>'}
       return s}
-    function ovaryArt(x){const d=dayOf(x),v=dv(x),cx=IO[0],cy=IO[1];let s='<circle cx="'+cx+'" cy="'+cy+'" r="'+IR+'" fill="#fff" stroke="#e7a3b4" stroke-width="2"/><ellipse cx="'+cx+'" cy="'+cy+'" rx="27" ry="20" fill="#fbe3ea" stroke="#c2416b" stroke-width="1.4"/>';
-      if(v<5.5){[[-12,-6],[9,-9],[-5,9],[12,6],[0,-1]].forEach((o,j)=>s+='<circle cx="'+(cx+o[0])+'" cy="'+(cy+o[1])+'" r="'+(3+v*0.4+(j%2)*.8).toFixed(2)+'" fill="#fff" stroke="#c2416b" stroke-width="1.2"/>')}
-      else if(v<13.5){const k=(v-5.5)/8;s+='<circle cx="'+(cx+3)+'" cy="'+(cy-1)+'" r="'+(6+k*11).toFixed(2)+'" fill="#fff" stroke="#c2416b" stroke-width="1.8"/><circle cx="'+(cx+6)+'" cy="'+(cy-4)+'" r="2.6" fill="#c2416b"/>';
-        [[-17,9],[16,11],[-15,-10]].forEach(o=>s+='<circle cx="'+(cx+o[0])+'" cy="'+(cy+o[1])+'" r="'+Math.max(1.5,4.5-k*3).toFixed(2)+'" fill="#fff" stroke="#e58fa0" stroke-width="1.1"/>')}
-      else if(v<14.6){const k=(v-13.5)/1.1;s+='<path d="M'+(cx-12)+' '+(cy+7)+' a15 15 0 1 1 22 3" fill="#fff" stroke="#c2416b" stroke-width="1.8"/><circle cx="'+(cx+14+k*14).toFixed(2)+'" cy="'+(cy+10+k*10).toFixed(2)+'" r="3.6" fill="#c2416b"/>'}
-      else{const peak=preg&&v>=21?1:Math.max(.2,1-Math.abs(v-21)/8);s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(6+peak*11).toFixed(2)+'" fill="#f1cf6b" stroke="#a87a12" stroke-width="1.6" opacity="'+(.45+peak*.55).toFixed(2)+'"/>'}
-      s+='<text x="'+cx+'" y="'+(cy+IR+18)+'" text-anchor="middle" font-size="12.5" font-weight="600" fill="#374151">Ovary</text>';
-      return s}
+    function labels(){const l=(x,y,txt,anc)=>'<text x="'+P(x,y)[0]+'" y="'+P(x,y)[1]+'" text-anchor="'+(anc||'middle')+'" font-size="12" font-weight="600" fill="#374151" paint-order="stroke" stroke="#fff" stroke-width="3">'+txt+'</text>';
+      return l(180,14,'Uterus lining')+l(287,208,'Ovary')+l(82,208,'Ovary')+l(228,248,'Cervix','start')}
     const imgOK={};function tryImg(src){if(src in imgOK)return imgOK[src];return imgOK[src]=new Promise(r=>{const i=new Image();i.onload=()=>r(true);i.onerror=()=>r(false);i.src=src})}
     const PHN={men:'menstrual',fol:'follicular',ovu:'ovulation',lut:'luteal',preg:'pregnancy'};
     let insetTok=0;
-    async function drawInsets(x){const tok=++insetTok,pk=pkey(dayOf(x));
-      const u='WebsitePics/cycle/uterus-'+PHN[pk]+'.png',o='WebsitePics/cycle/ovary-'+PHN[pk]+'.png';
-      const [hu,ho]=await Promise.all([tryImg(u),tryImg(o)]);if(tok!==insetTok)return;
-      const pic=(c,src,lab)=>'<circle cx="'+c[0]+'" cy="'+c[1]+'" r="'+IR+'" fill="#fff" stroke="#e7a3b4" stroke-width="2"/><image href="'+src+'" x="'+(c[0]-IR+4)+'" y="'+(c[1]-IR+4)+'" width="'+(IR*2-8)+'" height="'+(IR*2-8)+'"/><text x="'+c[0]+'" y="'+(c[1]+IR+18)+'" text-anchor="middle" font-size="12.5" font-weight="600" fill="#374151">'+lab+'</text>';
-      const lines='<path d="M'+UT[0]+' '+(UT[1]+14)+' L'+IU[0]+' '+(IU[1]-IR)+'" stroke="#e7a3b4" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M'+OV[1][0]+' '+(OV[1][1]+8)+' L'+IO[0]+' '+(IO[1]-IR)+'" stroke="#e7a3b4" stroke-width="1.5" stroke-dasharray="3 3"/>';
-      $('insets').innerHTML=lines+(hu?pic(IU,u,'Uterus lining'):uterusArt(x))+(ho?pic(IO,o,'Ovary'):ovaryArt(x))}
+    async function drawInsets(x){const tok=++insetTok,pk=pkey(dayOf(x)),own='WebsitePics/cycle/closeup-'+PHN[pk]+'.png';
+      const has=await tryImg(own);if(tok!==insetTok)return;
+      let s='<rect x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" rx="16" fill="#eaf0fd" stroke="#d6d0f0"/>';
+      s+='<clipPath id="cclip"><rect x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" rx="16"/></clipPath>';
+      s+='<path d="M'+UT[0]+' '+(UT[1]+16)+' L'+(BX+BW/2)+' '+BY+'" stroke="#c4b8ef" stroke-width="1.5" stroke-dasharray="3 3"/>';
+      if(has)s+='<image href="'+own+'" x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" clip-path="url(#cclip)" preserveAspectRatio="xMidYMid meet"/>';
+      else s+='<g clip-path="url(#cclip)"><image href="WebsitePics/WH_Uterus.webp" x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" preserveAspectRatio="xMidYMid slice"/>'+closeOverlay(x)+'</g>'+labels();
+      s+='<text x="'+(BX+BW/2)+'" y="'+(BY+BH+22)+'" text-anchor="middle" font-size="12.5" fill="#4b5563">Close-up: uterus, lining, ovaries</text>';
+      $('insets').innerHTML=s}
     function drawBody(x){const d=dayOf(x),v=dv(x),ov=clamp(0.2+0.5*H.E.f(v)+0.5*H.LH.f(v)),men=d<=5&&!(preg&&d>=21);
       $('glows').innerHTML=OV.map(o=>'<circle cx="'+o[0]+'" cy="'+o[1]+'" r="'+(7+ov*7).toFixed(2)+'" fill="#e58fa0" opacity="'+(.2+ov*.4).toFixed(2)+'"/>').join('')
         +'<circle cx="'+UT[0]+'" cy="'+UT[1]+'" r="'+(8+liningAt(x)*1.2).toFixed(2)+'" fill="'+(men?'#b3263e':'#e58fa0')+'" opacity="'+(men?.35:.2)+'"/>';
@@ -501,7 +460,7 @@
       return '<ul class="risks">'+p.risks.map(r=>'<li><span><b>'+r[0]+':</b> '+r[1]+'</span></li>').join('')+'</ul>'}
     function card(pop){const d=dayOf(t),i=phIdx(d),p=PHS[i],pk=pkey(d),c=$('pcard');
       c.style.setProperty('--pc',p.hex);c.style.setProperty('--pt',p.tc);
-      const tabs=[['organs','Organs'],['effects','Effects'],['risks','Risks']];
+      const tabs=[['effects','Effects'],['risks','Risks'],['organs','Organs']];
       c.innerHTML='<div class="pc-top"><div><div class="pc-n">'+p.n+'</div><h3 class="pc-t">'+(pk==='preg'?'Early pregnancy':p.t)+'</h3></div><span class="pc-d">Day '+d+' · '+p.d+'</span></div>'
         +'<p class="pc-sum">'+(pk==='preg'?PREG_SUM:p.sum)+'</p>'+bloodRow(d)
         +'<div class="tabs" role="tablist" aria-label="Details for this phase">'+tabs.map(x=>'<button class="tab" role="tab" id="tab-'+x[0]+'" aria-controls="tp" aria-selected="'+(tab===x[0])+'" tabindex="'+(tab===x[0]?0:-1)+'" data-tab="'+x[0]+'">'+x[1]+'</button>').join('')+'</div>'
