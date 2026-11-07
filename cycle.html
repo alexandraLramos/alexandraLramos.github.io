@@ -87,14 +87,31 @@
     .ctl-msg{display:none;margin:0 0 12px auto;max-width:600px;text-align:right;font-size:.92rem;color:#4b5563;line-height:1.6;}
     .ctl-msg.show{display:block;}
     /* wheel layout */
-    .wheel{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start;}
+    .wheel{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:start;}
     .wfig{display:flex;flex-direction:column;align-items:center;}
-    .wfig svg{width:100%;max-width:600px;height:auto;overflow:visible;touch-action:none;user-select:none;-webkit-user-select:none;}
+    .wfig svg{width:100%;max-width:520px;height:auto;overflow:visible;touch-action:none;user-select:none;-webkit-user-select:none;}
     .ring-hit{cursor:pointer;}
     #knob{cursor:grab;outline:none;}
     #knob:focus-visible .knob-ring{stroke:var(--text);stroke-width:3;}
     .wday{margin-top:4px;font-size:1rem;color:#4b5563;text-align:center;}
     .wday b{color:var(--text);font-weight:600;}
+    .plegend{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:560px;margin-top:6px;}
+    .plg{font:inherit;text-align:left;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:9px 10px 8px;cursor:pointer;min-height:44px;display:flex;flex-direction:column;gap:1px;position:relative;overflow:hidden;}
+    .plg::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--c);}
+    .plg b{font-size:.9rem;font-weight:600;color:var(--tc);}
+    .plg small{font-size:.78rem;color:#4b5563;}
+    .plg[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 9%,#fff);}
+    .plg:hover{border-color:var(--c);}
+    .closeup{margin:0 0 14px;background:#eaf0fd;border-radius:14px;overflow:hidden;}
+    .closeup svg{width:100%;height:auto;display:block;}
+    .cl-cap{display:grid;grid-template-columns:1fr 1.5fr 1fr;text-align:center;font-size:.8rem;font-weight:600;color:#374151;padding:0 6px 8px;margin-top:-4px;}
+    .minis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-4px 0 14px;}
+    .mini{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center;background:#f4f1fc;border-radius:12px;padding:8px 10px;}
+    .mini img{width:48px;height:40px;object-fit:contain;}
+    .mini p{font-size:.84rem;line-height:1.4;color:#374151;}
+    .mini b{display:block;font-size:.86rem;color:var(--text);}
+    @media(max-width:420px){.minis{grid-template-columns:1fr}}
+    #pbody.pop{animation:pop .35s cubic-bezier(.2,.8,.2,1);}
     .whelp{font-size:.88rem;color:#4b5563;text-align:center;margin-top:4px;}
     @keyframes drip{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(26px);opacity:0}}
     .drop{animation:drip 1.6s ease-in infinite;}
@@ -106,7 +123,7 @@
     .pc-n{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pt);}
     .pc-t{font-size:1.4rem;font-weight:600;letter-spacing:-.02em;line-height:1.2;}
     .pc-d{font-size:.85rem;color:#4b5563;white-space:nowrap;padding-top:3px;}
-    .pc-sum{font-size:.98rem;line-height:1.65;color:var(--text);margin:10px 0 12px;}
+    .pc-sum{font-size:.98rem;line-height:1.65;color:var(--text);margin:0 0 12px;}
     .blood{display:flex;align-items:center;gap:10px;background:#fbeef0;border-radius:10px;padding:10px 12px;font-size:.92rem;color:#5c1424;margin-bottom:14px;}
     .blood svg{flex-shrink:0;}
     .tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin-bottom:12px;}
@@ -168,6 +185,7 @@
     .ref-h{margin-top:14px;font-size:.78rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-dark);}
     .refs{margin:6px 0 0 20px;display:flex;flex-direction:column;gap:8px;}
     @media(max-width:880px){.wheel{grid-template-columns:1fr;}.gloss{grid-template-columns:1fr 1fr;}}
+    @media(max-width:520px){.plegend{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:640px){.basics,.flags,.gloss{grid-template-columns:1fr;}.ctl{justify-content:flex-start}.ctl-msg{text-align:left;margin-left:0}.bx{grid-template-columns:56px 1fr}.bx-art{width:56px;height:56px}.met{grid-template-columns:1fr 112px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
     @media(max-width:768px){.art-flow{min-height:170px!important;}.art-flow .flow{display:none;}.art-flow .flow-h{display:block;padding:10px 12px;}.wh-hero-grid{grid-template-columns:1fr;}.wh-face{max-width:200px;justify-self:start;order:-1;}.wh-card{grid-template-columns:1fr;}.wh-art{min-height:150px;}.wh-body{padding:22px 20px;}.wh-stats{gap:24px;}}
@@ -231,28 +249,38 @@
       <p class="ctl-msg" id="ctlMsg"></p>
       <div class="wheel">
         <figure class="wfig">
-          <svg viewBox="0 0 420 660" id="wsvg" aria-labelledby="wsvg-t" role="group">
-            <title id="wsvg-t">Cycle wheel: four phases sized by days, with the body in the middle and a close-up of the uterus and ovaries below</title>
-            <defs><clipPath id="wclip"><circle cx="210" cy="200" r="128"/></clipPath></defs>
-            <circle cx="210" cy="200" r="128" fill="#f4f1fc"/>
-            <image id="wimg" href="WebsitePics/WH_Body.webp" x="112" y="76" width="197" height="270" clip-path="url(#wclip)" preserveAspectRatio="xMidYMid meet"/>
+          <svg viewBox="-16 -16 452 452" id="wsvg" aria-labelledby="wsvg-t" role="group">
+            <title id="wsvg-t">Cycle wheel: four phases sized by the number of days each lasts, around the body</title>
+            <defs><clipPath id="wclip"><circle cx="210" cy="210" r="156"/></clipPath></defs>
+            <circle cx="210" cy="210" r="156" fill="#f4f1fc"/>
+            <image id="wimg" href="WebsitePics/WH_Body.webp" x="90" y="48" width="240" height="330" clip-path="url(#wclip)" preserveAspectRatio="xMidYMid meet"/>
             <g id="glows" clip-path="url(#wclip)"></g>
-            <g id="drops" clip-path="url(#wclip)"></g>
-            <circle cx="210" cy="200" r="150" fill="none" stroke="#eceaf3" stroke-width="20"/>
+            <circle cx="210" cy="210" r="180" fill="none" stroke="#eceaf3" stroke-width="22"/>
             <g id="arcs"></g>
-            <g id="labels" font-family="Geist,sans-serif"></g>
-            <circle class="ring-hit" cx="210" cy="200" r="150" fill="none" stroke="transparent" stroke-width="46" id="ringHit"/>
-            <g id="insets" font-family="Geist,sans-serif"></g>
+            <g id="ticks" font-family="Geist,sans-serif"></g>
+            <circle class="ring-hit" cx="210" cy="210" r="180" fill="none" stroke="transparent" stroke-width="50" id="ringHit"/>
             <g id="knob" role="slider" tabindex="0" aria-label="Cycle day" aria-valuemin="1" aria-valuemax="28" aria-valuenow="1" aria-valuetext="Day 1, menstrual phase">
-              <circle id="knobHit" r="24" fill="transparent"/>
-              <circle id="knobDot" class="knob-ring" r="14" fill="#fff" stroke-width="6"/>
+              <circle r="24" fill="transparent"/>
+              <circle id="knobDot" class="knob-ring" r="15" fill="#fff" stroke-width="6"/>
             </g>
           </svg>
+          <div class="plegend" id="plegend" role="group" aria-label="Jump to a phase"></div>
           <figcaption class="wday" id="wday"></figcaption>
-          <p class="whelp">Drag the dot, tap the ring, or focus the dot and use the arrow keys.</p>
+          <p class="whelp">Drag the dot, tap the ring or a phase, or use the arrow keys.</p>
         </figure>
         <div>
-          <div class="pcard" id="pcard"></div>
+          <div class="pcard" id="pcard">
+            <div id="phead" style="margin-bottom:12px"></div>
+            <figure class="closeup">
+              <svg id="csvg" viewBox="0 0 380 260" role="img" aria-label="Close-up of the uterus, its lining and the ovaries, drawn by Alexandra"></svg>
+              <figcaption class="cl-cap" aria-hidden="true"><span>Ovary</span><span>Uterus lining</span><span>Ovary</span></figcaption>
+            </figure>
+            <div class="minis">
+              <div class="mini"><img src="WebsitePics/WH_Brain.webp" alt=""><p><b>Brain</b><span id="miniBrain"></span></p></div>
+              <div class="mini"><img src="WebsitePics/WH_Thyroid.webp" alt=""><p><b>Thyroid</b><span id="miniThy"></span></p></div>
+            </div>
+            <div id="pbody"></div>
+          </div>
           <p class="sr-only" aria-live="polite" id="live"></p>
         </div>
       </div>
@@ -397,21 +425,24 @@
       men:'Opens slightly to let period blood out.',fol:'Mucus is scant and sticky at first, then gets wetter as estrogen rises.',
       ovu:'Mucus is clear, slippery and stretchy, like raw egg white, helping sperm swim through.',
       lut:'Mucus turns thick and sticky again, acting like a plug.',preg:'A thick mucus plug seals the cervix to protect the pregnancy.'};
+    const MINI={brain:{men:'Raises FSH to start the next cycle.',fol:'Rising estrogen lifts mood; FSH eases off.',ovu:'The pituitary fires the LH surge.',lut:'Progesterone warms the body slightly.',preg:'Progesterone stays high; tiredness is common.'},
+      thyroid:{men:'Steady. Too little can mean heavy periods.',fol:'Steady. Helps the follicle mature.',ovu:'Normal levels are needed to ovulate.',lut:'Too little can shorten this phase.',preg:'Works harder: needs rise 20 to 50%.'}};
     const ORG_ORDER=['brain','ovary','tubes','uterus','cervix','breast','thyroid'];
 
     // ── wheel geometry ──
-    const C=[210,200],R=150,DEG=360/28;
+    const C=[210,210],R=180,DEG=360/28;
     const pol=(a,r)=>[C[0]+r*Math.sin(a*Math.PI/180),C[1]-r*Math.cos(a*Math.PI/180)];
     function arcD(a0,a1,r){const s=pol(a0,r),e=pol(a1,r);return 'M'+s[0].toFixed(2)+' '+s[1].toFixed(2)+' A'+r+' '+r+' 0 '+(a1-a0>180?1:0)+' 1 '+e[0].toFixed(2)+' '+e[1].toFixed(2)}
-    $('arcs').innerHTML=PHS.map((p,i)=>{const a0=(p.days[0]-1)*DEG+0.9,a1=p.days[1]*DEG-0.9;return '<path data-i="'+i+'" d="'+arcD(a0,a1,R)+'" fill="none" stroke="'+p.hex+'" stroke-width="20" stroke-linecap="butt"/>'}).join('');
-    $('labels').innerHTML=PHS.map(p=>{const mid=((p.days[0]-1)+p.days[1])/2*DEG,q=pol(mid,R+26),anc=q[0]>C[0]+12?'start':q[0]<C[0]-12?'end':'middle';
-      return '<text x="'+q[0].toFixed(1)+'" y="'+(q[1]+5).toFixed(1)+'" text-anchor="'+anc+'" font-size="14" font-weight="600" fill="'+({men:'#2f58b0',fol:'#5b4fb8',ovu:'#a8324f',lut:'#7d5a0c'})[p.k]+'">'+p.t+'</text><text x="'+q[0].toFixed(1)+'" y="'+(q[1]+21).toFixed(1)+'" text-anchor="'+anc+'" font-size="11.5" fill="#4b5563">'+p.d+'</text>'}).join('')
-      +[1,7,14,21].map(d=>{const a=(d-1)*DEG,q1=pol(a,R-10),q2=pol(a,R+10);return '<line x1="'+q1[0]+'" y1="'+q1[1]+'" x2="'+q2[0]+'" y2="'+q2[1]+'" stroke="#fff" stroke-width="2"/>'}).join('');
+    $('arcs').innerHTML=PHS.map((p,i)=>{const a0=(p.days[0]-1)*DEG+0.9,a1=p.days[1]*DEG-0.9;return '<path data-i="'+i+'" d="'+arcD(a0,a1,R)+'" fill="none" stroke="'+p.hex+'" stroke-width="22" stroke-linecap="butt"/>'}).join('');
+    $('ticks').innerHTML=[1,7,14,21].map(d=>{const a=(d-1)*DEG,q1=pol(a,R-11),q2=pol(a,R+11),q=pol(a,R+26);
+      return '<line x1="'+q1[0].toFixed(1)+'" y1="'+q1[1].toFixed(1)+'" x2="'+q2[0].toFixed(1)+'" y2="'+q2[1].toFixed(1)+'" stroke="#fff" stroke-width="2.5"/><text x="'+q[0].toFixed(1)+'" y="'+(q[1]+4).toFixed(1)+'" text-anchor="middle" font-size="12" fill="#4b5563">'+d+'</text>'}).join('');
+    $('plegend').innerHTML=PHS.map((p,i)=>'<button class="plg" data-i="'+i+'" aria-pressed="false" style="--c:'+p.hex+';--tc:'+({men:'#2f58b0',fol:'#5b4fb8',ovu:'#a8324f',lut:'#7d5a0c'})[p.k]+'"><b>'+p.t+'</b><small>'+p.d+'</small></button>').join('');
+    document.querySelectorAll('.plg').forEach(b=>b.onclick=()=>{stopPlay();setDay(PHS[+b.dataset.i].days[0])});
 
     // ── body positions (inside the circle) ──
-    const OV=[[189.7,309.6],[233.1,309.6]],UT=[212.1,294.7];
+    const OV=[[184.8,333.5],[237.6,333.5]],UT=[212.2,315.3];
     // ── close-up of Alexandra's uterus + ovaries drawing, animated ──
-    const BX=50,BY=404,BW=320,BH=219,S=BW/380; // drawing crop is 380x260 (body px)
+    const BX=0,BY=0,S=1; // drawing crop is 380x260 (body px)
     const P=(x,y)=>[(BX+x*S).toFixed(1),(BY+y*S).toFixed(1)];
     function liningAt(x){const d=dv(x);if(preg&&d>=21)return 8;if(d<=5)return 6-4.5*(d-1)/4;if(d<=14)return 1.5+4*(d-5)/9;if(d<=26)return 5.5+2*(d-14)/12;return 7.5-1.5*(d-26)/2}
     function closeOverlay(x){const d=dayOf(x),v=dv(x),men=d<=5&&!(preg&&d>=21),th=liningAt(x);let s='';
@@ -432,18 +463,12 @@
     let insetTok=0;
     async function drawInsets(x){const tok=++insetTok,pk=pkey(dayOf(x)),own='WebsitePics/cycle/closeup-'+PHN[pk]+'.png';
       const has=await tryImg(own);if(tok!==insetTok)return;
-      let s='<rect x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" rx="16" fill="#eaf0fd" stroke="#d6d0f0"/>';
-      s+='<clipPath id="cclip"><rect x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" rx="16"/></clipPath>';
-      s+='<path d="M'+UT[0]+' '+(UT[1]+16)+' L'+(BX+BW/2)+' '+BY+'" stroke="#c4b8ef" stroke-width="1.5" stroke-dasharray="3 3"/>';
-      if(has)s+='<image href="'+own+'" x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" clip-path="url(#cclip)" preserveAspectRatio="xMidYMid meet"/>';
-      else s+='<g clip-path="url(#cclip)"><image href="WebsitePics/WH_Uterus.webp" x="'+BX+'" y="'+BY+'" width="'+BW+'" height="'+BH+'" preserveAspectRatio="xMidYMid slice"/>'+closeOverlay(x)+'</g>'+labels();
-      s+='<text x="'+(BX+BW/2)+'" y="'+(BY+BH+22)+'" text-anchor="middle" font-size="12.5" fill="#4b5563">Close-up: uterus, lining, ovaries</text>';
-      $('insets').innerHTML=s}
-    function drawBody(x){const d=dayOf(x),v=dv(x),ov=clamp(0.2+0.5*H.E.f(v)+0.5*H.LH.f(v)),men=d<=5&&!(preg&&d>=21);
-      $('glows').innerHTML=OV.map(o=>'<circle cx="'+o[0]+'" cy="'+o[1]+'" r="'+(7+ov*7).toFixed(2)+'" fill="#e58fa0" opacity="'+(.2+ov*.4).toFixed(2)+'"/>').join('')
+      $('csvg').innerHTML=has?'<image href="'+own+'" x="0" y="0" width="380" height="260" preserveAspectRatio="xMidYMid meet"/>'
+        :'<image href="WebsitePics/WH_Uterus.webp" x="0" y="0" width="380" height="260" preserveAspectRatio="xMidYMid slice"/>'+closeOverlay(x)}
+    function drawBody(x){const d=dayOf(x),v=dv(x),ov=clamp(0.2+0.5*H.E.f(v)+0.5*H.LH.f(v)),men=d<=5&&!(preg&&d>=21),br=clamp(0.25+0.75*Math.max(H.LH.f(v),H.FSH.f(v)));
+      $('glows').innerHTML='<circle cx="210.7" cy="91" r="'+(16+br*10).toFixed(1)+'" fill="#b07fb8" opacity="'+(.12+br*.25).toFixed(2)+'"/><circle cx="211" cy="150" r="12" fill="#e9a07f" opacity="'+((preg&&d>=21)?.4:.18)+'"/>'+OV.map(o=>'<circle cx="'+o[0]+'" cy="'+o[1]+'" r="'+(7+ov*7).toFixed(2)+'" fill="#e58fa0" opacity="'+(.2+ov*.4).toFixed(2)+'"/>').join('')
         +'<circle cx="'+UT[0]+'" cy="'+UT[1]+'" r="'+(8+liningAt(x)*1.2).toFixed(2)+'" fill="'+(men?'#b3263e':'#e58fa0')+'" opacity="'+(men?.35:.2)+'"/>';
-      let dr='';if(men&&bc!=='hiud'||men&&bc==='hiud'&&d<=2){const n=bc==='hiud'?1:(d<=2?3:d===3?2:1);for(let j=0;j<n;j++)dr+='<ellipse class="drop" cx="'+(UT[0]-4+j*4)+'" cy="'+(UT[1]+18)+'" rx="2.4" ry="3.2" fill="#b3263e" style="animation-delay:'+(j*.45)+'s"/>'}
-      $('drops').innerHTML=dr}
+    }
 
     // ── phase card ──
     const lvl=v=>v>.66?'high':v>.4?'medium':'low';
@@ -458,11 +483,11 @@
       if(tab==='organs')return '<ul class="orgs">'+ORG_ORDER.map(k=>'<li style="--oc:'+O[k].c+'"><span><b>'+O[k].n+':</b> '+O[k][pk]+'</span></li>').join('')+'</ul>';
       if(tab==='effects')return p.m.map(x=>'<div class="met">'+wave(x[1],p.hex)+'<span>'+x[0]+'<small>'+lvl(x[1][1])+'</small></span></div>').join('')+'<p style="font-size:.86rem;color:#4b5563;margin-top:8px">Lines show the trend across this phase. Everyone is different.<sup>2,3</sup></p>';
       return '<ul class="risks">'+p.risks.map(r=>'<li><span><b>'+r[0]+':</b> '+r[1]+'</span></li>').join('')+'</ul>'}
-    function card(pop){const d=dayOf(t),i=phIdx(d),p=PHS[i],pk=pkey(d),c=$('pcard');
-      c.style.setProperty('--pc',p.hex);c.style.setProperty('--pt',p.tc);
+    function card(pop){const d=dayOf(t),i=phIdx(d),p=PHS[i],pk=pkey(d),c=$('pbody');
+      $('pcard').style.setProperty('--pc',p.hex);$('pcard').style.setProperty('--pt',p.tc);
       const tabs=[['effects','Effects'],['risks','Risks'],['organs','Organs']];
-      c.innerHTML='<div class="pc-top"><div><div class="pc-n">'+p.n+'</div><h3 class="pc-t">'+(pk==='preg'?'Early pregnancy':p.t)+'</h3></div><span class="pc-d">Day '+d+' · '+p.d+'</span></div>'
-        +'<p class="pc-sum">'+(pk==='preg'?PREG_SUM:p.sum)+'</p>'+bloodRow(d)
+      $('phead').innerHTML='<div class="pc-top"><div><div class="pc-n">'+p.n+'</div><h3 class="pc-t">'+(pk==='preg'?'Early pregnancy':p.t)+'</h3></div><span class="pc-d">Day '+d+' · '+p.d+'</span></div>';
+      c.innerHTML='<p class="pc-sum">'+(pk==='preg'?PREG_SUM:p.sum)+'</p>'+bloodRow(d)
         +'<div class="tabs" role="tablist" aria-label="Details for this phase">'+tabs.map(x=>'<button class="tab" role="tab" id="tab-'+x[0]+'" aria-controls="tp" aria-selected="'+(tab===x[0])+'" tabindex="'+(tab===x[0]?0:-1)+'" data-tab="'+x[0]+'">'+x[1]+'</button>').join('')+'</div>'
         +'<div class="tabpanel" id="tp" role="tabpanel" aria-labelledby="tab-'+tab+'">'+panel(i,pk)+'</div>'
         +(bc==='hiud'?'<div class="iud"><b>With a hormonal IUD:</b> '+IUD.note[i]+'</div>':'');
@@ -497,7 +522,8 @@
         $('knob').setAttribute('aria-valuenow',d);$('knob').setAttribute('aria-valuetext','Day '+d+', '+name);
         $('wday').innerHTML='<b>Day '+d+'</b> of 28 · '+(pk==='preg'?'Early pregnancy':p.n+': '+p.t);
         $('day').value=d;$('day').setAttribute('aria-valuetext','Day '+d+', '+name);
-        const newPhase=pk;card(newPhase!==lastPhase);
+        $('miniBrain').textContent=MINI.brain[pk];$('miniThy').textContent=MINI.thyroid[pk];
+        const newPhase=pk;card(newPhase!==lastPhase);document.querySelectorAll('.plg').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
         if(newPhase!==lastPhase)$('live').textContent=(pk==='preg'?'Early pregnancy':p.n+', '+p.t)+'. '+p.d+'.';
         lastPhase=newPhase;lastDay=d}}
 
