@@ -93,6 +93,12 @@
     .visual{display:flex;flex-direction:column;align-items:center;position:sticky;top:calc(var(--nav-h) + 16px);}
     .visual svg{width:100%;max-width:330px;height:auto;}
     #dotRot{transition:transform .45s cubic-bezier(.3,.7,.2,1);transform-origin:160px 160px;}
+    #dotRot.dragging{transition:none;}
+    #ringSvg{touch-action:none;user-select:none;-webkit-user-select:none;}
+    #dotRot:focus-visible #ringDot{stroke:#1f2433;}
+    .ring-day{margin-top:6px;font-size:1.05rem;color:var(--ink);text-align:center;}
+    .ring-day b{font-weight:600;}
+    .ring-help{font-size:.86rem;color:var(--soft);text-align:center;}
 
     .phase-pill{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--pc);padding:5px 12px;border-radius:999px;}
     .phase-h{font-size:1.75rem;font-weight:600;letter-spacing:-.025em;margin:10px 0 6px;line-height:1.15;}
@@ -222,13 +228,16 @@
 
         <div class="stage-body">
           <div class="visual">
-            <svg viewBox="0 0 320 320" aria-hidden="true">
+            <svg viewBox="0 0 320 320" id="ringSvg">
               <defs><clipPath id="bclip"><circle cx="160" cy="160" r="128"/></clipPath></defs>
               <circle cx="160" cy="160" r="128" fill="#f4f1fc"/>
               <image href="WebsitePics/WH_Body.webp" x="62" y="22" width="196" height="270" clip-path="url(#bclip)" preserveAspectRatio="xMidYMid meet"/>
               <g id="ringArcs"></g>
-              <g id="dotRot"><circle cx="160" cy="16" r="11" fill="#fff" stroke-width="5" id="ringDot"/></g>
+              <circle cx="160" cy="160" r="144" fill="none" stroke="transparent" stroke-width="40" id="ringHit" style="cursor:pointer"/>
+              <g id="dotRot" role="slider" tabindex="0" aria-label="Cycle day on the ring" aria-valuemin="1" aria-valuemax="28" aria-valuenow="1" style="cursor:grab;outline:none"><circle cx="160" cy="16" r="22" fill="transparent"/><circle cx="160" cy="16" r="13" fill="#fff" stroke-width="6" id="ringDot"/></g>
             </svg>
+            <p class="ring-day" id="ringDay"></p>
+            <p class="ring-help">Drag the dot or tap the ring</p>
           </div>
           <div aria-live="polite">
             <span class="phase-pill" id="pill"></span>
@@ -293,7 +302,7 @@
     const g=(d,m,s)=>Math.exp(-((d-m)**2)/(2*s*s)),clamp=v=>Math.max(0,Math.min(1,v));
 
     // ── state ──
-    let day=1,preg=false,bc='none';
+    let day=1,preg=false,bc='none',dragging=false;
     const dayOf=x=>Math.min(28,Math.floor(x)+1), dv=x=>1+x*27/28, X=()=>day-0.5;
 
     // ── data ──
@@ -444,7 +453,7 @@
       if(i===0&&!pr)notes+='<p class="note blood"><b>Bleeding today: '+(bc==='hiud'?'light or none':(day<=2?'heavier':day===3?'medium':'lighter'))+'.</b> A whole period is usually about 30 to 40 mL, 2 to 3 tablespoons.<sup>1</sup></p>';
       if(bc==='hiud')notes+='<p class="note"><b>Hormonal IUD:</b> '+IUD.note[i]+'</p>';
       $('notes').innerHTML=notes;
-      $('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('ringDot').setAttribute('stroke',p.color);
+      if(!dragging)$('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('ringDay').innerHTML='<b>Day '+day+'</b> · '+(pr?'Early pregnancy':p.name);$('dotRot').setAttribute('aria-valuenow',day);$('dotRot').setAttribute('aria-valuetext','Day '+day+', '+(pr?'early pregnancy':p.name+' phase'));$('ringDot').setAttribute('stroke',p.color);
       document.querySelectorAll('#ringArcs path').forEach((a,j)=>a.setAttribute('opacity',j===i?1:.35));
       document.querySelectorAll('#segs i').forEach((s,j)=>s.classList.toggle('on',j===i));
       document.querySelectorAll('#segLabels button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
@@ -455,6 +464,17 @@
 
     // ── controls ──
     const set=d=>{day=((d-1+28)%28)+1;render()};
+    // ring: drag the dot or tap anywhere on the ring
+    const rsvg=$('ringSvg');
+    function angle(ev){const pt=rsvg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;const q=pt.matrixTransform(rsvg.getScreenCTM().inverse());return (Math.atan2(q.x-C,-(q.y-C))*180/Math.PI+360)%360}
+    function follow(ev){const a=angle(ev);$('dotRot').style.transform='rotate('+a.toFixed(1)+'deg)';const d=Math.min(28,Math.floor(a/DEG)+1);if(d!==day){day=d;render()}}
+    function begin(ev){stop();dragging=true;$('dotRot').classList.add('dragging');rsvg.setPointerCapture(ev.pointerId);follow(ev);ev.preventDefault()}
+    $('dotRot').addEventListener('pointerdown',begin);$('ringHit').addEventListener('pointerdown',begin);
+    rsvg.addEventListener('pointermove',ev=>{if(dragging)follow(ev)});
+    const finish=()=>{if(!dragging)return;dragging=false;$('dotRot').classList.remove('dragging');render()};
+    rsvg.addEventListener('pointerup',finish);rsvg.addEventListener('pointercancel',finish);
+    $('dotRot').addEventListener('keydown',e=>{const k={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1,PageUp:7,PageDown:-7}[e.key];
+      if(k){e.preventDefault();stop();set(day+k)}else if(e.key==='Home'){e.preventDefault();set(1)}else if(e.key==='End'){e.preventDefault();set(28)}});
     $('day').addEventListener('input',e=>{stop();set(+e.target.value)});
     $('prev').onclick=()=>{stop();set(day-1)};$('next').onclick=()=>{stop();set(day+1)};
     let timer=null;
