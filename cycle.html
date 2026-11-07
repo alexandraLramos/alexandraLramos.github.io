@@ -94,13 +94,17 @@
     .stage-body{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr);gap:24px;padding:14px 24px 8px;align-items:start;}
     .left{display:flex;flex-direction:column;align-items:center;text-align:center;}
     .left .phase-p{margin:0 auto;min-height:3em;}
-    #notes{padding:0 14px 8px;height:46px;}
+    #notes{padding:0 14px 8px;}
+    .note.tip{background:#f3f1f8;color:#4b5563;}
+    #notes .note{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .note.preg{background:#e8f4ee;color:#1f5c3f;}
     #notes .note{margin-top:0!important;font-size:.78rem!important;padding:3px 10px!important;line-height:1.35;border-radius:8px;}
     .stage-grid{align-items:stretch;}
     @media(min-width:861px){
-      .stage-body{grid-template-rows:auto;align-items:stretch!important;}
+      .stage-body{grid-template-rows:326px;align-items:stretch!important;}
       .left{justify-content:center;}
+      .right{display:flex;}
+      .right .duo{display:flex;flex-direction:column;justify-content:center;width:100%;}
       .stage-grid{grid-template-rows:126px;}
       .gcard{height:126px;overflow:hidden;}
     }
@@ -130,7 +134,7 @@
     .gcard .row{grid-template-columns:84px 1fr;}
     .hormone-pic{height:38px;}
     .visual{display:flex;flex-direction:column;align-items:center;margin-bottom:6px;}
-    .visual svg{width:100%;max-width:210px;height:auto;}
+    .visual svg{width:100%;max-width:232px;height:auto;}
     #dotRot{transition:transform .45s cubic-bezier(.3,.7,.2,1);transform-origin:160px 160px;}
     #dotRot.dragging{transition:none;}
     #ringSvg{touch-action:none;user-select:none;-webkit-user-select:none;}
@@ -393,7 +397,7 @@
       ovu:[['Ligament laxity','is highest; warm up and train landing technique.<sup>3</sup>'],['Seizures','a pattern linked to the estrogen surge.<sup>6</sup>']],
       lut:[['Blood sugar','some people with type 1 diabetes need more insulin.<sup>8</sup>'],['Premenstrual asthma','often starts before the period.<sup>7</sup>'],['PMS and PMDD','mood symptoms peak in the last week.<sup>1</sup>'],['Heat strain','higher body temperature makes hot workouts harder.<sup>1</sup>']]};
     const IUD={msg:'With a hormonal IUD, most people still ovulate, so the phases continue, but bleeding is much lighter or stops.<sup>4</sup>',
-      note:['It releases levonorgestrel, which keeps the lining thin, so there is little to shed.','It thickens cervical mucus, so sperm can\'t get through.','You may still ovulate, but sperm are blocked and slowed, so fertilization is unlikely.','The thin lining can\'t support implantation.']};
+      note:['keeps the lining thin, so there\'s little to shed.','thickens cervical mucus so sperm can\'t get through.','you may still ovulate, but sperm are blocked.','the thin lining can\'t support implantation.']};
     const WOW={men:[['🫁','Asthma can flare<sup>7</sup>'],['🧠','Migraines cluster<sup>9</sup>']],
       fol:[['🦵','Knee ligaments start loosening<sup>3</sup>']],
       ovu:[['🦵','ACL tears more likely<sup>3</sup>'],['⚡','Seizures can cluster<sup>6</sup>']],
@@ -639,7 +643,8 @@
       if(preg){let m='';if(day<14)m='Only possible after ovulation (day 14).';else if(day<=15)m='The egg is fertilized in the tube.';else if(day<21)m='It travels to the uterus (3–5 days).';else m='It implants; no period comes.';
         if(bc==='hiud'&&day>=14)m+=' Very unlikely with an IUD.';notes='<p class="note preg"><b>If pregnancy begins:</b> '+m+'</p>'}
       else if(bc==='hiud')notes='<p class="note"><b>Hormonal IUD:</b> '+IUD.note[i]+'<sup>4</sup></p>';
-      else if(i===0)notes='<p class="note blood"><b>Bleeding today: '+(day<=2?'heavier':day===3?'medium':'lighter')+'.</b> About 30–40 mL per period.<sup>1</sup></p>';
+      else if(i===0)notes='<p class="note blood"><b>Bleeding today: '+(day<=2?'heavier':day===3?'medium':'lighter')+'.</b> ~30–40 mL per period.<sup>1</sup></p>';
+      else notes='<p class="note tip"><b>Tip:</b> switch on Hormonal IUD or pregnancy to see what changes.</p>';
       $('notes').innerHTML=notes;
       if(!dragging)$('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('dotRot').setAttribute('aria-valuenow',day);$('dotRot').setAttribute('aria-valuetext','Day '+day+', '+(pr?'early pregnancy':p.name+' phase'));$('ringDot').setAttribute('stroke',p.color);$('ringDotEdge').setAttribute('stroke',pr?'#1f5c3f':p.tc);
       document.querySelectorAll('#ringArcs path').forEach((a,j)=>a.setAttribute('opacity',j===i?1:.35));
