@@ -94,16 +94,15 @@
     .stage-body{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr);gap:24px;padding:14px 24px 8px;align-items:start;}
     .left{display:flex;flex-direction:column;align-items:center;text-align:center;}
     .left .phase-p{margin:0 auto;min-height:3em;}
-    #notes{width:100%;display:flex;flex-direction:column;gap:3px;margin-top:6px;}
+    #notes{padding:0 14px 8px;height:46px;}
+    .note.preg{background:#e8f4ee;color:#1f5c3f;}
     #notes .note{margin-top:0!important;font-size:.78rem!important;padding:3px 10px!important;line-height:1.35;border-radius:8px;}
-    .duo-txt dd{min-height:2.8em;}
     .stage-grid{align-items:stretch;}
     @media(min-width:861px){
-      .stage-body{grid-template-rows:366px;}
-      .left{height:366px;justify-content:flex-start;}
-      .right{height:366px;}
-      .stage-grid{grid-template-rows:122px;}
-      .gcard{height:122px;overflow:hidden;}
+      .stage-body{grid-template-rows:auto;align-items:stretch!important;}
+      .left{justify-content:center;}
+      .stage-grid{grid-template-rows:126px;}
+      .gcard{height:126px;overflow:hidden;}
     }
     .gcard .chips{min-height:28px;}
     .wowlist{min-height:62px;}
@@ -159,10 +158,11 @@
     @keyframes drip{0%{transform:translateY(0);opacity:0}12%{opacity:1}85%{opacity:1}100%{transform:translateY(34px);opacity:0}}
     .drip{animation:drip 1.8s ease-in infinite;transform-box:fill-box;}
     .duo-cap{display:grid;grid-template-columns:1fr 1.4fr 1fr;text-align:center;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-top:-6px;}
-    .duo-txt{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 14px 10px;margin:0;}
-    .duo-txt dt{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);}
-    .duo-txt dd{margin:1px 0 0;font-size:.88rem;line-height:1.4;color:var(--ink);}
-    @media(max-width:520px){.duo-txt{grid-template-columns:1fr}}
+    .duo-txt{display:flex;flex-direction:column;gap:2px;padding:4px 14px 6px;margin:0;}
+    .duo-txt div{display:flex;gap:8px;align-items:baseline;}
+    .duo-txt dt{flex-shrink:0;width:62px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);}
+    .duo-txt dd{margin:0;font-size:.84rem;line-height:1.4;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    @media(max-width:520px){.duo-txt dd{white-space:normal}}
     .feel{margin-top:16px;}
     .feel h3{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:8px;}
     .chips{display:flex;flex-wrap:wrap;gap:8px;}
@@ -293,12 +293,12 @@
           </div>
             <h2 class="phase-h" id="phaseH"></h2>
             <p class="phase-p" id="phaseP"></p>
-            <div id="notes"></div>
           </div>
           <div class="right">
             <figure class="duo">
                 <svg id="duoSvg" viewBox="0 0 380 270" role="img" aria-label="Diagram of the uterus, fallopian tubes and ovaries, changing with the day"></svg>
                 <dl class="duo-txt"><div><dt>Ovary</dt><dd id="txtOvary"></dd></div><div><dt>Uterus</dt><dd id="txtUterus"></dd></div></dl>
+                <div id="notes"></div>
               </figure>
           </div>
         </div>
@@ -329,6 +329,12 @@
         <h2>Go deeper</h2>
         <details><summary>Hormone levels across the cycle</summary><div class="dbody"><div class="chart"><svg id="chart" viewBox="0 0 800 220" role="img" aria-label="Relative hormone levels across a 28-day cycle"></svg></div><div class="legend" id="legend"></div>
           <p class="fine">GnRH from the brain tells the pituitary to release FSH (grows follicles) and LH (its surge releases the egg). Follicles make estrogen; the corpus luteum makes progesterone. Curves are relative and show a textbook 28-day cycle.<sup>1</sup></p></div></details>
+        <details><summary>How a hormonal IUD works</summary><div class="dbody"><p>A hormonal IUD is a small, flexible T placed inside the uterus. It slowly releases <b>levonorgestrel</b>, a progestin, mostly right where it sits.<sup>4</sup></p><ul>
+          <li><b>Blocks sperm:</b> it thickens the mucus in the cervix, so sperm can't swim through.</li>
+          <li><b>Thins the lining:</b> the endometrium stays thin, so periods get lighter or stop and an egg couldn't implant.</li>
+          <li><b>Slows sperm:</b> it makes it harder for sperm to move and reach an egg.</li>
+          <li><b>Sometimes stops ovulation:</b> some users stop ovulating, especially early on, but many keep ovulating.</li></ul>
+          <p class="fine">It is more than 99% effective and works for several years. A copper IUD has no hormones and works differently.<sup>4</sup></p></div></details>
         <details><summary>Possible risks during this phase</summary><div class="dbody"><ul id="risks"></ul><p class="fine">Most of this research is still mixed, and everyone is different.</p></div></details>
         <details><summary>What every organ is doing today</summary><div class="dbody"><ul id="organs"></ul></div></details>
         <details><summary>References</summary><div class="dbody"><ol class="refs">
@@ -387,7 +393,7 @@
       ovu:[['Ligament laxity','is highest; warm up and train landing technique.<sup>3</sup>'],['Seizures','a pattern linked to the estrogen surge.<sup>6</sup>']],
       lut:[['Blood sugar','some people with type 1 diabetes need more insulin.<sup>8</sup>'],['Premenstrual asthma','often starts before the period.<sup>7</sup>'],['PMS and PMDD','mood symptoms peak in the last week.<sup>1</sup>'],['Heat strain','higher body temperature makes hot workouts harder.<sup>1</sup>']]};
     const IUD={msg:'With a hormonal IUD, most people still ovulate, so the phases continue, but bleeding is much lighter or stops.<sup>4</sup>',
-      note:['Little or no bleeding.','Most users still ovulate.','Still ovulating; pregnancy very unlikely.','PMS can continue.']};
+      note:['It releases levonorgestrel, which keeps the lining thin, so there is little to shed.','It thickens cervical mucus, so sperm can\'t get through.','You may still ovulate, but sperm are blocked and slowed, so fertilization is unlikely.','The thin lining can\'t support implantation.']};
     const WOW={men:[['🫁','Asthma can flare<sup>7</sup>'],['🧠','Migraines cluster<sup>9</sup>']],
       fol:[['🦵','Knee ligaments start loosening<sup>3</sup>']],
       ovu:[['🦵','ACL tears more likely<sup>3</sup>'],['⚡','Seizures can cluster<sup>6</sup>']],
@@ -573,6 +579,7 @@
         for(let i=0;i<(iud?2:6);i++){const px=176+i*5.5,py=104+(i%3)*9;s+='<ellipse cx="'+px+'" cy="'+py+'" rx="2.8" ry="2" fill="#b8243e" opacity=".85" transform="rotate('+(i*35)+' '+px+' '+py+')"/>'}
         for(let j=0;j<n;j++)s+=drop(190+(j-1)*6,224,1.2,j*.55)}
       // IUD: T shape with one string
+      if(iud)s+='<g><rect x="183" y="176" width="14" height="38" rx="6" fill="#f3e9fb" stroke="#b9a7ea" stroke-width="1.2"/>'+[184,190,196,202,208].map(yy=>'<path d="M185 '+yy+' q5 -3 10 0" stroke="#c9b8f2" stroke-width="1.4" fill="none"/>').join('')+'</g><text x="222" y="214" font-size="10" font-weight="700" fill="#5b4fb8" font-family="Geist,sans-serif">thick mucus</text>';
       if(iud)s+='<g stroke-linecap="round" fill="none"><path d="M172 96 Q190 101 208 96 M190 98 L190 146" stroke="#fff" stroke-width="7"/><path d="M172 96 Q190 101 208 96 M190 98 L190 146" stroke="#5b4fb8" stroke-width="3.6"/><path d="M190 146 C190 170 190 200 191 244" stroke="#5b4fb8" stroke-width="1.1"/></g><text x="104" y="232" text-anchor="end" font-size="10.5" font-weight="700" fill="#5b4fb8" font-family="Geist,sans-serif">IUD</text><path d="M106 229 L184 140" stroke="#b3a8ea" stroke-width="1"/>';
       // follicles: left ovary rests; right ovary ovulates this cycle
       const rp=(dx,dy)=>{const a=OR.rot*Math.PI/180;return [OR.x+dx*Math.cos(a)-dy*Math.sin(a),OR.y+dx*Math.sin(a)+dy*Math.cos(a)]};
@@ -629,10 +636,10 @@
       $('wow').innerHTML=(pr?[['🧪','Tests detect hCG by a missed period<sup>1</sup>']]:WOW[p.k]).map(w=>'<li><i aria-hidden="true">'+w[0]+'</i><span>'+w[1]+'</span></li>').join('');
       $('chips').innerHTML=(bc==='hiud'&&i===0?['Light or no bleeding']:[]).concat(feel).map(f=>'<span class="chip">'+f+'</span>').join('');
       let notes='';
-      if(i===0&&!pr)notes+='<p class="note blood"><b>Bleeding today: '+(bc==='hiud'?'light or none':(day<=2?'heavier':day===3?'medium':'lighter'))+'.</b> About 30–40 mL per period.<sup>1</sup></p>';
-      if(bc==='hiud'&&!preg)notes+='<p class="note"><b>Hormonal IUD:</b> '+IUD.note[i]+'<sup>4</sup></p>';
       if(preg){let m='';if(day<14)m='Only possible after ovulation (day 14).';else if(day<=15)m='The egg is fertilized in the tube.';else if(day<21)m='It travels to the uterus (3–5 days).';else m='It implants; no period comes.';
-        if(bc==='hiud'&&day>=14)m+=' Very unlikely with an IUD.';notes+='<p class="note" style="background:#e8f4ee;color:#1f5c3f"><b>If pregnancy begins:</b> '+m+'</p>'}
+        if(bc==='hiud'&&day>=14)m+=' Very unlikely with an IUD.';notes='<p class="note preg"><b>If pregnancy begins:</b> '+m+'</p>'}
+      else if(bc==='hiud')notes='<p class="note"><b>Hormonal IUD:</b> '+IUD.note[i]+'<sup>4</sup></p>';
+      else if(i===0)notes='<p class="note blood"><b>Bleeding today: '+(day<=2?'heavier':day===3?'medium':'lighter')+'.</b> About 30–40 mL per period.<sup>1</sup></p>';
       $('notes').innerHTML=notes;
       if(!dragging)$('dotRot').style.transform='rotate('+((day-.5)*DEG).toFixed(2)+'deg)';$('dotRot').setAttribute('aria-valuenow',day);$('dotRot').setAttribute('aria-valuetext','Day '+day+', '+(pr?'early pregnancy':p.name+' phase'));$('ringDot').setAttribute('stroke',p.color);$('ringDotEdge').setAttribute('stroke',pr?'#1f5c3f':p.tc);
       document.querySelectorAll('#ringArcs path').forEach((a,j)=>a.setAttribute('opacity',j===i?1:.35));
